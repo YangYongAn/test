@@ -1,0 +1,39 @@
+<!--支付-拼团规则-->
+<template>
+	<view class="pintuan-rules">
+		<text class="pintuan-rules-title">拼团规则</text>
+		<view class="pintuan-rules-text">
+			<rich-text :nodes="content"></rich-text>
+		</view>
+	</view>
+</template>
+<script>
+export default {
+	name: 'hoc-pin-rules-sgm',
+	apiready() {//like created
+
+	},
+	data() {
+		return {
+			content: this.props.content !== undefined ? this.props.content : '<p style="color: #999; font-size: 12px;">1、24小时内没有拼团成功，自动取消订单</p><p style="color: #999; font-size: 12px;">2、拼团成功平台会在48小时发货</p><p style="color: #999; font-size: 12px;">3、拼团成功的不能取消订单！</p>'
+		}
+	},
+	methods: {
+
+	}
+}
+</script>
+<style>
+.pintuan-rules {
+	background: #f8f8f8;
+    padding: 15px;
+}
+.pintuan-rules-title {
+	font-size: 14px;
+	margin-bottom: 15px;
+	color: #6c7279;
+}
+.pintuan-rules-text {
+	margin: 0 15px;
+}
+</style>

@@ -1,0 +1,99 @@
+<!--首页-分类-->
+<template>
+	<view class="index-classify">
+		<view v-for="(item,index) in classifylist" class="index-classify-item" @click="classifyClick(item)">
+			<image class="index-classify-item-icon" :src="item.icon"></image>
+			<text class="index-classify-item-text">{{item.name}}</text>
+		</view>
+	</view>
+</template>
+<script>
+export default {
+	name: 'hoc-classify-tab-sgm',
+	apiready() {//like created
+
+	},
+	data() {
+		return {
+			classifylist: this.props.classifyList || [
+				{
+					"id": "bbe35280-dba7-11ea-8529-d94a7752ff71",
+					"name": "华为",
+					"icon": "http://a5acb3a72579f0bf5f6c.qiniucdn.apicloud-system.com/apicloud/48529743a715842f9b70b36b789b7438.png",
+					"addtime": "2020-08-11T07:53:24.648Z",
+					"sta": 1,
+					"orderby": 5,
+					"pid": "765fdbc0-dba2-11ea-a68f-873831895ca3"
+				},
+				{
+					"id": "765fdbc0-dba2-11ea-a68f-873831895ca3",
+					"name": "5G手机",
+					"icon": "http://a5acb3a72579f0bf5f6c.qiniucdn.apicloud-system.com/apicloud/86e180a4995c449f3c3c45495e69dc8c.png",
+					"addtime": "2020-08-11T07:15:40.540Z",
+					"sta": 1,
+					"orderby": 4,
+					"pid": "1"
+				},
+				{
+					"id": "03e206d0-d6e9-11ea-8546-397f48399cb9",
+					"name": "游戏手机",
+					"icon": "http://a5acb3a72579f0bf5f6c.qiniucdn.apicloud-system.com/apicloud/0e842b738aa73a2db7b8582c9bf8a890.png",
+					"addtime": "2020-08-05T06:58:06.909Z",
+					"sta": 1,
+					"orderby": 3,
+					"pid": "1"
+				},
+				{
+					"id": "22737f20-d6e9-11ea-8546-397f48399cb9",
+					"name": "以旧换新",
+					"icon": "http://a5acb3a72579f0bf5f6c.qiniucdn.apicloud-system.com/apicloud/1dc6d1fad3d850332078348c20c1d2c9.png",
+					"addtime": "2020-08-05T06:58:58.194Z",
+					"sta": 1,
+					"orderby": 2,
+					"pid": "1"
+				}
+			]
+		}
+	},
+	methods: {
+		classifyClick(item) {
+			this.fire('classifyClick', item)
+		}
+	}
+}
+</script>
+<style>
+.index-classify {
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-around;
+	padding: 10px 0;
+	background-color: #fff;
+	overflow: auto;
+}
+.index-classify-item {
+	width: 70px;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	flex-shrink: 0;
+}
+
+.index-classify-item-icon {
+	width: 50px;
+	height: 50px;
+	margin: 16px auto 8px;
+}
+
+.index-classify-item-text {
+	text-align: center;
+	line-height: 17px;
+	height: 17px;
+	font-size: 12px;
+	color: #666666;
+}
+</style>

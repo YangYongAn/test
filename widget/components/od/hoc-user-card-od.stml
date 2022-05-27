@@ -1,0 +1,75 @@
+<template>
+	<view class="user-card">
+		<!-- 用户信息 -->
+		<view class="user_box">
+			<image class="user_bg" src="http://ae8b3ee28597856d3283.qiniucdn.apicloud-system.com/apicloud/9f2f2379e0d71466281f3b2decbcb5af.png"></image>
+			<view class="user_wrap">
+				<image class="user_logo" :src='avatar' mode="aspectFill"></image>
+				<text class="user_name">{{ nickname }}</text>
+				<image class="user_gor" src="http://ae8b3ee28597856d3283.qiniucdn.apicloud-system.com/apicloud/7158c8c5425bd78b31d74da4ca8563f2.png"></image>
+			</view>
+		</view>
+	</view>
+</template>
+<script>
+export default {
+	name: 'hoc-user-card-od',
+	props: {
+		nickname: {
+			type: String,
+			default:""
+		},
+		avatar: {
+			type: String,
+			default:""
+		}
+	},
+	apiready() {//like created
+
+	},
+	data() {
+		return {
+			nickname:this.props.nickname || "测试账号",
+			avatar:this.props.avatar || "http://aea8bc2ccdd582de43c1.qiniucdn.apicloud-system.com/apicloud/46e4b8d7a4a8d1febeec082516a8e8f5.png",
+		}
+	},
+	methods: {
+
+	}
+}
+</script>
+<style scoped>
+.user_box {
+	height: 150px;
+	justify-content: center;
+}
+.user_bg {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+}
+.user_wrap {
+	margin-bottom: 25px;
+	flex-direction: row;
+	align-items: center;
+	height: 60px;
+}
+.user_logo {
+	width: 60px;
+	height: 60px;
+	border-radius: 50%;
+	margin-left: 20px;
+	background-color: #f8f8f8;
+}
+.user_name {
+	flex: 1;
+	font-size: 17px;
+	color: white;
+	margin: 0 15px;
+}
+.user_gor {
+	width: 16px;
+	height: 16px;
+	margin-right: 20px;
+}
+</style>

@@ -1,0 +1,74 @@
+<template>
+    <view class="page">
+        <!-- 顶部导航 -->
+        <hoc-nav-bar-od msg='立即购买' isBack />
+        <view class="place">
+            <!-- 收货地址 -->
+            <hoc-user-address-od :data='useraddress' />
+            <!-- 商品信息 -->
+            <hoc-good-info-od :list='goodData' />
+            <!-- 配送方式 -->
+            <hoc-delivery-od price='6' />
+            <!-- 备注 -->
+            <hoc-remark-buy-od />
+        </view>
+        <!-- 底部按钮 -->
+        <hoc-order-footer-od :data='orderBuy' />
+    </view>
+</template>
+<script>
+import '../../components/od/hoc-nav-bar-od.stml';
+import '../../components/od/hoc-user-address-od.stml';
+import '../../components/od/hoc-good-info-od.stml';
+import '../../components/od/hoc-delivery-od.stml';
+import '../../components/od/hoc-remark-buy-od.stml';
+import '../../components/od/hoc-order-footer-od.stml';
+export default {
+    name: 'template-od-place_order',
+    apiready() { //like created
+    },
+    data() {
+        return {
+            // 用户地址
+            useraddress: {
+                "id": "ad278260-ab4a-11ec-ac11-e7c0d9bbce51",
+                "name": "测试昵称",
+                "phone": "17733553558",
+                "qustr": "北京市,北京市,东城区",
+                "address": "幸福小区",
+                "def": 0,
+                "uid": "84333200-ab4a-11ec-ac11-e7c0d9bbce51",
+                "quid": "110000,110100,110101",
+                "addtime": "2022-03-24T08:16:16.262Z"
+            },
+            // 商品信息
+            goodData: [{
+                "title": "夏新款套装女洋气时尚短裤阔腿裤",
+                "image": "http://ae8b3ee28597856d3283.qiniucdn.apicloud-system.com/apicloud/3ee90482ef5b13bdbd9e9dc3f79f495e.png",
+                "price": 699,
+                "ku_num": 995,
+                "delprice": 1236,
+                "key": "白色/S码",
+                "buynum": 1
+            }],
+            // 下单信息
+            orderBuy: {
+                orderBuynum: 1,
+                payPrice: 666
+            }
+        };
+    },
+    methods: {}
+};
+</script>
+<style>
+.page {
+    height: 100%;
+    background-color: #f8f8f8;
+}
+.place {
+    flex: 1;
+    /* height: 100%; */
+
+}
+</style>

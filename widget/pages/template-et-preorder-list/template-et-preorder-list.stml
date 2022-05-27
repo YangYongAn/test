@@ -1,0 +1,46 @@
+<template>
+    <view class="page">
+        <hoc-header-bar-et title="我的预约" isBack/>
+        <scroll-view style="flex: 1;" scroll-y :show-scrollbar="false">
+            <!--预约课程卡片列表-->
+            <hoc-my-order-card-et :list="list" @itemClick="intoDetail" />
+        </scroll-view>
+
+    </view>
+</template>
+<script>
+import "../../components/et/hoc-header-bar-et.stml";
+import '../../components/et/hoc-my-order-card-et.stml';
+import "../../components/et/hoc-no-data-et.stml";
+export default {
+    name: "template-et-preorder-list",
+    data() {
+        return {
+            list: [{
+                status: 1,
+                create_time: "2022-03-27",
+                title: "托福基础班"
+            }, {
+                status: 0,
+                create_time: "2022-03-27",
+                title: "托福提升班"
+            }]
+        };
+    },
+    methods: {
+        intoDetail(pageParam) {
+            api.openWin({
+                name: 'template-et-preorder-detail',
+                url: '../template-et-preorder-detail/template-et-preorder-detail.stml',
+                pageParam
+            });
+        }
+    }
+};
+</script>
+<style>
+.page {
+    height: 100%;
+    background-color: #f8f8f8;
+}
+</style>

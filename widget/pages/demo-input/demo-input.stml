@@ -1,0 +1,97 @@
+<template>
+
+	<safe-area class="page">
+		<NavBar onBack={this.back}>Input</NavBar>
+		<scroll-view :show-scrollbar="false">
+			<DemoBlock title='基本的输入框组件'>
+				<avm-input
+					placeholder='请输入内容'
+					value={this.data.value}/>
+			</DemoBlock>
+			<DemoBlock title='带清除按钮'>
+				<avm-input
+					placeholder='请输入内容'
+					clearable
+					:placeholderClass="placeholder_class"
+					 handleChange={this.onChange}
+				/>
+			</DemoBlock>
+			<DemoBlock title='禁用状态'>
+				<avm-input placeholder='请输入内容' value='被禁用的输入框' disabled/>
+			</DemoBlock>
+			<DemoBlock title='只读状态'>
+				<avm-input placeholder='请输入内容' value='只读模式的输入框' readOnly/>
+			</DemoBlock>
+			<DemoBlock title='上下布局' padding='0' border='none'>
+				<avm-list prefixWidth="100px">
+					<avm-list-item title='用户名'>
+						<avm-input placeholder='请输入用户名' clearable/>
+					</avm-list-item>
+					<avm-list-item title='密码'>
+						<avm-input placeholder='请输入密码' clearable type='password' id="password1"/>
+					</avm-list-item>
+				</avm-list>
+			</DemoBlock>
+			<DemoBlock title='左右布局' padding='0' border='none'>
+				<avm-list prefixWidth="100px">
+					<avm-list-item prefix='用户名'>
+						<avm-input placeholder='请输入用户名' clearable />
+					</avm-list-item>
+					<avm-list-item prefix='密码'>
+						<avm-input placeholder='请输入密码' clearable type='password' id="password2"/>
+					</avm-list-item>
+				</avm-list>
+			</DemoBlock>
+			<DemoBlock title='额外的操作按钮' padding='0' border='none'>
+				<avm-list prefixWidth="100px">
+					<avm-list-item prefix='短信验证码' extra={<text style="color: #9AC200">发送验证码</text>}>
+						<avm-input placeholder='请输入验证码' clearable/>
+					</avm-list-item>
+				</avm-list>
+			</DemoBlock>
+			<DemoBlock title='右侧对齐'>
+				<avm-input
+					placeholder='请输入验证码'
+					textAlign="right"
+					clearable
+				/>
+			</DemoBlock>
+		</scroll-view>
+	</safe-area>
+</template>
+
+<script>
+import '../../components/avm-ui/input'
+import '../../components/avm-ui/list'
+import NavBar from '../../components/avm-ui/nav-bar'
+import {DemoBlock} from '../../components/avm-ui/demos'
+
+export default {
+	name: 'demo-input',
+	data() {
+		return {
+			value: '',
+			placeholder_class: {
+				color: '#f00'
+			}
+		}
+	},
+	methods: {
+		back() {
+			api.closeWin();
+		},
+		onChange(val) {
+			api.toast({
+				msg: val
+			})
+		}
+	}
+}
+</script>
+<style src="../../components/avm-ui/demos/index.css"></style>
+<style>
+.page {
+	background: #f2f2f2;
+	padding: 0 16px;
+}
+</style>

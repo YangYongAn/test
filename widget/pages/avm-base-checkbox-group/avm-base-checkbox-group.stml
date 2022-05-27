@@ -1,0 +1,72 @@
+<!--基础组件-->
+<template>
+<safe-area class="page">
+	<avm-nav-bar onBack={this.back}>CheckboxGroup</avm-nav-bar>
+	<DemoBlock title='基础用法'>
+		<checkbox-group class="group" onchange={this.checkboxgroupChanged}>
+            <label class="checkbox_label">
+                <checkbox color="#9ac200" value="checkbox_one" class="checkbox_label_icon"/>
+                <text class="checkbox_label_text">选项一</text>
+            </label>
+            <label class="checkbox_label">
+                <checkbox color="#9ac200" value="checkbox_two" class="checkbox_label_icon"/>
+                <text class="checkbox_label_text">选项二</text>
+            </label>
+        </checkbox-group>
+	</DemoBlock>
+	<DemoBlock title='自定义icon'>
+		<checkbox-group class="group" onchange={this.checkboxgroupChanged}>
+            <label class="checkbox_label">
+                <checkbox icon="../../image/unSelect.png" selectedIcon="../../image/select.png" value="checkbox_one" class="checkbox_label_icon"/>
+                <text class="checkbox_label_text">选项一</text>
+            </label>
+            <label class="checkbox_label">
+                <checkbox icon="../../image/unSelect.png" selectedIcon="../../image/select.png" value="checkbox_two" class="checkbox_label_icon"/>
+                <text class="checkbox_label_text">选项二</text>
+            </label>
+        </checkbox-group>
+	</DemoBlock>
+</safe-area>
+</template>
+<script>
+import '../../components/avm-ui/nav-bar'
+import {DemoBlock} from '../../components/avm-ui/demos'
+export default {
+	name: 'avm-base-checkbox-group',
+	data(){
+		return {
+			
+		}
+    },
+	methods: {
+		back() {
+			api.closeWin();
+		},
+		checkboxgroupChanged(e) {
+			api.toast({
+				msg: JSON.stringify(e.detail.value)
+			});
+		}
+	}
+}
+</script>
+<style>
+.page {
+	width: 100%;
+	height: 100%;
+	background: #f2f2f2;
+	padding: 0 16px;
+}
+.checkbox_label {
+	margin: 8px 0;
+}
+.checkbox_label_icon {
+	margin-right: 8px;
+	width: 22px;
+	height: 22px;
+}
+.checkbox_label_text {
+	font-size: 14px;
+	color: #333;
+}
+</style>

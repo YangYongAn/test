@@ -1,0 +1,179 @@
+<template>
+	<view class="goods-list">
+		<view class="common_tit">
+			<text class="common_zi">{title}</text>
+			<view class="flex1"></view>
+			<view class="common_morebtn">
+				<text class="common_more">更多</text>
+				<image class="common_img" src="http://ae8b3ee28597856d3283.qiniucdn.apicloud-system.com/apicloud/c89316e175437ebce8f361ef3f9c3973.png"></image>
+			</view>
+		</view>
+		<view class="zone_box" >
+			<view class="grid_box">
+				<view class="-grid-item" @click="onDetailClick" style={'width:'+gridWidth+'px;height:'+(gridWidth*0.75+80)+'px;'}
+					v-for="item in list" :key="item.id">
+					<image class="-grid-item-img" src={item.image} mode="aspectFill"></image>
+					<text class="-grid-item-title">{item.title}</text>
+					<text class="-grid-item-price">{'￥' + item.price}</text>
+				</view>
+			</view>
+		</view>
+	</view>
+</template>
+<script>
+export default {
+	name: 'hoc-good-list-gr-od',
+	props: {
+		list: {
+			type: Array,
+			default: function () {
+				return []
+			}
+		},
+		title: {
+			type: String,
+			default: ""
+		}
+	},
+
+	data() {
+		return {
+			list:this.props.list || [
+				{
+					id: "1",
+					title: "莫代尔无袖吊带连衣裙春秋侧开叉长裙女夏季内搭修身显瘦打底裙子",
+					image:
+						"http://aea8bc2ccdd582de43c1.qiniucdn.apicloud-system.com/apicloud/af44dcca9cde25d42f56f3047bfe0249.png",
+					price: 699,
+					buy_num: 233,
+					delprice: 1299,
+				},
+				{
+					id: "2",
+					title: "夏新款套装女洋气时尚短裤阔腿裤两件套小个子夏装搭配显高",
+					image:
+						"http://aea8bc2ccdd582de43c1.qiniucdn.apicloud-system.com/apicloud/46e4b8d7a4a8d1febeec082516a8e8f5.png",
+					price: 629,
+					buy_num: 666,
+					delprice: 1236,
+				},
+				{
+					id: "3",
+					title: "2020夏新款韩版连衣裙女收腰显瘦显高A字裙气质法式",
+					image:
+						"http://aea8bc2ccdd582de43c1.qiniucdn.apicloud-system.com/apicloud/05a8c2eda3a3e7f24b809d37064a702b.jpg",
+					price: 1299,
+					buy_num: 200,
+					delprice: 2199,
+				},
+				{
+					id: "4",
+					title: "港风套装女复古chic减龄短袖 ins复古穿搭",
+					image:
+						"http://aea8bc2ccdd582de43c1.qiniucdn.apicloud-system.com/apicloud/55503f6038070b5e7bcd663df8e9c61a.jpg",
+					price: 1998,
+					buy_num: 1234,
+					delprice: 2666,
+				},
+			],
+			title:this.props.title ||"活动专区"
+		}
+	},
+	computed: {
+		gridWidth() {
+			return Math.floor((api.winWidth - 30 - 18) / 2);
+		}
+	},
+	methods: {
+		fixBuynum(num) {
+			if (!num) { return 0; }
+			num = parseInt(num);
+			if (num > 9999) {
+				num = (num / 10000).toFixed(2);
+				num = num + 'w';
+			}
+			return num;
+		},
+		onDetailClick(){
+			api.openWin({
+				name:'detail',
+				url:'widget://pages/template-od-detail/template-od-detail'
+			})
+		}
+	}
+}
+</script>
+<style scoped>
+.common_tit {
+	flex-direction: row;
+	align-items: center;
+	margin-top: 5px;
+	padding: 15px;
+	background-color: #fff;
+}
+
+.common_zi {
+	font-size: 20px;
+	height: 28px;
+	line-height: 28px;
+	font-weight: bold;
+	color: #6e552b;
+}
+
+.flex1 {
+	flex: 1;
+}
+
+.common_morebtn {
+	flex-direction: row;
+	align-items: center;
+}
+
+.common_more {
+	font-size: 12px;
+	color: #8f8f8f;
+}
+
+.common_img {
+	width: 10px;
+	height: 10px;
+}
+.grid_box {
+	flex-direction: row;
+	flex-wrap: wrap;
+	padding: 0 3px 0 15px;
+	background-color: #fff;
+}
+
+.-grid-item {
+	/* width: 45%;  */
+	margin-bottom: 5px;
+	margin-right: 12px;
+	border-radius: 8px;
+	border: 1px solid #f6f6f6;
+	border-bottom: 3px solid #f6f6f6;
+	box-sizing: border-box;
+}
+.-grid-item-img {
+	width: 100%;
+}
+.-grid-item-title {
+	font-size: 14px;
+	line-height: 20px;
+	height: 40px;
+	margin: 5px 12px 0;
+	color: #333333;
+	font-weight: bold;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+	-webkit-line-clamp: 2;
+}
+.-grid-item-price {
+	margin-left: 12px;
+	line-height: 12px;
+	font-weight: 500;
+	color: #fe5c00;
+	font-size: 14px;
+}
+</style>

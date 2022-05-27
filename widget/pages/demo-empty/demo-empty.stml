@@ -1,0 +1,45 @@
+<template>
+
+	<safe-area>
+		<NavBar onBack={this.back}>Empty</NavBar>
+		<scroll-view>
+			<DemoBlock title='基础用法' padding='0'>
+				<Empty />
+			</DemoBlock>
+
+			<DemoBlock title='描述文字' padding='0'>
+				<Empty description='暂无数据' />
+			</DemoBlock>
+
+			<DemoBlock title='自定义样式' padding='0'>
+				<Empty style="padding: '64px 0'" imageStyle={ {width: 128} } description='暂无数据' />
+			</DemoBlock>
+			<DemoBlock title='自定义图片' padding='0'>
+				<Empty style="padding: '64px 0'" description='暂无数据'>
+					<UiwCloseSquare  fontSize={60} color={'#9ac200'}/>
+				</Empty>
+			</DemoBlock>
+		</scroll-view>
+
+
+	</safe-area>
+</template>
+
+<style src="../../components/avm-ui/empty/index.css"/>
+<style src="../../components/avm-ui/icon/index.css"/>
+<style src="../../components/avm-ui/nav-bar/index.css"/>
+<style src="../../components/avm-ui/demos/index.css"/>
+
+<script>
+import Empty from '../../components/avm-ui/empty';
+import UiwCloseSquare from '../../components/avm-ui/icon';
+import NavBar from '../../components/avm-ui/nav-bar';
+import {DemoBlock} from '../../components/avm-ui/demos';
+
+export default {
+	name: 'demo-empty',
+	back() {
+		api.closeWin();
+	}
+}
+</script>

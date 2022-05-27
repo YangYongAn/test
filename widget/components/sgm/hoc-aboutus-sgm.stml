@@ -1,0 +1,55 @@
+<template>
+	<view class="about-us">
+		<img class="about-us-logo" :src="image"/>
+		<text class="about-us-name">{{title}}</text>
+		<text class="about-us-version">{{version}}</text>
+		<text class="about-us-url">{{url}}</text>
+	</view>
+</template>
+<script>
+export default {
+	name: 'hoc-aboutus-sgm',
+	apiready() {//like created
+
+	},
+	data() {
+		return {
+			image: this.props.image !== undefined ? this.props.image : 'http://ae8b3ee28597856d3283.qiniucdn.apicloud-system.com/apicloud/4bb17d1e558c34b813965d8b35e05407.png',
+			title: this.props.title !== undefined ? this.props.title : '拼团商城',
+			version: this.props.version !== undefined ? this.props.version : '1.0.98',
+			url: this.props.url !== undefined ? this.props.url : 'www.apicloud.com'
+		}
+	},
+	methods: {
+
+	}
+}
+</script>
+<style>
+.about-us {
+	align-items: center;
+	width: 100%;
+}
+.about-us-logo {
+	width: 100px;
+	height: 100px;
+	border-radius: 8px;
+	margin-top: 50px;
+	background-color: #c3c6cd;
+}
+.about-us-name {
+	font-size: 20px;
+	font-weight: bold;
+	margin-top: 10px;
+}
+.about-us-version {
+	font-size: 16px;
+	margin-top: 4px;
+	color: #666666;
+}
+.about-us-url {
+	font-size: 14px;
+	margin-top: 10px;
+	color: #999999;
+}
+</style>

@@ -1,0 +1,85 @@
+<template>
+	<view class="classinfo_box">
+		<view v-for="(item,index) in list" @click="onSortClick" class="classinfo_one" data-id={item.id}>
+			<image class="classinfo_img" src={item.icon}></image>
+			<text class="classinfo_zi">{item.name}</text>
+		</view>
+	</view>
+</template>
+<script>
+export default {
+	name: 'hoc-sort-list-od',
+	props: {
+		list: {
+			type: String,
+			default: function () {
+				return []
+			}
+		}
+	},
+	apiready() {//like created
+
+	},
+	data() {
+		return {
+			list: this.props.list || [
+				{
+					"id": "f4aaeef0-caf6-11ea-8523-0da8a6a49497",
+					"name": "连衣裙",
+					"icon": "http://aea8bc2ccdd582de43c1.qiniucdn.apicloud-system.com/apicloud/fb2fd84add6d8abdfe419b6171f3058f.png",
+				},
+				{
+					"id": "fc084f30-caf6-11ea-8523-0da8a6a49497",
+					"name": "衬衫",
+					"icon": "http://aea8bc2ccdd582de43c1.qiniucdn.apicloud-system.com/apicloud/e8623d0eb02bd7ad54af16b5780ea62a.png",
+				},
+				{
+					"id": "1ff38f90-caf7-11ea-8523-0da8a6a49497",
+					"name": "半身裙",
+					"icon": "http://aea8bc2ccdd582de43c1.qiniucdn.apicloud-system.com/apicloud/15988601ef5f857e970992f5040eeb66.png",
+				},
+				{
+					"id": "418835c0-caf7-11ea-8523-0da8a6a49497",
+					"name": "吊带裙",
+					"icon": "http://aea8bc2ccdd582de43c1.qiniucdn.apicloud-system.com/apicloud/c8f30ce70fb18c0632bf820f79f8c596.png",
+				}
+			]
+		}
+	},
+	methods: {
+		onSortClick() {
+			api.setTabBarAttr({
+				index: 1
+			});
+		}
+	}
+}
+</script>
+<style>
+.classinfo_box {
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-around;
+	height: 106px;
+	background-color: #fff;
+}
+
+.classinfo_one {
+	width: 50px;
+	height: 100%;
+}
+
+.classinfo_img {
+	width: 50px;
+	height: 50px;
+	margin: 16px auto 8px;
+}
+
+.classinfo_zi {
+	text-align: center;
+	line-height: 17px;
+	height: 17px;
+	font-size: 12px;
+	color: #666666;
+}
+</style>

@@ -1,0 +1,37 @@
+<template name='tpl'>
+    <view class="page">
+        <hoc-header-bar-et title="柚子英语教育"/>
+        <hoc-user-panel-et userName="APP用户9626" />
+        <hoc-check-list-et :list="checkList" />
+    </view>
+</template>
+<script>
+import "../../components/et/hoc-header-bar-et.stml";
+import '../../components/et/hoc-user-panel-et.stml';
+import '../../components/et/hoc-check-list-et.stml';
+export default {
+    name: "template-et-user",
+    data() {
+        return {
+            checkList: [{
+                id: 'preorderList',
+                leftIcon: '../../image/icon__user-cell--alarm.png',
+                text: '我的预约',
+                extraText: '立即查看',
+                link: '../template-et-preorder-list/template-et-preorder-list.stml'
+            }, {
+                id: 'orderList',
+                leftIcon: '../../image/icon__user-cell--order.png',
+                text: '我的线上课订单',
+                link: '../template-et-order-list/template-et-order-list.stml'
+            }]
+        };
+    }
+};
+</script>
+<style>
+.page {
+    height: 100%;
+    background-color: #fff;
+}
+</style>

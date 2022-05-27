@@ -1,0 +1,150 @@
+<template>
+	<view class="page">
+		<safe-area>
+			<avm-nav-bar onBack={this.back}>ActionSheet</avm-nav-bar>
+		</safe-area>
+		<DemoBlock title='基础用法'>
+			<avm-space wrap>
+				<avm-button onClick={() => this.setVisible('visibleOne', true)}>基础用法</avm-button>
+				<avm-button onClick={() => this.setVisible('visibleTwo', true)}>取消按钮和额外描述</avm-button>
+			</avm-space>
+		</DemoBlock>
+		<DemoBlock title='选项状态'>
+			<avm-button onClick={() => this.setVisible('visibleThree', true)}>禁用和危险的选项</avm-button>
+		</DemoBlock>
+		<DemoBlock title='事件处理'>
+			<avm-button onClick={() => this.setVisible('visibleFour', true)}>事件处理</avm-button>
+		</DemoBlock>
+		<avm-action-sheet
+			:visible="visibleOne"
+			actions={actions}
+			handleClose={() => this.setVisible('visibleOne', false)}
+			handleAction={(action, index) => this.onAction(action, index)}/>
+		<avm-action-sheet
+			extra='请选择你要进行的操作'
+			cancelText="取消"
+			extraDesc="请选择哦~~"
+			:visible="visibleTwo"
+			actions={actions}
+			handleClose={() => this.setVisible('visibleTwo', false)}
+		/>
+		<avm-action-sheet
+			:visible="visibleThree"
+			actions={this.data.actions3}
+			cancelText="取消了哦"
+			handleClose={() => this.setVisible('visibleThree', false)}
+		/>
+		<avm-action-sheet
+			:visible="visibleFour"
+			actions={this.data.actions4}
+			handleClose={() => this.setVisible('visibleFour', false)}}
+			handleAction={(action, index) => this.onAction(action, index)}/>
+	</view>
+</template>
+<script>
+import '../../components/avm-ui/action-sheet'
+import '../../components/avm-ui/space'
+import '../../components/avm-ui/button'
+import '../../components/avm-ui/nav-bar'
+import {DemoBlock} from '../../components/avm-ui/demos'
+
+const actions = [
+  { text: '复制', key: 'copy' },
+  { text: '修改', key: 'edit' },
+  {
+	text: '删除',
+	key: 'delete',
+	onClick: () => {
+		api.toast({
+			msg: '点击删除操作了!'
+		})
+	}},
+]
+export default {
+	name: 'demo-actionsheet',
+	data() {
+		return {
+			visibleOne: false,
+			visibleTwo: false,
+			visibleThree: false,
+			visibleFour: false,
+			actions3: [
+				{ text: '复制', key: 'copy' },
+				{ text: '修改', key: 'edit', disabled: true },
+				{
+					text: '删除',
+					key: 'delete',
+					description: '删除后数据不可恢复',
+					danger: true,
+					onClick: () => {
+						api.toast({
+							msg: '点击删除操作了!'
+						})
+						this.data.visibleThree = false
+					}
+				},
+			],
+			actions4: [
+				{ text: '复制', key: 'copy' },
+				{ text: '修改', key: 'edit' },
+				{
+					text: '删除',
+					key: 'delete',
+					onClick: () => {
+						api.toast({
+							msg: '删除',
+							location: 'top'
+						});
+						this.data.visibleFour = false
+					},
+				},
+			]
+		}
+	},
+	methods: {
+		setVisible(key, value) {
+			this.data[key] = value
+		},
+		back() {
+			api.closeWin();
+		},
+		closeOne() {
+			this.setVisible('visibleOne', false)
+		},
+		onAction(action, index) {
+			api.toast({
+				msg: `点击了${action.text} + ${index}`,
+				location: 'top'
+			})
+			// if (action.key === 'edit' || action.key === 'copy') {
+			// 	api.toast({
+			// 		msg: `点击了${action.text} + ${index}`,
+			// 		location: 'top'
+			// 	})
+			// }
+		},
+		onClose3() {
+			api.alert({
+				msg: this.data.visibleThree.toString(),
+				location: 'top'
+			})
+			this.setVisible('visibleThree', false)
+		},
+		onClose4() {
+			api.toast({
+				msg: '关闭事件处理动作面板啦~',
+				location: 'top'
+			})
+			this.setVisible('visibleFour', false)
+		}
+	}
+}
+</script>
+<style>
+.page {
+	width: 100%;
+	height: 100%;
+	padding-bottom: 20px;
+	background: #f2f2f2;
+}
+</style>

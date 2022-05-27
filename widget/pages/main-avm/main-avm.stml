@@ -1,0 +1,177 @@
+<template>
+<view class="main-avm-container">
+  <view class="main-avm-top" v-if="!isShowIndex">
+    <text class="main-avm-top-title">AVM PLAY</text>
+    <text class="main-avm-top-sub-title">Application-View-Model</text>
+    <text class="main-avm-top-desc">AVM是用友APICloud发布的一款专注移动端的高性能多端JavaScript框架，提供简洁的代码书写模式，编码一次可同时生成Android&iOS原生App、小程序和WebApp。</text>
+  </view>
+  <view
+     v-if="!isShowIndex"
+    class="main-avm-box"
+    @touchstart="handleTouchstart"
+    @touchmove="handleTouchMove"
+    :style="`top: ${top}px`">
+    <view class="main-avm-drag"><text class="main-avm-drag-inner"></text></view>
+    <scroll-view class="main-avm-content" scroll-y :show-scrollbar="false">
+      <view v-for="item in avmContentList" :key="item.tab" class="main-avm-item" @click="itemClick(item)">
+        <text class="main-avm-item-text">{item.text}</text>
+        <image class="main-avm-item-icon" :src="`../../image/${item.icon}.png`" :alt="item.icon"/>
+      </view>
+    </scroll-view>
+  </view>
+  <main-avm-index v-if="isShowIndex" @handleHideIndexList="handleHideIndexList" :curTab="curTab" :curChildTab="curChildTab"/>
+</view>
+</template>
+
+<script>
+import '../main-avm-index/main-avm-index.stml'
+import {avmContentList} from '../../utils/constant'
+export default {
+  name: "main-avm",
+  apiready() {
+		api.setStatusBarStyle && api.setStatusBarStyle({
+			style: 'dark'
+		});
+	},
+  computed: {
+    // 当前运行平台 app/web/mp
+    platform() {
+      return api.platform;
+    }
+  },
+  data() {
+    return {
+      startY: 0,
+      top: api.systemType === 'ios' ? 260 : 240,
+      isShowIndex: false,
+      curTab: null,
+      curChildTab: null
+    }
+  },
+  methods: {
+    handleTouchstart(e) {
+      this.data.startY = e.detail.y;
+    },
+    handleTouchMove(e) {
+      if (e.detail.y - this.data.startY < 0) { // 向上滑动
+        this.data.top > 60 ? (this.data.top = this.data.top - 10) : (this.enterAvmList())
+      } else { // 向下滑动
+        this.data.top < (api.systemType === 'ios' ? 260 : 240) && (this.data.top = this.data.top + 10)
+      }
+    },
+    itemClick(item) {
+      this.data.curTab = item.type;
+      this.data.curChildTab = item.tab;
+      this.enterAvmList(item)
+    },
+    // 进入AVM组件list列表页面
+    enterAvmList(item) {
+      this.isShowIndex = true
+      // const url = '../main-avm-index/main-avm-index.stml';
+      // const {type, tab} = item || {};
+
+      // if (this.platform === 'app') { // app端
+      //   api.openWin({
+      //     name: 'main-avm-index',
+      //     url,
+      //     pageParam: item ? {type, tab} : null
+      // });
+      // } else if (this.platform === 'mp') { // 小程序端
+      //   wx.redirectTo({
+      //     url: `${url}?type=${type}&tab=${tab}`
+      //   })
+      // }
+    },
+    handleHideIndexList() {
+      this.data.isShowIndex = false
+      this.data.top = api.systemType === 'ios' ? 260 : 240
+      this.data.curTab = null
+      this.data.curChildTab = null
+    }
+  }
+}
+</script>
+
+<style>
+.main-avm-container {
+  background: #f6f6f6;
+  width: 100%;
+  height: 100%;
+}
+.main-avm-top {
+  width: 100%;
+  height: auto;
+  padding: 36px 20px 24px;
+  background: url(../../image/avm_top_bg.png) no-repeat;
+  background-size: 100% 100%;
+	background-position: center center;
+}
+.main-avm-top-title {
+  font-size: 18px;
+  color: #333;
+  font-weight: 500;
+  line-height: 25px;
+  padding-top: 35px;
+}
+.main-avm-top-sub-title {
+  font-size: 14px;
+  color: #333333;
+  line-height: 19px;
+  padding: 15px 0 24px;
+  font-weight: 400;
+}
+.main-avm-top-desc {
+  font-size: 13px;
+  font-weight: 400;
+  color: #999999;
+  line-height: 24px;
+}
+.main-avm-box {
+  flex: 1;
+  z-index: 999;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 0 16px;
+  background: #FFFFFF;
+  box-shadow: 0px -2px 16px 0px rgba(0, 0, 0, 0.06);
+  border-radius: 20px 20px 0px 0px;
+}
+.main-avm-content {
+  flex: 1;
+}
+.main-avm-drag {
+  width: 100%;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  align-items: center;
+}
+.main-avm-drag-inner {
+  width: 30px;
+  height: 3px;
+  border-radius: 2px;
+  background: #ccc;
+  align-self: center;
+}
+.main-avm-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 0.5px solid #eee;
+  padding: 18px 0;
+  flex-shrink: 0;
+}
+.main-avm-item-text {
+  font-size: 16px;
+  color: #333;
+  font-weight: 400;
+  line-height: 22px;
+}
+.main-avm-item-icon {
+  width: 22px;
+  height: 22px;
+}
+
+</style>

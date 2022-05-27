@@ -1,0 +1,87 @@
+<template>
+  <safe-area class="page">
+    <avm-nav-bar onBack={this.back}>Card</avm-nav-bar>
+    <DemoBlock title='基本用法' background='gray'>
+      <avm-card title='卡片标题' onClick={()=>this.onClick()}>
+        卡片内容
+      </avm-card>
+    </DemoBlock>
+    <DemoBlock title='没有卡片内容' background='gray'>
+      <avm-card title='卡片标题' onClick={()=>this.onClick()}></avm-card>
+    </DemoBlock>
+    <DemoBlock title='没有卡片标题' background='gray'>
+      <avm-card onClick={()=>this.onClick()}>卡片内容</avm-card>
+    </DemoBlock>
+    <DemoBlock title='自定义卡片样式' background='gray'>
+      <avm-card
+        bodyClassName={'customBody'}
+        title='卡片标题'
+      >
+        <text>卡片内容</text>
+      </avm-card>
+    </DemoBlock>
+  </safe-area>
+</template>
+<script>
+import '../../components/avm-ui/card';
+import '../../components/avm-ui/nav-bar';
+import {DemoBlock} from '../../components/avm-ui/demos';
+export default {
+  name: 'test',
+  data() {
+    return {
+      list: [
+        'A',
+        'B',
+        'C',
+        'D',
+        'E',
+        'F',
+        'G',
+        'H',
+        'I',
+        'J',
+        'K',
+        'L',
+        'M',
+        'N',
+        'O',
+        'P',
+        'Q',
+      ]
+    }
+  },
+  methods: {
+    back() {
+			api.closeWin();
+		},
+    onClick () {
+      api.alert({
+        msg: '点击了卡片'
+      })
+    },
+    onHeaderClick() {
+      api.alert({
+        msg: '点击了卡片Header区域'
+      })
+    },
+    onBodyClick() {
+      api.alert({
+        msg: '点击了卡片Body区域'
+      })
+    }
+  }
+}
+</script>
+
+
+<style scoped>
+.page{
+  position: relative;
+  height: 100%;
+  background-color: #f3f3f3;
+}
+.customBody {
+  color: #00b578;
+}
+</style>

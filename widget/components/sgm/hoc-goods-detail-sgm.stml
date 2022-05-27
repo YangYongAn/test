@@ -1,0 +1,59 @@
+<!--商品详情card-->
+<template>
+	<view class="goods-detail">
+		<view class="goods-detail-title">
+			<view class="goods-detail-title-line"></view>
+			<text class="goods-detail-title-text">{{title}}</text>
+		</view>
+		<!-- <text class="goods-detail-info">{{info}}</text> -->
+		<view class="goods-detail-info">
+			<rich-text :nodes="info"></rich-text>
+		</view>
+	</view>
+</template>
+<script>
+export default {
+	name: 'hoc-goods-detail-sgm',
+	apiready() {//like created
+
+	},
+	data() {
+		return {
+			title: this.props.title !== undefined ? this.props.title : '商品详情',
+			info: this.props.info !== undefined ? this.props.info : '<img style="width: 100%; height: auto;" src="http://ae8b3ee28597856d3283.qiniucdn.apicloud-system.com/apicloud/89d57c29cf24aff7c0471233e7d0ab46.png" />'
+		}
+	},
+	methods: {
+
+	}
+}
+</script>
+<style>
+.goods-detail {
+	margin-top: 8px;
+	background-color: #fff;
+	padding: 0 15px;
+	margin-bottom: 10px;
+}
+.goods-detail-title {
+	flex-direction: row;
+	align-items: center;
+	padding: 12px 0;
+	border-bottom: 1px solid #f8f8f8;
+}
+.goods-detail-title-line {
+	width: 3px;
+	height: 14px;
+	border-radius: 2px;
+	background-color: #339dff;
+}
+.goods-detail-title-text {
+	font-size: 16px;
+	font-weight: bold;
+	color: #333;
+	margin-left: 8px;
+}
+.goods-detail-info {
+	padding: 12px 0;
+}
+</style>

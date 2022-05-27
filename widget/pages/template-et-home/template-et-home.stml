@@ -1,0 +1,184 @@
+<template name='tab-home'>
+	<view class="page">
+		<hoc-header-bar-et title="柚子英语教育"/>
+		<scroll-view class="main" scroll-y :show-scrollbar="false">
+			<!--头部轮播-->
+			<hoc-swiper-et :swiperList="banners" />
+			<!--课程类别菜单-->
+			<hoc-course-menu-et :menuList="menuList" @itemClick="gotoCourse" />
+			<!--名师团队-->
+			<hoc-teacher-team-et :teacherList="teacherList" @itemClick="teacherClick" />
+			<!--关于我们-->
+			<hoc-aboutus-et :contents="contents" />
+		</scroll-view>
+	</view>
+</template>
+<script>
+import "../../components/et/hoc-header-bar-et.stml";
+import '../../components/et/hoc-swiper-et.stml';
+import '../../components/et/hoc-course-menu-et.stml';
+import '../../components/et/hoc-teacher-team-et.stml';
+import '../../components/et/hoc-aboutus-et.stml'; // 首页-轮播图数据
+export default {
+	name: "template-et-home",
+	installed() {
+		// 显式声明状态栏样式 解决部分安卓机型自动生成的灰色半透明背景
+		api.setStatusBarStyle && api.setStatusBarStyle({
+			style: 'dark',
+			//字体样式
+			color: '-' //背景色
+		});
+	},
+	data() {
+		return {
+			banners: [{
+				"cover": "http://ae8b3ee28597856d3283.qiniucdn.apicloud-system.com/apicloud/f37011096dcb1d65093b6aa247b4f7c7.png"
+			}, {
+				"cover": "http://ae8b3ee28597856d3283.qiniucdn.apicloud-system.com/apicloud/9e904b8fcf2572d05d44c553f3f74f04.png"
+			}, {
+				"cover": "http://ae8b3ee28597856d3283.qiniucdn.apicloud-system.com/apicloud/d0e5835a20a57e2716aba301ae715893.png"
+			}],
+			menuList: [{
+				name: "雅思培训",
+				image: "http://aa8954a760b087bd5575.qiniucdn.apicloud-system.com/apicloud/62d63d588551d1c75bd11404e0666d9f.png"
+			}, {
+				name: "托福培训",
+				image: "http://aa8954a760b087bd5575.qiniucdn.apicloud-system.com/apicloud/936c24de0b3049dea6162b5d9bcf01cb.png"
+			}, {
+				name: "商务英语",
+				image: "http://aa8954a760b087bd5575.qiniucdn.apicloud-system.com/apicloud/06a6961f626afd2d539e66a30725c3e3.png"
+			}, {
+				name: "少儿英语",
+				image: "http://aa8954a760b087bd5575.qiniucdn.apicloud-system.com/apicloud/12cb821ff1c86094e67f55c08b8d5f6c.png"
+			}],
+			teacherList: [{
+				name: "张亦宏",
+				thumb: "http://ae8b3ee28597856d3283.qiniucdn.apicloud-system.com/apicloud/380f6633aab0352d42dc1217a8d10c8f.png",
+				introduction: "10余年雅思教龄"
+			}, {
+				name: "王明云",
+				thumb: "http://ae8b3ee28597856d3283.qiniucdn.apicloud-system.com/apicloud/380f6633aab0352d42dc1217a8d10c8f.png",
+				introduction: "12余年托福教龄"
+			}, {
+				name: "周宇航",
+				thumb: "http://ae8b3ee28597856d3283.qiniucdn.apicloud-system.com/apicloud/380f6633aab0352d42dc1217a8d10c8f.png",
+				introduction: "近20年雅思教龄"
+			}],
+			contents: [{
+				value: "<p class='content-text'>柚子英语教育，创建于2007年，专为为有学习英语需求的学员提供英语辅导教学。采取“直播+辅导”双师模式，AI技术辅助教学。总部设立在北京，先后在上海、广州、深圳、天津、杭州、成都、西安、南京等地成立分支机构，现已有120余所辅导中心，成为颇受家长和学生信赖的英语辅导品牌之一。秉承“激发兴趣、培养习惯、塑造品格”的教育理念，柚子英语不仅关注学生学习成绩的提高，更关注学生学习兴趣的激发、学习习惯的培养和思维模式的塑造。柚子英语以“给孩子受益一生的教育”为使命，为广大学子提供优质的课程辅导和贴心的教学服务，满足学生英语课外补习需求。</p>"
+			}, {
+				value: "<img src='http://ae8b3ee28597856d3283.qiniucdn.apicloud-system.com/apicloud/70886d751d5940247055ab8b88854e08.png' style='height: 194px; width: 100%; margin: 15px 0;'/>"
+			},
+			{
+				value: "<p class='content-text'>柚子英语教育还与北京大学数学系、南开大学数学系、上海交大数学系、武汉大学数学系等机构签订合作协议，成为他们的实习基地和就业实践基地。依托强大的教学资源与师资力量，柚子英语以实现优秀教育资源的共享为己任，建立起英语网络远程教育平台，大量学员在每年的考试与各类竞赛中取得优异成绩。</p>"
+			}
+			]
+		};
+	},
+	methods: {
+		gotoCourse(data) {
+			api.openWin({
+				name: 'template-et-course-list',
+				url: '../template-et-course-list/template-et-course-list.stml',
+				pageParam: {
+					...data.detail
+				}
+			});
+		},
+		teacherClick(data) {
+			const {
+				name,
+				introduction
+			} = data.detail;
+			this.showModal({
+				title: name,
+				content: introduction,
+				success(res) {
+					if (res.confirm) {
+						console.log('用户点击确定');
+					} else if (res.cancel) {
+						console.log('用户点击取消');
+					}
+				},
+				complete(res) {
+					console.log(res);
+				}
+			});
+		},
+		showModal({
+			...options
+		}) {
+			if (!api.appVersion) {
+				return wx.showModal(options);
+			} else {
+				options.msg = options.content;
+				const showCancel = options.showCancel || true;
+				if (showCancel) {
+					api.confirm(options, _ => {
+						_result({
+							..._,
+							confirm: _.buttonIndex === 2,
+							cancel: _.buttonIndex === 1
+						});
+					});
+				} else {
+					api.alert(options, _ => {
+						_result({
+							..._,
+							confirm: _.buttonIndex === 1,
+							cancel: false
+						});
+					});
+				}
+
+				function _result(res) {
+					if (res) {
+						options.success && options.success(res);
+					} else {
+						options.fail && options.fail();
+					}
+					options.complete && options.complete(res);
+				}
+			}
+		}
+	}
+};
+</script>
+<style>
+.page {
+	width: 100%;
+	height: 100%;
+	background: #f2f2f2;
+}
+.main {
+	flex: 1;
+}
+.content-text {
+	color: #666;
+	font-size: 14px;
+	line-height: 24px;
+	margin: 0;
+	padding: 0;
+}
+.desc-list-item {
+	background: #f00;
+	width: 33%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+.desc-list-item-title {
+	font-size: 14px;
+	font-weight: 400;
+	color: #999;
+	line-height: 14px;
+	padding: 10px 0;
+}
+.desc-list-item-desc {
+	font-size: 16px;
+	font-weight: 500;
+	color: #333;
+	line-height: 16px;
+}
+</style>

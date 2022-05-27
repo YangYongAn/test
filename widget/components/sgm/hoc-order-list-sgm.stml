@@ -1,0 +1,222 @@
+<template>
+	<scroll-view class="order-list" scroll-y>
+		<view class="order-list-item" @click="orderItemClick">
+			<view class="order-list-item-top">
+				<text class="order-list-item-top-text">订单编号: {{ordeBaseInfo.orderid}}</text>
+				<text class="order-list-item-top-text">{{ordeBaseInfo.status_str}}</text>
+			</view>
+			<view class="order-list-item-goods">
+				<view class="order-list-item-goods-item" v-for="good in buyProductList" @click="goodsItemClick(good)">
+					<img class="order-list-item-goods-img" :src="good.image" />
+					<view class="order-list-item-goods-right">
+						<text class="order-list-item-goods-title">{good.title}</text>
+						<view class="order-list-item-goods-guige-box">
+							<text class="order-list-item-goods-guige">{good.key ? ' '+good.key : '默认规格'}</text>
+							<text class="order-list-item-goods-num">{'x'+(good.buynum||good.tuinum)}</text>
+						</view>
+						<view class="order-list-item-goods-bottom">
+							<text class="order-list-item-goods-price">{'¥' + (good.act=='buy'?good.delprice:good.price)}</text>
+						</view>
+					</view>
+				</view>
+			</view>
+			<view class="order-list-item-footer" v-if="ordeBaseInfo.status==2">
+				<text class="order-list-item-footer-szi">共{{ordeBaseInfo.buy_num || 0}}件商品</text>
+				<view class="flex1"></view>
+				<text class="order-list-item-footer-szi">合计：</text>
+				<text class="order-list-item-footer-rzi">￥{{ordeBaseInfo.pay_price}}</text>
+			</view>
+			<view class="order-list-item-footer" v-if="ordeBaseInfo.status==2">
+				<text class="order-list-item-footer-tuantext">还差</text>
+				<text class="order-list-item-footer-tuannum">{{ordeBaseInfo.cnum}}</text>
+				<text class="order-list-item-footer-tuantext">人拼成，</text>
+				<hoc-count-down-sgm time={ordeBaseInfo.endmiao} desc="剩余"></hoc-count-down-sgm>
+				<view class="flex1"></view>
+				<text class="order-list-btn order-list-btn-orange" data-index={index} @click="fnInvite">邀请好友</text>
+			</view>
+			<view class="order-list-item-footer" v-else>
+				<text class="order-list-item-footer-szi">共{{ordeBaseInfo.buy_num || 0}}件商品，合计:</text>
+				<text class="order-list-item-footer-rzi">￥ {{ordeBaseInfo.pay_price}}</text>
+				<view class="flex1"></view>
+				<!-- 取消订单 未支付 -->
+				<text class="order-list-btn order-list-btn-gray" v-if="ordeBaseInfo.status == 1" @click="fnCancelOrder">取消订单</text>
+				<text class="order-list-btn order-list-btn-orange" v-if="ordeBaseInfo.status == 1" @click="fnPayOrder">立即付款</text>
+				<!-- 取消订单 已支付 -->
+				<text class="order-list-btn order-list-btn-gray" v-if="ordeBaseInfo.status > 1 && ordeBaseInfo.status < 4"
+					@click="fnCancelOrderPay">取消订单</text>
+				<!-- 确认收货 -->
+				<text class="order-list-btn order-list-btn-orange" v-if="ordeBaseInfo.status == 4" @click="fnConfirmOrder">确认收货</text>
+			</view>
+		</view>
+	</scroll-view>
+</template>
+<script>
+export default {
+	name: 'hoc-order-list-sgm',
+	apiready() {//like created
+
+	},
+	data() {
+		return {
+			ordeBaseInfo: this.props.ordeBaseInfo || {
+                orderid: "202203290948386376",
+                status: 5,
+                pay_price: 4198.88,
+                buy_num: 2,
+                endmiao: null,
+                status_str: "已关闭",
+                cnum: 3
+            },
+			buyProductList: this.props.buyProductList || [{
+                title: "苹果笔记本电脑超薄",
+                image: "http://ae8b3ee28597856d3283.qiniucdn.apicloud-system.com/apicloud/02b297b95bd2ae7aa0021ed8df11bede.png",
+                price: 30.9,
+                delprice: 50,
+                key: "小盒/200g",
+                buynum: 1,
+                act: "tuan"
+            }, {
+                title: "Apple 2019新款 Mac Pro 32G 256G八核 Intel Xeon W（3.5GHz…",
+                image: "http://ae8b3ee28597856d3283.qiniucdn.apicloud-system.com/apicloud/899e2ba871eb98a66e22004747fb12df.png",
+                price: 30.9,
+                delprice: 40,
+                key: "小盒/200g",
+                buynum: 1,
+                act: "buy"
+            }]
+		}
+	},
+	methods: {
+		orderItemClick() {
+			this.fire('orderItemClick')
+		},
+		goodsItemClick() {
+			this.fire('goodsItemClick')
+		},
+		fnCancelOrder() {
+			this.fire('fnCancelOrder')
+		},
+		fnPayOrder() {
+			this.fire('fnPayOrder')
+		},
+		fnCancelOrderPay() {
+			this.fire('fnCancelOrderPay')
+		},
+		fnInvite() {
+			this.fire('fnInvite')
+		}
+	}
+}
+</script>
+<style>
+.order-list {
+	flex: 1;
+}
+.order-list-item {
+	width: 100%;
+	background: #ffffff;
+	margin-top: 8px;
+}
+.order-list-item-top {
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	height: 44px;
+	padding: 0 15px;
+	border-bottom: 1px solid #f8f8f8;
+}
+.order-list-item-top-text {
+	font-size: 14px;
+	color: #333333;
+}
+.order-list-item-footer {
+	flex-direction: row;
+	align-items: center;
+	height: 44px;
+	padding: 0 15px;
+	border-bottom: 1px solid #f8f8f8;
+}
+.order-list-item-footer-tuantext {
+	font-size: 12px;
+	color: #333333;
+}
+.order-list-item-footer-tuannum {
+	font-size: 12px;
+	color: #ff7037;
+	margin: 0 3px;
+}
+.order-list-item-footer-szi {
+	font-size: 12px;
+	color: #333333;
+}
+.order-list-item-footer-rzi {
+	font-size: 16px;
+	color: #fe5c00;
+}
+.flex1 {
+	flex: 1;
+}
+.order-list-btn {
+	width: 70px;
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+	margin-left: 8px;
+	border-radius: 2px;
+	font-size: 14px;
+	padding: 0 3px;
+}
+.order-list-btn-gray {
+	background-color: white;
+	border: 1px solid #b5b5b5;
+	color: #999999;
+}
+.order-list-btn-orange {
+	background-color: #339dff;
+	color: white;
+}
+
+.order-list-item-goods {
+	background-color: white;
+}
+.order-list-item-goods-item {
+	flex-direction: row;
+	padding-bottom: 15px;
+	margin: 15px 15px 0;
+	border-bottom: 1px solid #f8f8f8;
+}
+.order-list-item-goods-img {
+	width: 60px;
+	height: 60px;
+	margin-right: 12px;
+	border-radius: 4px;
+}
+.order-list-item-goods-right {
+	align-content: center;
+	flex: 1;
+}
+.order-list-item-goods-title {
+	font-size: 14px;
+	color: #333333;
+}
+.order-list-item-goods-guige-box {
+	flex-direction: row;
+	justify-content: space-between;
+	margin-top: 5px;
+}
+.order-list-item-goods-guige,
+.order-list-item-goods-num {
+	font-size: 12px;
+	color: #999999;
+}
+.order-list-item-goods-bottom {
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	margin-top: 10px;
+}
+.order-list-item-goods-price {
+	font-size: 14px;
+	color: #fe904a;
+}
+</style>

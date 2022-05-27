@@ -1,0 +1,75 @@
+<template>
+	<view class="tab-bar">
+		<view class="tab-item" v-for="(item,index) in tabList" :key="index" @click="tabClick(index)">
+			<image class="tab-icon" :src="curIndex === index ? item.selectedIcon : item.icon" />
+			<text :class="`tab-text ${curIndex === index ? 'tab-text-active' : ''}`">{{ item.msg}}</text>
+		</view>
+	</view>
+</template>
+<script>
+export default {
+	name: 'hoc-tab-bar-od',
+	data() {
+		return {
+			curIndex: 0,
+			tabList: this.props.tabList || [
+				{
+					icon: '../../image/template_od1.png',
+					selectedIcon: '../../image/template_od1_select.png',
+					msg: "首页",
+				},
+				{
+					icon: '../../image/template_od2.png',
+					selectedIcon: '../../image/template_od2_select.png',
+					msg: "分类",
+				},
+				{
+					icon: '../../image/template_od3.png',
+					selectedIcon: '../../image/template_od3_select.png',
+					msg: "购物车",
+				},
+				{
+					icon: '../../image/template_od4.png',
+					selectedIcon: '../../image/template_od4_select.png',
+					msg: "我的",
+				},
+			]
+		}
+	},
+	methods: {
+		tabClick(index) {
+			this.data.curIndex = index;
+			this.fire('tabClick', index)
+		}
+	}
+}
+</script>
+<style scoped>
+.tab-bar {
+	flex-direction: row;
+	justify-content: space-between;
+	padding: 3px 0;
+	width: 100%;
+	height: 60px;
+	background-color: #fff;
+}
+.tab-item {
+	width: 33%;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+}
+.tab-text {
+	font-size: 11px;
+	color: #666;
+	font-weight: 400;
+}
+.tab-text-active {
+	color: #333;
+	font-weight: 500;
+}
+.tab-icon {
+	width: 25px !important;
+	height: 25px;
+}
+</style>

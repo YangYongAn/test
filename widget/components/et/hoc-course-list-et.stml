@@ -1,0 +1,89 @@
+<!--不同类别下课程列表-卡片-->
+<template>
+	<view class="page">
+		<view v-for="item in list" :key="item.id" class="b-course-card" @click="gotoCourseDetail(item)">
+			<img class="b-course-card-img" :src="item.cover" />
+			<view class="b-course-card-content">
+				<view class="b-course-card-content-info">
+					<text class="b-course-card-content-title">{{ item.title }}</text>
+					<text class="b-course-card-price">{{ item.class_hour }}课时/{{ item.price }}元</text>
+				</view>
+				<text class="b-course-card-content-desc">{{ item.introduction }}</text>
+			</view>
+		</view>
+	</view>
+</template>
+<script>
+export default {
+	name: 'hoc-course-list-et',
+	apiready() {//like created
+
+	},
+	data() {
+		return {
+			list: this.props.list || [{
+				id: "486747f0-e6c7-11ea-8da4-530d11e9ab6f",
+				title: "托福基础班",
+				introduction: "专项针对听说和读写进行授课，符合英语学习规律为冲刺托福高分奠定坚实基础。",
+				class_hour: 20,
+				price: 3500,
+				cover: "http://aa8954a760b087bd5575.qiniucdn.apicloud-system.com/apicloud/76abf6b3c8df591a726c3156427b1171.png"
+			}, {
+				id: "d38e2bc0-d296-11ec-8b39-cda3e4fd4f7b",
+				title: "提交学习能力",
+				introduction: "专项针对听说和读写进行授课，符合英语学习规律为冲刺托福高分奠定坚实基础。",
+				class_hour: 20,
+				price: 5000,
+				cover: "http://a0a67a2d94d23442aaa3.qiniucdn.apicloud-system.com/apicloud/45cad7acde20f5ee41692957385a9453.png"
+			}]
+		}
+	},
+	methods: {
+		gotoCourseDetail(item) {
+			this.fire('gotoCourseDetail', item)
+		}
+	}
+}
+</script>
+<style>
+.b-course-card {
+	width: auto;
+	height: auto;
+	margin: 15px;
+	background: #fff;
+	border: 1px solid #f3f3f3;
+	border-radius: 4px;
+}
+.b-course-card-img {
+	width: 100%;
+	height: 194px;
+}
+.b-course-card-content {
+	margin: 12px;
+}
+.b-course-card-content-info {
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+	height: 22px;
+}
+.b-course-card-content-title {
+	flex: 1;
+	color: #333;
+	font-size: 16px;
+	font-weight: bold;
+	margin-right: 8px;
+	flex-wrap: wrap;
+}
+.b-course-card-content-desc {
+	margin-top: 15px;
+	white-space: pre-wrap;
+	font-size: 14px;
+	color: #666666;
+}
+.b-course-card-price {
+	font-size: 16px;
+	color: #fa6400;
+	font-weight: bold;
+}
+</style>

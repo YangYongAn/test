@@ -1,0 +1,57 @@
+<template>
+	<view class="remark">
+		<!-- 备注 -->
+		<text class="bei_zi">备注</text>
+		<view class="bei_box">
+			<textarea class="bei_area" id="beizhu" :value="this.props.inputVal" :placeholder="this.props.placeholder"></textarea>
+		</view>
+	</view>
+</template>
+<script>
+export default {
+	name: 'hoc-remark-buy-od',
+	props: {
+		inputVal: {
+			type: String,
+			default: ""
+		},
+		placeholder: {
+			type: String,
+			default: ""
+		}
+	},
+	apiready() {//like created
+
+	},
+	data() {
+		return {
+			inputVal:this.props.inputVal || "",
+			placeholder:this.props.placeholder || "留下您想对商家说的话",
+		}
+	},
+	methods: {
+
+	}
+}
+</script>
+<style scoped>
+/* 备注 */
+.bei_zi {
+	font-size: 14px;
+	margin-left: 15px;
+	margin-top: 15px;
+	margin-bottom: 4px;
+	color: #6c7279;
+}
+.bei_box {
+	height: 122px;
+	padding: 14px 15px;
+	margin-bottom: 10px;
+	background-color: white;
+}
+.bei_area {
+	width: auto;
+	height: 100%;
+	border: none;
+}
+</style>

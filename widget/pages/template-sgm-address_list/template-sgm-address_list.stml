@@ -1,0 +1,39 @@
+<template>
+    <safe-area class="page">
+        <hoc-nav-bar-sgm isShowBack title="收货地址" />
+        <hoc-address-list-sgm :addressList="addresslist" />
+    </safe-area>
+</template>
+<script>
+import '../../components/sgm/hoc-address-list-sgm.stml';
+import '../../components/sgm/hoc-nav-bar-sgm.stml';
+export default {
+    name: 'template-sgm-address_list',
+    apiready() { //like created
+    },
+    data() {
+        return {
+            addresslist: [{
+                def: 2,
+                id: "1",
+                name: "杨飞",
+                phone: "15534212345",
+                address: "北京北京市海淀区北太平庄街道北三环中路44号"
+            }, {
+                def: 2,
+                id: "1",
+                name: "杨飞",
+                phone: "15534212345",
+                address: "北京北京市海淀区北太平庄街道北三环中路44号"
+            }]
+        };
+    },
+    methods: {}
+};
+</script>
+<style>
+.page {
+    height: 100%;
+    background-color: #f8f8f8;
+}
+</style>

@@ -1,0 +1,49 @@
+<!--基础组件-->
+<template>
+<safe-area class="page">
+	<avm-nav-bar onBack={this.back}>Textarea</avm-nav-bar>
+	<DemoBlock title='基础用法'>
+		<textarea placeholder="请输入" class="textarea"/>
+	</DemoBlock>
+	<DemoBlock title='输入字数限制'>
+		<textarea class="textarea" placeholder="输入限制为50字符" maxlength="50" autofocus/>
+	</DemoBlock>
+	<DemoBlock title='自动增长高度'>
+		<textarea class="textarea" placeholder="请输入" auto-height/>
+	</DemoBlock>
+</safe-area>
+</template>
+<script>
+import '../../components/avm-ui/nav-bar'
+import {DemoBlock} from '../../components/avm-ui/demos'
+export default {
+	name: 'avm-base-textarea',
+	data(){
+		return {
+			
+		}
+    },
+	methods: {
+		back() {
+			api.closeWin();
+		},
+		
+	}
+}
+</script>
+<style>
+.page {
+	width: 100%;
+	height: 100%;
+	background: #f2f2f2;
+	padding: 0 16px;
+}
+.textarea {
+	padding: 5px 8px;
+	margin: 8px;
+	width: 60%;
+	min-height: 50px;
+}
+
+
+</style>

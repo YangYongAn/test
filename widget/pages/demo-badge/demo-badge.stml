@@ -1,0 +1,76 @@
+<template>
+	<safe-area>
+		<avm-nav-bar onBack={this.back}>Badge</avm-nav-bar>
+		<scroll-view>
+			<DemoBlock title='基础样式'>
+				<avm-space gap="30px">
+					<avm-badge color='#108ee9' content='8' isDot>
+						<div className="box"/>
+					</avm-badge>
+					<avm-badge content='28'>
+						<div className="box"/>
+					</avm-badge>
+					<avm-badge content='99+'>
+						<div className="box"/>
+					</avm-badge>
+					<avm-badge>
+						<div className="box"/>
+					</avm-badge>
+				</avm-space>
+			</DemoBlock>
+			<DemoBlock title='自定义样式'>
+				<avm-space gap="35px">
+					<avm-badge
+						color='#9AC200'
+						content="8">
+						<div className="box"/>
+					</avm-badge>
+					<avm-badge
+						color='#FA6400'
+						content="8"
+						right="100%"
+						top="100%">
+						<div className="box"/>
+					</avm-badge>
+					<avm-badge content="8" color="#F7B500" right="100%">
+						<div className="box"/>
+					</avm-badge>
+					<avm-badge content="8" top="100%" top="100%">
+						<div className="box"/>
+					</avm-badge>
+				</avm-space>
+			</DemoBlock>
+			<DemoBlock title='独立展示'>
+				<avm-space gap="30px">
+					<avm-badge content='99+'/>
+					<avm-badge content='新消息!'/>
+				</avm-space>
+			</DemoBlock>
+		</scroll-view>
+	</safe-area>
+</template>
+
+<script>
+import Badge from '../../components/avm-ui/badge'
+import '../../components/avm-ui/space'
+import '../../components/avm-ui/nav-bar'
+import {DemoBlock} from '../../components/avm-ui/demos'
+
+export default {
+	name: 'demo-badge',
+	methods: {
+		back() {
+			api.closeWin();
+		}
+	}
+}
+</script>
+<style src="../../components/avm-ui/demos/index.css"/>
+<style>
+.box {
+	background: #f2f2f2;
+	width: 22px;
+	height: 22px;
+	display: block;
+}
+</style>

@@ -1,0 +1,71 @@
+<template>
+    <view class="commodity-swiper-box">
+        <swiper class="commodity-swiper-swiper" circular autoplay onchange="fnSwiperChange">
+            <swiper-item v-for="imgSrc in swiperList">
+                <image class="commodity-swiper-img" :src="imgSrc"/>
+            </swiper-item>
+        </swiper>
+        <text class="commodity-swiper-indicator-text">{{(current+1)+'/'+swiperList.length}}</text>
+    </view>	
+</template>
+<script>
+export default {
+    name: 'hoc-commodity-swiper-sgm',
+    data(){
+        return {
+            current: 0,
+            swiperList: this.props.swiperList || [
+                'http://ae8b3ee28597856d3283.qiniucdn.apicloud-system.com/apicloud/83ae0824c4ec6a77faf585f94e88e498.png'
+            ]
+        }
+    },
+    computed:{
+        swiperHeight(){
+            return api.winWidth * 0.75;
+        }
+    },
+    methods: {
+        fnSwiperChange(e){
+            this.data.current = e.detail.current;
+        }
+    }
+}
+</script>
+<style>
+.commodity-swiper-box {
+    width: 100%;
+    background-color: white;
+    position: absolute;
+}
+.commodity-swiper-swiper {
+    width: 100%;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.commodity-detail-swiper-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+.commodity-swiper-img {
+    width: 100%;
+    height: 294px;
+}
+.commodity-swiper-indicator-text{
+    position: absolute;
+    bottom: 16px;
+    right: 8px;
+    height: 22px;
+    padding: 0 10px;
+    background-color: rgba(0,0,0,0.4);
+    border-radius: 11px;
+    text-align: center;
+    font-size: 10px;
+    line-height: 22px;
+    color: white;
+}
+</style>

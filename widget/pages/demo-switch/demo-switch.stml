@@ -1,0 +1,83 @@
+<template>
+	<safe-area class="page">
+		<avm-nav-bar onBack={this.back}>Switch</avm-nav-bar>
+		<scroll-view>
+			<DemoBlock title='基础用法'>
+				<avm-space>
+					<avm-switch defaultChecked/>
+					<avm-switch />
+				</avm-space>
+			</DemoBlock>
+			<DemoBlock title='受控组件'>
+				<avm-switch
+					checked={this.data.checked}
+					handleChange={this.toggleChecked}
+				/>
+			</DemoBlock>
+			<DemoBlock title='文字和图标'>
+				<avm-space wrap>
+					<avm-switch uncheckedText='关' checkedText='开' width="60px"/>
+					<avm-switch uncheckedText={"关闭"} checkedText={"开启"} width="100px"/>
+					<avm-switch uncheckedText='0' checkedText='1' width="60px"/>
+				</avm-space>
+			</DemoBlock>
+			<DemoBlock title='自定义样式'>
+				<avm-switch defaultChecked checkedColor="#00b578" height="36px" width="100px"/>
+			</DemoBlock>
+			<DemoBlock title='禁用状态'>
+				<avm-space>
+					<avm-switch disabled />
+					<avm-switch disabled defaultChecked />
+				</avm-space>
+			</DemoBlock>
+			<!-- <DemoBlock title='加载状态'>
+				<avm-switch loading />
+			</DemoBlock> -->
+			<DemoBlock title='异步'>
+				<avm-space wrap>
+					<avm-switch defaultChecked beforeChange={this.beforeChange} />
+				</avm-space>
+			</DemoBlock>
+		</scroll-view>
+	</safe-area>
+</template>
+<script>
+import '../../components/avm-ui/switch'
+import '../../components/avm-ui/space'
+import '../../components/avm-ui/nav-bar'
+import {DemoBlock} from '../../components/avm-ui/demos'
+export default {
+	name: 'demo-switch',
+	data() {
+		return{
+      checked: false
+		}
+	},
+	methods: {
+		back() {
+			api.closeWin();
+		},
+		toggleChecked(check) {
+			this.data.checked = !this.data.checked
+			api.toast({
+				msg: check
+			})
+		},
+		beforeChange() {
+			return new Promise(resolve => {
+				setTimeout(() => {
+				resolve('获取数据啦')
+				}, 1000)
+			})
+		}
+	}
+}
+</script>
+<style src="../../components/avm-ui/demos/index.css"/>
+<style>
+.page {
+	height: 100%;
+	width: 100%;
+	background: #f2f2f2;
+}
+</style>

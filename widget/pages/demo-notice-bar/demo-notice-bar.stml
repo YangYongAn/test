@@ -1,0 +1,94 @@
+<template>
+	<safe-area>
+		<NavBar onBack={this.back}>NoticeBar</NavBar>
+		<scroll-view style="margin: 0 16px;">
+			<DemoBlock
+				title='基础用法'
+				padding='0'
+				border='none'
+				background='transparent'>
+				<avm-space block direction='vertical'>
+					<avm-notice-bar content='正文内容尽量不超过一行,多余的部分请省略省略省略省略省略省略省略省略' color='alert'/>
+					<avm-notice-bar content='正文内容尽量不超过一行,多余的部分请省略省略省略省略省略省略省略省略' color='alert' extra="✕"/>
+					<avm-notice-bar content='正文内容尽量不超过一行,多余的部分请省略省略省略省略省略省略省略省略' color='alert' extra="﹥"/>
+				</avm-space>
+			</DemoBlock>
+			<DemoBlock
+				title='基础用法带icon'
+				padding='0'
+				border='none'
+				background='transparent'>
+				<avm-space block direction='vertical'>
+					<avm-notice-bar content='正文内容尽量不超过一行,多余的部分请省略省略省略省略省略省略省略省略' color='alert' isShowLeftIcon/>
+					<avm-notice-bar content='正文内容尽量不超过一行,多余的部分请省略省略省略省略省略省略省略省略' color='alert' extra="✕" isShowLeftIcon/>
+					<avm-notice-bar content='正文内容尽量不超过一行,多余的部分请省略省略省略省略省略省略省略省略' color='alert' extra="﹥" isShowLeftIcon/>
+				</avm-space>
+			</DemoBlock>
+			<DemoBlock
+				title='多种用法'
+				padding='0'
+				border='none'
+				background='transparent'>
+				<avm-space block direction='vertical'>
+					<avm-notice-bar content='正向提示正向提示正向提示正向提示正向提示' color='default' isShowLeftIcon/>
+					<avm-notice-bar content='错误提示错误提示错误提示错误提示错误提示' color='error' isShowLeftIcon/>
+					<avm-notice-bar content='警告提示警告提示警告提示警告提示警告提示' color='alert' isShowLeftIcon/>
+					<avm-notice-bar content='补充提示补充提示补充提示补充提示补充提示' color='info' isShowLeftIcon/>
+					<avm-notice-bar content='自定义颜色提示自定义颜色提示自定义颜色提示' bgColor="#f0f" textColor="#ff0" borderColor="#0f0" isShowLeftIcon/>
+				</avm-space>
+			</DemoBlock>
+			<DemoBlock title='可关闭' padding='0' border='none'>
+				<avm-notice-bar content='这条通知可以关闭: 正文内容尽量不超过一行,多余的部分请省略省略省略省略省略省略省略省略' closeable isShowLeftIcon/>
+			</DemoBlock>
+			<DemoBlock title='小尺寸通告栏' padding='0' border='none'>
+				<avm-notice-bar content='小提示小提示小提示小提示小提示' size="small"/>
+			</DemoBlock>
+			<DemoBlock
+				title='自定义'
+				padding='0'
+				border='none'
+				background='transparent'>
+				<avm-space block direction='vertical'>
+					<avm-notice-bar
+						isShowLeftIcon
+						icon={<text style="fontSize: 12px;">自定义icon</text>}
+						extra={<text style="fontSize: 12px;">自定义extra</text>}
+						content={'正文内容尽量不超过一行,多余的部分请省略省略省略省略省略省略省略省略省略省略省略省略省略省略省略省略'}
+						closeable/>
+					<avm-notice-bar
+						isShowLeftIcon
+						extra={<text className={'text-style'}>查看详情</text>}
+						content={'自定义右侧功能区'}
+						color='alert'/>
+					</avm-space>
+			</DemoBlock>
+		</scroll-view>
+
+
+	</safe-area>
+</template>
+
+<script>
+import '../../components/avm-ui/notice-bar'
+import '../../components/avm-ui/space'
+import NavBar from '../../components/avm-ui/nav-bar'
+import {DemoBlock} from '../../components/avm-ui/demos'
+export default {
+	name: 'demo-noticebar',
+	methods: {
+		back() {
+			api.closeWin();
+		}
+	}
+}
+</script>
+<style src="../../components/avm-ui/demos/index.css"/>
+<style>
+.page {
+	height: 100%;
+	width: 100%;
+}
+.text-style {
+	color: skyblue;
+}
+</style>

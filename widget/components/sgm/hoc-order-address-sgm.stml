@@ -1,0 +1,81 @@
+<!--订单详情-配送信息-->
+<template>
+	<view class="order-detail-address">
+		<image class="order-detail-address-img" src="http://ae8b3ee28597856d3283.qiniucdn.apicloud-system.com/apicloud/0d5e497818619d204390eb9163f55086.png"></image>
+		<view class="order-detail-address-wrap">
+			<view>
+				<view class="order-detail-address-tit">
+					<text class="order-detail-address-name">{'收货人：' + consignee}</text>
+					<text class="order-detail-address-phone">{this.phoneHash(phone.toString())}</text>
+				</view>
+				<text class="order-detail-address-details">{area + detailAddress}</text>
+			</view>
+		</view>
+	</view>
+</template>
+<script>
+export default {
+	name: 'hoc-order-address-sgm',
+	apiready() {//like created
+
+	},
+	data() {
+		return {
+			consignee: this.props.consignee !== undefined ? this.props.consignee : '樱桃小丸子',
+            phone: this.props.phone !== undefined ? this.props.phone : 1234556789,
+            area: this.props.area !== undefined ? this.props.area : '北京',
+            detailAddress: this.props.detailAddress !== undefined ? this.props.detailAddress : '海淀区用友'
+		}
+	},
+	methods: {
+		phoneHash(phone){
+            if(!phone){return ''}
+            phone = phone.substring(0,3) + "****" + phone.substring(7);
+            return phone;
+        },
+	}
+}
+</script>
+<style>
+.order-detail-address {
+	flex-direction: row;
+	align-items: center;
+	padding: 16px 0;
+	background-color: #fff;
+	margin-top: 8px;
+	margin-bottom: 10px;
+}
+.order-detail-address-img {
+	width: 32px;
+	height: 32px;
+	margin-left: 10px;
+}
+.order-detail-address-wrap {
+	justify-content: center;
+	flex: 1;
+	margin: 0 15px;
+}
+.noaddress {
+	font-size: 15px;
+	color: #333333;
+}
+.order-detail-address-tit {
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+}
+.order-detail-address-name {
+	font-size: 15px;
+	color: #333333;
+}
+.order-detail-address-phone {
+	margin-top: 2px;
+	font-size: 13px;
+	color: #777777;
+}
+.order-detail-address-details {
+	margin-top: 8px;
+	font-size: 12px;
+	color: #333333;
+}
+</style>

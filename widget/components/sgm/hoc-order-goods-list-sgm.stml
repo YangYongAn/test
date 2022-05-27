@@ -1,0 +1,86 @@
+<template>
+	<view class="order-goods-page">
+		<view class="order-goods-item" v-for="item in list" @click="onclick(item)">
+			<image class="order-goods-img" :src="item.image"></image>
+			<view class="order-goods-right">
+				<text class="order-goods-title">{{item.title}}</text>
+				<view class="order-goods-guige-box">
+					<text class="order-goods-guige">{{item.key || '默认规格'}}</text>
+					<text class="order-goods-num">x{{item.buynum}}</text>
+				</view>
+				<view class="order-goods-bottom">
+					<text class="order-goods-price">¥ {{item.price}}</text>
+				</view>
+			</view>
+		</view>
+	</view>
+</template>
+<script>
+export default {
+	name: 'hoc-order-goods-list-sgm',
+	data() {
+		return {
+			list: this.props.list || [{
+                title: "测血压手环智能心率心脏血氧运动量体温定位",
+                image: "http://a346b1014469c58049d5.qiniucdn.apicloud-system.com/apicloud/2fffadde6135dda7de6c7567a461c5af.png",
+                price: 30.9,
+                delprice: 50,
+                key: "红色",
+                buynum: 1,
+                act: "tuan"
+            }]
+		}
+	},
+	methods: {
+		onclick(item) {
+			this.fire('goodClick', item);
+		}
+	}
+}
+</script>
+<style scoped>
+.order-goods-page {
+	background-color: white;
+	margin-bottom: 10px;
+}
+.order-goods-item {
+	flex-direction: row;
+	padding-bottom: 15px;
+	margin: 15px 15px 0;
+	border-bottom: 1px solid #f8f8f8;
+}
+.order-goods-img {
+	width: 60px;
+	height: 60px;
+	margin-right: 12px;
+	border-radius: 4px;
+}
+.order-goods-right {
+	align-content: center;
+	flex: 1;
+}
+.order-goods-title {
+	font-size: 14px;
+	color: #333333;
+}
+.order-goods-guige-box {
+	flex-direction: row;
+	justify-content: space-between;
+	margin-top: 5px;
+}
+.order-goods-guige,
+.order-goods-num {
+	font-size: 12px;
+	color: #999999;
+}
+.order-goods-bottom {
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	margin-top: 10px;
+}
+.order-goods-price {
+	font-size: 14px;
+	color: #fe904a;
+}
+</style>

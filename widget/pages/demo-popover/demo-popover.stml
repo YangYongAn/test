@@ -1,0 +1,171 @@
+<template>
+	<scroll-view scroll-y :show-scrollbar="false" class="page">
+		<avm-nav-bar onBack={this.back}>Popover</avm-nav-bar>
+		<DemoBlock title='不同方向'>
+			<avm-space wrap>
+				<avm-popover content="Hello world" placement="top" id="popover-top" popupId="popover-top-popup">
+					<avm-button>top</avm-button>
+				</avm-popover>
+				<avm-popover content="Hello world" placement="top-start" id="popover-top-start" popupId="popover-top-start-popup">
+					<avm-button>top-start</avm-button>
+				</avm-popover>
+				<avm-popover content="Hello world" placement="top-end" id="popover-top-end" popupId="popover-top-end-popup">
+					<avm-button>top-end</avm-button>
+				</avm-popover>
+				<avm-popover content="Hello world" placement="bottom" id="popover-bottom" popupId="popover-bottom-start-popup">
+					<avm-button>bottom</avm-button>
+				</avm-popover>
+				<avm-popover content="Hello world" placement="bottom-start" id="popover-bottom-start" popupId="popover-bottom-start-popup">
+					<avm-button>bottom-start</avm-button>
+				</avm-popover>
+				<avm-popover content="Hello world" placement="bottom-end" id="popover-bottom-end" popupId="popover-bottom-end-popup">
+					<avm-button>bottom-end</avm-button>
+				</avm-popover>
+				<avm-popover content="Hello world" placement="left" id="popover-left" popupId="popover-left-popup">
+					<avm-button>left</avm-button>
+				</avm-popover>
+				<avm-popover content="Hello world" placement="left-start" id="popover-left-start" popupId="popover-left-start-popup">
+					<avm-button>left-start</avm-button>
+				</avm-popover>
+				<avm-popover content="Hello world" placement="left-end" id="popover-left-end" popupId="popover-left-end-popup">
+					<avm-button>left-end</avm-button>
+				</avm-popover>
+				<avm-popover content="Hello world" placement="right" id="popover-right" popupId="popover-right-popup">
+					<avm-button>right</avm-button>
+				</avm-popover>
+				<avm-popover content="Hello world" placement="right-start" id="popover-right-start" popupId="popover-right-start-popup">
+					<avm-button>right-start</avm-button>
+				</avm-popover>
+				<avm-popover content="Hello world" placement="right-end" id="popover-right-end" popupId="popover-right-end-popup">
+					<avm-button>right-end</avm-button>
+				</avm-popover>
+			</avm-space>
+		</DemoBlock>
+		<DemoBlock title='黑色样式'>
+			<avm-space wrap>
+				<avm-popover content="Hello world" mode="dark" id="popover-dark" popupId="popover-dark-popup">
+					<avm-button>黑色样式</avm-button>
+				</avm-popover>
+			</avm-space>
+		</DemoBlock>
+		<DemoBlock title='菜单列表'>
+			<avm-space wrap>
+				<avm-popover isMenu :actions="actionList" placement="right" id="popover-right-menu" popupId="popover-right-menu-popup" @actionClick="actionClick">
+					<avm-button>菜单列表</avm-button>
+				</avm-popover>
+			</avm-space>
+		</DemoBlock>
+		<DemoBlock title='菜单列表-横向展示'>
+			<avm-space wrap>
+				<avm-popover isMenu isHorizontalMenu mode="dark" :actions="actionList1" placement="top" id="popover-top-menu-row" popupId="popover-top-menu-row-popups">
+					<avm-button>菜单列表-横向展示</avm-button>
+				</avm-popover>
+			</avm-space>
+		</DemoBlock>
+		<DemoBlock title='菜单列表-黑色样式'>
+			<avm-space wrap>
+				<avm-popover isMenu :actions="actionList" mode="dark" placement="right" id="popover-right-menu" popupId="popover-right-menu-popup">
+					<avm-button>菜单列表-黑色样式</avm-button>
+				</avm-popover>
+			</avm-space>
+		</DemoBlock>
+		<DemoBlock title='菜单列表-带icon'>
+			<avm-space wrap>
+				<avm-popover isMenu :actions="actionList1" placement="right" id="popover-right-menu-icon" popupId="popover-right-menu-icon-popup">
+					<avm-button>菜单列表-带icon</avm-button>
+				</avm-popover>
+			</avm-space>
+		</DemoBlock>
+	</scroll-view>
+</template>
+<script>
+import '../../components/avm-ui/popover'
+import '../../components/avm-ui/nav-bar'
+import '../../components/avm-ui/space'
+import '../../components/avm-ui/button'
+import {DemoBlock} from '../../components/avm-ui/demos'
+
+export default {
+	name: 'demo-popover',
+	data() {
+		return{
+			actionList: [{
+                "key": "key1",
+                "text": "选择标题",
+                "icon": null,
+                "disabled": false
+            }, {
+                "key": "key2",
+                "text": "选择标题",
+                "icon": null,
+                "disabled": false
+            }, {
+                "key": "key3",
+                "text": "选择标题",
+                "icon": null,
+                "disabled": false
+            }],
+			actionList1: [{
+                "key": "key1",
+                "text": "选择标题",
+                "icon": 'http://ae8b3ee28597856d3283.qiniucdn.apicloud-system.com/apicloud/3dd2bde750a04efd60869b5f9efdb3ca.png',
+                "disabled": false
+            }, {
+                "key": "key2",
+                "text": "选择标题",
+                "icon": 'http://ae8b3ee28597856d3283.qiniucdn.apicloud-system.com/apicloud/3dd2bde750a04efd60869b5f9efdb3ca.png',
+                "disabled": false
+            }, {
+                "key": "key3",
+                "text": "选择标题",
+                "icon": 'http://ae8b3ee28597856d3283.qiniucdn.apicloud-system.com/apicloud/3dd2bde750a04efd60869b5f9efdb3ca.png',
+                "disabled": false
+            }, {
+                "key": "key4",
+                "text": "选择标题",
+                "icon": 'http://ae8b3ee28597856d3283.qiniucdn.apicloud-system.com/apicloud/3dd2bde750a04efd60869b5f9efdb3ca.png',
+                "disabled": false
+            }, {
+                "key": "key5",
+                "text": "选择标题",
+                "icon": 'http://ae8b3ee28597856d3283.qiniucdn.apicloud-system.com/apicloud/3dd2bde750a04efd60869b5f9efdb3ca.png',
+                "disabled": false
+            }, {
+                "key": "key6",
+                "text": "选择标题",
+                "icon": 'http://ae8b3ee28597856d3283.qiniucdn.apicloud-system.com/apicloud/3dd2bde750a04efd60869b5f9efdb3ca.png',
+                "disabled": false
+            }, {
+                "key": "key7",
+                "text": "选择标题",
+                "icon": 'http://ae8b3ee28597856d3283.qiniucdn.apicloud-system.com/apicloud/3dd2bde750a04efd60869b5f9efdb3ca.png',
+                "disabled": false
+            }, {
+                "key": "key8",
+                "text": "选择标题",
+                "icon": 'http://ae8b3ee28597856d3283.qiniucdn.apicloud-system.com/apicloud/3dd2bde750a04efd60869b5f9efdb3ca.png',
+                "disabled": false
+            }]
+		}
+	},
+	methods: {
+		back() {
+			api.closeWin();
+		},
+		actionClick(e) {
+			api.toast({
+				msg: '点击了'
+			})
+		}
+	}
+}
+</script>
+<!-- <style src="../../components/avm-ui/popover/index.css"/> -->
+<style src="../../components/avm-ui/demos/index.css"/>
+<style>
+.page {
+	z-index: 0;
+	width: 100%;
+	background: #f2f2f2;
+}
+</style>

@@ -1,0 +1,97 @@
+<template>
+    <view class="page flex flex-center">
+
+
+
+        <text class="tips-text">订单支付成功</text>
+
+        <view class="btn-box">
+            <view class="btn btn-main" @click="next(1)">
+                <text class="btn-text btn-text-main">继续选购</text>
+            </view>
+            <view class="btn btn-sub" @click="next(3)">
+                <text class="btn-text btn-text-sub">查看订单</text>
+            </view>
+        </view>
+        <img class="icon" src="../../image/icon/icon-pay-result-success.png" alt="" />
+    </view>
+</template>
+<script>
+import {
+    setTabBarIndex
+} from "../../script/util";
+export default {
+    name: "template-of-pay_result",
+    methods: {
+        next(index) {
+            const tips = index === 1 ? '继续选购' : '查看订单'
+            api.toast({
+                msg: tips
+            })
+        }
+    }
+};
+</script>
+<style>
+.page {
+    height: 100%;
+    background: #fff;
+}
+
+.flex-center {
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.icon {
+    width: 100px;
+    height: 100px;
+    position: relative;
+}
+
+.tips-text {
+    font-size: 18px;
+    color: #333;
+    margin: 21px;
+}
+
+.btn-box {
+    width: 100%;
+    margin: 105px 0;
+    flex-direction: row;
+    justify-content: center;
+}
+
+
+.btn {
+    width: 42%;
+    border-radius: 4px;
+}
+
+.btn-main {
+    background: #FE5760;
+}
+
+.btn-sub {
+    background: #FFF;
+    margin-left: 10px;
+    border: 1px solid #FE5760;
+}
+
+.btn-text {
+    color: #FFFFFF;
+    text-align: center;
+    height: 44px;
+    line-height: 44px;
+    font-size: 15px;
+}
+
+.btn-text-main {
+    color: #FFF;
+}
+
+.btn-text-sub {
+    color: #FE5760;
+}
+</style>

@@ -1,0 +1,57 @@
+<template>
+	<safe-area class="page">
+		<hoc-nav-bar-od msg='我的订单' isBack />
+		<hoc-order-tab-od />
+		<hoc-order-list-od :list="orderList" />
+	</safe-area>
+</template>
+<script>
+import '../../components/od/hoc-nav-bar-od.stml';
+import '../../components/od/hoc-order-tab-od.stml';
+import '../../components/od/hoc-order-list-od.stml';
+export default {
+	name: 'template-od-order_list',
+	apiready() { //like created
+	},
+	data() {
+		return {
+			orderList: [
+				{
+					"orderid": "517932164548",
+					"status": 1,
+					"pay_price": 5999,
+					"buy_data_title": "夏新款套装女洋气时尚短裤阔腿裤",
+					"buy_data_image":
+						"http://ae8b3ee28597856d3283.qiniucdn.apicloud-system.com/apicloud/3ee90482ef5b13bdbd9e9dc3f79f495e.png",
+					"buy_data_price": 699,
+					"buy_data_key": "白色/S码",
+					"buy_data_buynum": 2,
+					"status_str": "已关闭",
+					"buy_num": 2
+				},
+				{
+					"orderid": "517932164548",
+					"status": 9,
+					"pay_price": 6999,
+					"buy_data_title":
+						"莫代尔无袖吊带连衣裙春秋侧开叉长裙女夏季内搭修身显瘦打底裙子莫…",
+					"buy_data_image":
+						"http://ae8b3ee28597856d3283.qiniucdn.apicloud-system.com/apicloud/1cc4b3d74953e9426e83e6e0bb3e5afd.png",
+					"buy_data_price": 6999,
+					"buy_data_key": "黑色/M码",
+					"buy_data_buynum": 2,
+					"status_str": "已关闭",
+					"buy_num": 2
+				}
+			]
+		};
+	},
+	methods: {}
+};
+</script>
+<style>
+.page {
+	height: 100%;
+	background-color: #f8f8f8;
+}
+</style>

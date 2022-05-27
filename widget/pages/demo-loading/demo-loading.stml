@@ -1,0 +1,54 @@
+<template>
+  <safe-area class="page">
+    <avm-nav-bar onBack={this.back}>Loading</avm-nav-bar>
+    <DemoBlock title='默认'>
+      <Loading />
+    </DemoBlock>
+    <DemoBlock title='黑色的 Loading'>
+      <Loading color='#333' />
+    </DemoBlock>
+    <DemoBlock title='白色的 Loading' background='#a5a5a5'>
+      <Loading color='white' />
+    </DemoBlock>
+    <DemoBlock title='自动适配当前字号'>
+      <Loading size='small' />
+      <Loading />
+      <Loading size='big' />
+    </DemoBlock>
+    <DemoBlock title='自动适配当前文本颜色'>
+      <view>
+        <Loading color='#00b578' />
+        <span>绿色文字</span>
+      </view>
+      <view>
+        <Loading color='#ff3141' />
+        <span>红色文字</span>
+      </view>
+    </DemoBlock>
+  </safe-area>
+</template>
+
+<style src="../../components/avm-ui/loading/index.css"/>
+<style src="../../components/avm-ui/demos/index.css"/>
+<script>
+import Loading from '../../components/avm-ui/loading';
+import '../../components/avm-ui/nav-bar';
+import {DemoBlock} from '../../components/avm-ui/demos';
+export default {
+  name: 'test',
+  data() {
+    return {}
+  },
+  back() {
+    api.closeWin();
+  }
+}
+</script>
+
+
+<style scoped>
+.page{
+  position: relative;
+  height: 100%;
+}
+</style>

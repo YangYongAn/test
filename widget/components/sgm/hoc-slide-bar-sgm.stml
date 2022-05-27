@@ -1,0 +1,89 @@
+<!--侧边导航栏-->
+<template>
+	<view class="side-bar">
+		<view :class="`side-bar-item ${this.data.curTab === item.value ? 'side-bar-item-active' : ''}`"
+			v-for="item in sideBarList" :key="item.value" @click="tabClick(item)">
+			<text
+				:class="`side-bar-item-line ${this.data.curTab === item.value ? 'side-bar-item-line-active' : ''}`"></text>
+			<text
+				:class="`side-bar-item-text ${this.data.curTab === item.value ? 'side-bar-item-text-active' : ''}`">{item.text}</text>
+		</view>
+	</view>
+</template>
+<script>
+export default {
+	name: 'hoc-slide-bar-sgm',
+	apiready() {//like created
+
+	},
+	data() {
+		return {
+			curTab: this.props.curTab !== undefined ? this.props.curTab : 'f7cf34d0-d6e8-11ea-8546-397f48399cb9',
+			sideBarList: this.props.sideBarList || [{
+				"value": "f7cf34d0-d6e8-11ea-8546-397f48399cb9",
+				"text": "全面屏"
+			}, {
+				"value": "765fdbc0-dba2-11ea-a68f-873831895ca3",
+				"text": "5G手机"
+			}, {
+				"value": "03e206d0-d6e9-11ea-8546-397f48399cb9",
+				"text": "游戏手机"
+			}, {
+				"value": "22737f20-d6e9-11ea-8546-397f48399cb9",
+				"text": "以旧换新"
+			}, {
+				"value": "ef79ea90-d6e9-11ea-90a3-f3961652479d",
+				"text": "轻薄本"
+			}]
+		}
+	},
+	methods: {
+		tabClick(item) {
+			this.data.curTab = item.value
+			this.fire('tabClick', item.value)
+		}
+	}
+}
+</script>
+<style>
+.side-bar {
+	flex-shrink: 0;
+	width: 80px;
+	height: 554px;
+	background: #f8f8f8;
+	display: flex;
+	flex-direction: column;
+	overflow: auto;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.side-bar-item {
+	height: 40px;
+	background: #f8f8f8;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	flex-shrink: 0;
+}
+.side-bar-item-active {
+	background: #fff;
+}
+.side-bar-item-line {
+	width: 4px;
+	height: 14px;
+	background: #f8f8f8;
+	margin-right: 8px;
+}
+.side-bar-item-line-active {
+	background: #339dff;
+}
+.side-bar-item-text {
+	font-size: 14px;
+	color: #8f8f8f;
+}
+.side-bar-item-text-active {
+	color: #333;
+	font-weight: 500;
+}
+</style>

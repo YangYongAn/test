@@ -1,0 +1,195 @@
+<template>
+	<scroll-view scroll-y class="shopping-list">
+		<view class="sl-list_box">
+			<view class="sl-card_one" v-for="(item,index) in list">
+				<view class="sl-chk_img_box" data-id={item.cartid}>
+					<image class="sl-chk_img" src={index == active ? "http://ae8b3ee28597856d3283.qiniucdn.apicloud-system.com/apicloud/015eca78c47045f0c20354ad187a7191.png":'http://ae8b3ee28597856d3283.qiniucdn.apicloud-system.com/apicloud/f9b7e811f27b1a39bb33250a69ffd26e.png'}></image>
+				</view>
+				<image @click="onDetailClick" class="sl-card_img" src={item.image} mode="aspectFill" data-index={index}></image>
+				<view class="sl-card_details">
+					<text class="sl-card_title" style="white-space:nowrap" data-index={index}>{item.title}</text>
+					<view class="sl-card_tips" data-index={index}>
+						<text class="sl-card_tip">{item.key ? item.key : '默认规格'}}</text>
+						<image  class="sl-card_lower" src="http://ae8b3ee28597856d3283.qiniucdn.apicloud-system.com/apicloud/0de2da04366a9cb90a80baa70b455b32.png"></image>
+						<text class="sl-flex1 sl-card_dz" v-show={item.isjia==0}>已下架</text>
+					</view>
+					<view class="sl-card_pbox">
+						<text class="sl-card_price">{'¥'+item.price}</text>
+						<view class="sl-card_num">
+							<text class={'sl-card_btn'+(item.buynum==1?' card_btn_disable':'')}
+								data-index={index}>-</text>
+							<text class="sl-card_num_text">{item.buynum}</text>
+							<text class="sl-card_btn" data-index={index}>+</text>
+						</view>
+					</view>
+				</view>
+			</view>
+		</view>
+	</scroll-view>
+</template>
+<script>
+export default {
+	name: 'hoc-shopping-list-od',
+	props: {
+		list: {
+			type: Array,
+			default: function () {
+				return []
+			}
+		},
+		active:{
+			type:Number,
+			default:1
+		}
+	},
+	apiready() {//like created
+
+	},
+	data() {
+		return {
+			list:this.props.list || [
+					{
+					  "key": "S",
+					  "buynum": 1,
+					  "id": "6117fcc80-d2f4-11ea-a0bc-bd616acc739c",
+					  "title": "港风套装女复古chic减龄短袖 ins复古穿搭",
+					  "image":
+						"http://ae8b3ee28597856d3283.qiniucdn.apicloud-system.com/apicloud/3ee90482ef5b13bdbd9e9dc3f79f495e.png",
+					  "price": 1299,
+					  "isjia": 0
+					},
+					{
+					  "key": "M",
+					  "buynum": 3,
+					  "id": "27b5c380-d2f7-11ea-a0bc-bd616ac2c739c",
+					  "title": "休闲时尚套装女夏裤子洋气可盐可甜",
+					  "image":
+						"http://ae8b3ee28597856d3283.qiniucdn.apicloud-system.com/apicloud/1cc4b3d74953e9426e83e6e0bb3e5afd.png",
+					  "price": 629,
+					  "isjia": 1
+					},
+					{
+					  "key": "S",
+					  "buynum": 6,
+					  "id": "9d739ce0-d2fd-11ea-a0bc-bd616acc739c",
+					  "title": "碎花连衣裙两件套装女",
+					  "image":
+						"http://ae8b3ee28597856d3283.qiniucdn.apicloud-system.com/apicloud/2c8bbe302662ca7261a3f43a0a725d43.png",
+					  "price": 699,
+					  "isjia": 1
+					}
+				  ],
+				  active:this.props.active || 1
+		}
+	},
+	methods: {
+		onDetailClick(){
+			api.openWin({
+				name:'detail',
+				url:'widget://pages/template-od-detail/template-od-detail'
+			})
+		}
+	}
+}
+</script>
+<style scoped>
+.shopping-list {
+	flex: 1;
+	width: 100%;
+}
+/* list */
+.sl-list_box {
+	background-color: white;
+	border-radius: 4px;
+	padding: 10px 15px;
+}
+.sl-card_one {
+	display: flex;
+	flex-direction: row;
+	height: 120px;
+	padding: 15px 0;
+	border-bottom: 1px solid #f8f8f8;
+	justify-content: space-between;
+}
+.sl-card_img {
+	width: 90px;
+	height: 68px;
+}
+.sl-chk_img_box {
+	justify-content: center;
+	width: 35px;
+	height: 68px;
+	margin-right: 13px;
+}
+.sl-chk_img {
+	width: 20px;
+	height: 20px;
+}
+.sl-card_details {
+	flex: 1;
+	margin-left: 13px;
+	width: 183px;
+}
+.sl-card_title {
+	font-size: 15px;
+	color: #333333;
+	line-height: 18px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.sl-card_tips {
+	flex-direction: row;
+	align-items: center;
+	margin-top: 8px;
+}
+.sl-card_tip {
+	font-size: 12px;
+	color: #999999;
+	padding: 0 4px;
+	background-color: #f9faf9;
+	margin-right: 5px;
+}
+.sl-card_lower {
+	width: 10px;
+	height: 10px;
+}
+.sl-card_dz {
+	font-size: 12px;
+	text-align: right;
+	color: #999999;
+}
+.sl-card_pbox {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+	margin-top: 18px;
+}
+.sl-card_price {
+	font-size: 14px;
+	color: #ff7037;
+}
+.sl-card_num {
+	flex-direction: row;
+	align-items: center;
+	width: 106px;
+	height: 30px;
+	border: 1px solid #f8f8f8;
+	border-radius: 4px;
+}
+.sl-card_btn {
+	width: 35px;
+	text-align: center;
+	font-size: 20px;
+	color: #555555;
+}
+.sl-card_btn_disable {
+	color: #cccccc;
+}
+.sl-card_num_text {
+	flex: 1;
+	text-align: center;
+	font-size: 14px;
+	color: #333333;
+}
+</style>

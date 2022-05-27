@@ -1,0 +1,176 @@
+<template>
+    <safe-area class="page">
+        <!-- 头部导航 -->
+        <hoc-nav-bar-sgm title="拼团商城" isShowBack={false} />
+        <!-- 搜索 -->
+        <hoc-search-bar-sgm isClick @searchClick="openSearch" isCancel={false} isClick={false} placeholder="请输入商品名称" />
+        <scroll-view class="hoc-index-page-sgm" scroll-y :show-scrollbar="false">
+            <!-- banner -->
+            <hoc-swiper-sgm :list="swiperList" />
+            <!-- 拼团成功信息 -->
+            <hoc-spell-succtip-sgm @handleClick="fnOpenGoodsDetails" nickname="赵丽丽" paytime="2022-01-01" avatar="http://aea8bc2ccdd582de43c1.qiniucdn.apicloud-system.com/apicloud/46e4b8d7a4a8d1febeec082516a8e8f5.png" />
+            <!-- 分类 -->
+            <hoc-classify-tab-sgm @classifyClick="fnOpenClassPage" :classifyList="classifyList" />
+            <!-- 活动、推荐专区 -->
+            <hoc-activity-area-sgm @clickMoreBtn="fnOpenMoreZonePage" @clickGoodsItem="fnOpenDetails"
+                :productList="activityAreaSgmProductList" />
+        </scroll-view>
+    </safe-area>
+</template>
+<script>
+import '../../components/sgm/hoc-nav-bar-sgm.stml';
+import '../../components/sgm/hoc-search-bar-sgm.stml';
+import '../../components/sgm/hoc-swiper-sgm.stml';
+import '../../components/sgm/hoc-spell-succtip-sgm.stml';
+import '../../components/sgm/hoc-classify-tab-sgm.stml';
+import '../../components/sgm/hoc-activity-area-sgm.stml';
+export default {
+    name: 'template-sgm-main',
+    data() {
+        return {
+            swiperList: [{
+                id: "0cdfb640-d2db-11ea-ab34-1b0cd727d0eb",
+                title: "333",
+                type: "class",
+                orderby: 1,
+                addtime: "2020-07-31T03:08:04.388Z",
+                goodsid: "",
+                topid: "top1",
+                classid: "765fdbc0-dba2-11ea-a68f-873831895ca3",
+                icon: "http://a346b1014469c58049d5.qiniucdn.apicloud-system.com/apicloud/0a26deb65cb6e537a5e619241d382ecc.png"
+            }, {
+                id: "df67a270-dba1-11ea-a68f-873831895ca3",
+                title: "拼团4",
+                type: "none",
+                orderby: 1,
+                addtime: "2020-08-11T07:11:27.255Z",
+                goodsid: "",
+                icon: "http://a346b1014469c58049d5.qiniucdn.apicloud-system.com/apicloud/746f329fbe1b3791e49072c8a05ec60e.png"
+            }, {
+                id: "f6c3c4f0-d2da-11ea-ab34-1b0cd727d0eb",
+                title: "222",
+                type: "top",
+                orderby: 1,
+                addtime: "2020-07-31T03:07:27.295Z",
+                goodsid: "",
+                topid: "top2",
+                icon: "http://a346b1014469c58049d5.qiniucdn.apicloud-system.com/apicloud/521010247ff5852fe77dff5a943e6d97.png"
+            }, {
+                id: "d8ebd8a0-d2da-11ea-ab34-1b0cd727d0eb",
+                title: "111",
+                type: "item",
+                orderby: 1,
+                addtime: "2020-07-31T03:06:37.226Z",
+                goodsid: "a304eb50-d2df-11ea-ab34-1b0cd727d0eb",
+                topid: "top1",
+                icon: "http://a346b1014469c58049d5.qiniucdn.apicloud-system.com/apicloud/0a26deb65cb6e537a5e619241d382ecc.png"
+            }],
+            classifyList: [{
+                "id": "bbe35280-dba7-11ea-8529-d94a7752ff71",
+                "name": "华为",
+                "icon": "http://a5acb3a72579f0bf5f6c.qiniucdn.apicloud-system.com/apicloud/48529743a715842f9b70b36b789b7438.png",
+                "addtime": "2020-08-11T07:53:24.648Z",
+                "sta": 1,
+                "orderby": 5,
+                "pid": "765fdbc0-dba2-11ea-a68f-873831895ca3"
+            }, {
+                "id": "765fdbc0-dba2-11ea-a68f-873831895ca3",
+                "name": "5G手机",
+                "icon": "http://a5acb3a72579f0bf5f6c.qiniucdn.apicloud-system.com/apicloud/86e180a4995c449f3c3c45495e69dc8c.png",
+                "addtime": "2020-08-11T07:15:40.540Z",
+                "sta": 1,
+                "orderby": 4,
+                "pid": "1"
+            }, {
+                "id": "03e206d0-d6e9-11ea-8546-397f48399cb9",
+                "name": "游戏手机",
+                "icon": "http://a5acb3a72579f0bf5f6c.qiniucdn.apicloud-system.com/apicloud/0e842b738aa73a2db7b8582c9bf8a890.png",
+                "addtime": "2020-08-05T06:58:06.909Z",
+                "sta": 1,
+                "orderby": 3,
+                "pid": "1"
+            }, {
+                "id": "22737f20-d6e9-11ea-8546-397f48399cb9",
+                "name": "以旧换新",
+                "icon": "http://a5acb3a72579f0bf5f6c.qiniucdn.apicloud-system.com/apicloud/1dc6d1fad3d850332078348c20c1d2c9.png",
+                "addtime": "2020-08-05T06:58:58.194Z",
+                "sta": 1,
+                "orderby": 2,
+                "pid": "1"
+            }],
+            activityAreaSgmProductList: [{
+                "id": "e9fc85d0-d275-11ec-803a-9bb76ce20623",
+                "title": "测血压手环智能心率心脏血氧运动量体温定位",
+                "image": "http://a346b1014469c58049d5.qiniucdn.apicloud-system.com/apicloud/2fffadde6135dda7de6c7567a461c5af.png",
+                "price": 30.9,
+                "delprice": 50,
+                "buy_num": 30,
+                "images": "http://a346b1014469c58049d5.qiniucdn.apicloud-system.com/apicloud/2fffadde6135dda7de6c7567a461c5af.png",
+                "dw": "个",
+                "pnum": 3,
+                "images_show": ["http://a346b1014469c58049d5.qiniucdn.apicloud-system.com/apicloud/2fffadde6135dda7de6c7567a461c5af.png"],
+                "pnumstr": "三"
+            }, {
+                "id": "ac3abd20-d275-11ec-803a-9bb76ce20623",
+                "title": "NFC版全面彩屏支付30种运动模式心率检",
+                "image": "http://a346b1014469c58049d5.qiniucdn.apicloud-system.com/apicloud/746f329fbe1b3791e49072c8a05ec60e.png",
+                "price": 30.9,
+                "delprice": 40,
+                "buy_num": 451,
+                "images": "http://a346b1014469c58049d5.qiniucdn.apicloud-system.com/apicloud/746f329fbe1b3791e49072c8a05ec60e.png",
+                "dw": "个",
+                "pnum": 5,
+                "images_show": ["http://a346b1014469c58049d5.qiniucdn.apicloud-system.com/apicloud/746f329fbe1b3791e49072c8a05ec60e.png"],
+                "pnumstr": "五"
+            }, {
+                "id": "8839f8f0-d275-11ec-803a-9bb76ce20623",
+                "title": "配充电盒Apple蓝牙耳机",
+                "image": "http://a346b1014469c58049d5.qiniucdn.apicloud-system.com/apicloud/521010247ff5852fe77dff5a943e6d97.png",
+                "price": 30,
+                "delprice": 40,
+                "buy_num": 20,
+                "images": "http://a346b1014469c58049d5.qiniucdn.apicloud-system.com/apicloud/521010247ff5852fe77dff5a943e6d97.png",
+                "dw": "个",
+                "pnum": 3,
+                "images_show": ["http://a346b1014469c58049d5.qiniucdn.apicloud-system.com/apicloud/521010247ff5852fe77dff5a943e6d97.png"],
+                "pnumstr": "三"
+            }]
+        };
+    },
+    methods: {
+        openSearch() {
+            console.log('点击搜索框了~');
+        },
+        fnOpenClassPage(data) {
+            api.openWin({
+                name: 'sortDetail',
+                url: '../template-sgm-sort_list/template-sgm-sort_list.stml'
+            });
+        },
+        fnOpenMoreZonePage(data) {
+            console.log('活动专区，点击进入更多页面了', JSON.stringify(data));
+        },
+        /***
+         * 商品详情
+         * */
+        fnOpenDetails(data) {
+            api.openWin({
+                name: 'compodityDetail',
+                url: '../template-sgm-commodity_detail/template-sgm-commodity_detail.stml'
+            });
+        },
+        fnOpenGoodsDetails(e) {
+            console.log('点击拼团成功，进入到拼团商品信息页面', JSON.stringify(e));
+        }
+    }
+};
+</script>
+<style>
+.hoc-index-page-sgm {
+    height: 100%;
+    background: #fff;
+}
+.page {
+    background-color: #fff;
+}
+</style>

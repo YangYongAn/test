@@ -1,0 +1,61 @@
+<template>
+	<view class="delivery">
+		<view class="ge_box">
+			<view class="ge_list border-bottom">
+				<text class="ge_zi">配送方式</text>
+				<text class="ge_rzi">配送</text>
+			</view>
+			<view class="ge_list">
+				<text class="ge_zi">运费</text>
+				<text class="ge_rzi">{'+￥' + price}</text>
+			</view>
+		</view>
+	</view>
+</template>
+<script>
+export default {
+	name: 'hoc-delivery-od',
+	props: {
+		price: {
+			type: String,
+			default: ''
+		}
+	},
+	apiready() {//like created
+
+	},
+	data() {
+		return {
+			price:this.props.price || "6"
+		}
+	},
+	methods: {
+
+	}
+}
+</script>
+<style scoped>
+/* 配送 */
+.ge_box {
+	padding: 0 15px;
+	margin-top: 8px;
+	background-color: white;
+}
+.ge_list {
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+	height: 55px;
+}
+.border-bottom {
+	border-bottom: 1px solid #f8f8f8;
+}
+.ge_zi {
+	font-size: 16px;
+	color: #393f44;
+}
+.ge_rzi {
+	font-size: 14px;
+	color: #979ea6;
+}
+</style>

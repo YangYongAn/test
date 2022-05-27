@@ -1,0 +1,73 @@
+<template>
+	<view class="tab-bar">
+		<view class="tab-item" v-for="(item,index) in tabList" :key="index" @click="tabClick(index)">
+			<image class="tab-icon" :src="curIndex === index ? item.selectIcon : item.icon" />
+			<text :class="`tab-text ${curIndex === index ? 'tab-text-active' : ''}`">{item.msg}</text>
+		</view>
+
+
+	</view>
+</template>
+<script>
+export default {
+	name: 'hoc-tab-bar-es',
+	apiready() {//like created
+
+	},
+	data() {
+		return {
+			curIndex: 0,
+			tabList: this.props.list || [
+				{
+					icon: '../../image/es-home.png',
+					selectIcon: "../../image/es-home-selected.png",
+					msg: "首页"
+				},
+				{
+					icon: '../../image/es-case.png',
+					selectIcon: "../../image/es-case-selected.png",
+					msg: "案例"
+				},
+				{
+					icon: '../../image/es-join.png',
+					selectIcon: "../../image/es-join-selected.png",
+					msg: "加盟代理"
+				}
+			]
+		}
+	},
+	methods: {
+		tabClick(index) {
+			this.data.curIndex = index;
+			this.fire('tabClick', index)
+		}
+	}
+}
+</script>
+<style>
+.tab-bar {
+	flex-direction: row;
+	padding: 3px 0;
+	width: 100%;
+	height: 60px;
+	background-color: #fff;
+}
+.tab-item {
+	flex: 1;
+	justify-content: space-around;
+	align-items: center;
+}
+.tab-text {
+	font-size: 11px;
+	color: #666;
+	font-weight: 400;
+}
+.tab-icon {
+	width: 25px !important;
+	height: 25px;
+}
+.tab-text-active {
+	color: #333;
+	font-weight: 500;
+}
+</style>

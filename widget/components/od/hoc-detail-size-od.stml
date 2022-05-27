@@ -1,0 +1,56 @@
+<template>
+	<view class="detail-size">
+		<view class="goods_spec_box" >
+			<text class="goods_spec_desc">规格</text>
+			<text class="goods_spec_text">{size ? size : '默认规格'}</text>
+			<view class="flex1"></view>
+			<image class="goods_arrow" src="http://ae8b3ee28597856d3283.qiniucdn.apicloud-system.com/apicloud/7f1ac595c49db90971904ca9dad47b1e.png"></image>
+		</view>
+	</view>
+</template>
+<script>
+export default {
+	name: 'hoc-detail-size-od',
+	props: {
+		size: {
+			type: String,
+			default: ''
+		}
+	},
+	apiready() {//like created
+
+	},
+	data() {
+		return {
+			data:this.props.size || ""
+		}
+	},
+	methods: {
+
+	}
+}
+</script>
+<style scoped>
+/* goods spec */
+.goods_spec_box {
+	flex-direction: row;
+	align-items: center;
+	height: 50px;
+	margin-top: 8px;
+	padding: 0 15px;
+	background-color: white;
+}
+.goods_arrow {
+	width: 14px;
+	height: 14px;
+}
+.goods_spec_desc {
+	font-size: 14px;
+	color: #666;
+}
+.goods_spec_text {
+	font-size: 14px;
+	color: #333;
+	margin-left: 14px;
+}
+</style>

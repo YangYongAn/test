@@ -1,0 +1,69 @@
+<!--基础组件-->
+<template>
+<safe-area class="page">
+	<avm-nav-bar onBack={this.back}>Slider</avm-nav-bar>
+	<DemoBlock title='基础用法'>
+		<text class="text">{'拖动过程中的value：' + changingValue}</text>
+        <text class="text">{'拖动完成后的value：' + value}</text>
+        <slider
+			:block-size="20"
+			block-color="#9AC200"
+			activeColor="#9AC200"
+			class="slider"
+			onchange={this.onchange}
+			onchanging={this.onchanging}></slider>
+	</DemoBlock>
+	<DemoBlock title='禁用'>
+        <slider
+			:block-size="20"
+			:value="60"
+			class="slider"
+			block-color="#f5f5f5"
+			activeColor="#9AC200"
+			onchange={this.onchange}
+			onchanging={this.onchanging}
+			disabled></slider>
+	</DemoBlock>
+</safe-area>
+</template>
+<script>
+import '../../components/avm-ui/nav-bar'
+import {DemoBlock} from '../../components/avm-ui/demos'
+export default {
+	name: 'avm-base-slider',
+	data(){
+		return {
+			value:   0,
+            changingValue: 0
+		}
+    },
+	methods: {
+		back() {
+			api.closeWin();
+		},
+		onchange(e){
+			this.data.value = e.detail.value;
+		},
+		onchanging(e){
+			this.data.changingValue = e.detail.value;
+		}
+	}
+}
+</script>
+<style>
+.page {
+	width: 100%;
+	height: 100%;
+	background: #f2f2f2;
+	padding: 0 16px;
+}
+.text {
+	margin: 8px;
+	font-size: 14px;
+	color: #333;
+}
+.slider {
+	margin: 8px;
+	width: 60%;
+}
+</style>

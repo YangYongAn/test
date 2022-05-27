@@ -1,0 +1,228 @@
+<template>
+<safe-area class="main">
+    <avm-nav-bar onBack={this.back}>Swiper</avm-nav-bar>
+    <scroll-view>
+        <DemoBlock title='基础用法'>
+            <avm-swiper indicatorProps={indicatorProps} title="标题文本">
+                {{
+                    colors.map((color, index) => {
+                        const styles = {
+                            background: color
+                        }
+                        return (
+                            <avm-swiper-item key={index}>
+                                <span
+                                    className='contents'
+                                    style={styles}
+                                    handleClick={() => api.toast({msg: `你点击了卡片 ${index + 1}`})}>{index + 1}</span>
+                            </avm-swiper-item>
+                        )
+                    })
+                }}
+            </avm-swiper>
+        </DemoBlock>
+        <DemoBlock title='自动播放'>
+            <avm-swiper autoplay indicatorProps={indicatorProps}>
+                {{
+                    colors.map((color, index) => {
+                        const styles = {
+                            background: color
+                        }
+                        return (
+                            <avm-swiper-item key={index}>
+                                <span className='contents' style={styles}>{index + 1}</span>
+                            </avm-swiper-item>
+                        )
+                    })
+                }}
+            </avm-swiper>
+        </DemoBlock>
+        <DemoBlock title='自定义圆角样式'>
+            <avm-space direction='vertical' block>
+                <avm-swiper borderRadius="10px" defaultIndex={2} indicatorProps={indicatorProps}>
+                    {{
+                        colors.map((color, index) => {
+                            const styles = {
+                                background: color
+                            }
+                            return (
+                                <avm-swiper-item key={index}>
+                                    <span className='contents' style={styles}>{index + 1}</span>
+                                </avm-swiper-item>
+                            )
+                        })
+                    }}
+                </avm-swiper>
+            </avm-space>
+        </DemoBlock>
+        <DemoBlock title='指示器颜色'>
+            <avm-space direction='vertical' block>
+                <avm-swiper :indicatorProps="{color: '#f0f'}" defaultIndex={1}>
+                    {{
+                        colors.map((color, index) => {
+                            const styles = {
+                                background: color
+                            }
+                            return (
+                                <avm-swiper-item key={index} handleClick={(index) => this.handleClick(index)}>
+                                    <span className='contents' style={styles}>{index + 1}</span>
+                                </avm-swiper-item>
+                            )
+                        })
+                    }}
+                </avm-swiper>
+                <DemoDescription content='通过indicatorProps可以控制指示器的外观' />
+            </avm-space>
+        </DemoBlock>
+        <!-- <DemoBlock title='指示器在滑块外面'>
+            <avm-space direction='vertical' block>
+            <avm-swiper trackPadding="16px auto" indicatorProps={indicatorProps}>
+                {{
+                    colors.map((color, index) => {
+                        const styles = {
+                            background: color
+                        }
+                        return (
+                            <avm-swiper-item key={index}>
+                                <span className='contents' style={styles}>{index + 1}</span>
+                            </avm-swiper-item>
+                        )
+                    })
+                }}
+            </avm-swiper>
+            <DemoDescription content='通过 trackPadding 可以控制滑动轨道区域的 padding，从而实现指示器和滑块"分离"的效果' />
+            </avm-space>
+        </DemoBlock> -->
+        <DemoBlock title='自定义指示器'>
+            <avm-space direction='vertical' block>
+                <avm-swiper indicator={data => (<span className='customIndicator'>{{`${data.current + 1} / ${data.total}`}}</span>)}>
+                    {{
+                        colors.map((color, index) => {
+                            const styles = {
+                                background: color
+                            }
+                            return (
+                                <avm-swiper-item key={index}>
+                                    <span className='contents' style={styles}>{index + 1}</span>
+                                </avm-swiper-item>
+                            )
+                        })
+                    }}
+                </avm-swiper>
+                <DemoDescription content='你可以完全自定义指示器的渲染，甚至改变指示器的位置' />
+            </avm-space>
+        </DemoBlock>
+        <DemoBlock title='无指示器'>
+            <avm-swiper indicator={() => null}>
+                {{
+                    colors.map((color, index) => {
+                        const styles = {
+                            background: color
+                        }
+                        return (
+                            <avm-swiper-item key={index}>
+                                <span className='contents' style={styles}>{index + 1}</span>
+                            </avm-swiper-item>
+                        )
+                    })
+                }}
+            </avm-swiper>
+        </DemoBlock>
+        <DemoBlock title="全屏引导">
+            <avm-button onClick={() => this.setVisible(true)}>显示弹出层</avm-button>
+            <DemoDescription content='配合 Popup 组件可以实现全屏引导'/>
+        </DemoBlock>
+    </scroll-view>
+    <avm-popup position='bottom' visible={this.data.visiable} bodyStyle={popupBodyStyle} bodyHeight="100%">
+        <avm-swiper loop={false} height="100%">
+            <avm-swiper-item>
+                <span className='contentFull' :style="{background: '#ace0ff'}">1</span>
+            </avm-swiper-item>
+            <avm-swiper-item>
+                <span className='contentFull' :style="{background: '#bcffbd'}">2</span>
+            </avm-swiper-item>
+            <avm-swiper-item>
+                <div className='contentFull' :style="{background: '#fff'}">
+                    <avm-button onClick={() => this.setVisible(false)}>开始使用</avm-button>
+                </div>
+            </avm-swiper-item>
+        </avm-swiper>
+    </avm-popup>
+</safe-area>
+</template>
+<script>
+import '../../components/avm-ui/swiper'
+import '../../components/avm-ui/space'
+import '../../components/avm-ui/button'
+import '../../components/avm-ui/nav-bar'
+import '../../components/avm-ui/popup'
+import {DemoBlock, DemoDescription} from '../../components/avm-ui/demos'
+const colors = ['#ace0ff', '#bcffbd', '#e4fabd', '#ffcfac']
+export default {
+    data() {
+        return {
+            current: 0,
+            indicatorProps: {
+                color: 'white'
+            },
+            visiable: false,
+            popupBodyStyle:{ height: '100%', background: '#f00'}
+        }
+    },
+    methods: {
+        back() {
+			api.closeWin();
+		},
+        onchange(v){
+            api.toast({
+                msg: v
+            })
+            this.data.current = v;
+        },
+        setVisible(v) {
+            this.data.visiable = v
+        },
+        handleClick(index) {
+            api.toast({
+                msg:'点击了'+index
+            })
+        }
+    }
+}
+</script>
+<style src="../../components/avm-ui/demos/index.css"></style>
+<style>
+.main {
+    width: 100%;
+    height: 100%;
+}
+.contents {
+    width: 100%;
+    height: 120px;
+    color: #ffffff;
+    text-align: center;
+    line-height: 120px;
+    font-size: 48px;
+    user-select: none;
+}
+.customIndicator {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 3px 6px;
+    color: #ffffff;
+    border-radius: 50%;
+    user-select: none;
+    font-size: 12px;
+}
+.contentFull {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    color: #fff;
+    font-size: 48px;
+    user-select: none;
+    padding-top: 60px;
+}
+</style>

@@ -1,0 +1,49 @@
+<template>
+	<safe-area class="page">
+		<avm-nav-bar onBack={this.back}>ErrorBlock</avm-nav-bar>
+		<scroll-view>
+			<DemoBlock title='四种状态' padding='0' border='none'>
+				<avm-space block direction='vertical' gap="16px">
+					<avm-error-block status='default' imageHeight="150px"/>
+					<avm-error-block status='disconnected' />
+					<avm-error-block status='empty' />
+					<avm-error-block status='busy' />
+				</avm-space>
+			</DemoBlock>
+			<DemoBlock title='全屏' padding='0' border='none'>
+				<avm-error-block fullPage/>
+			</DemoBlock>
+			<DemoBlock title='自定义' padding='0' border='none'>
+				<avm-error-block
+					image='../../image/cf.png'
+					imgHeight="150px"
+					description={<text>Customize Description</text>}>
+					<avm-button color='primary'>Create Now</avm-button>
+				</avm-error-block>
+			</DemoBlock>
+		</scroll-view>
+	</safe-area>
+</template>
+
+<style src="../../components/avm-ui/demos/index.css"/>
+
+<script>
+import '../../components/avm-ui/error-block'
+import '../../components/avm-ui/nav-bar'
+import '../../components/avm-ui/space'
+import '../../components/avm-ui/button'
+import {DemoBlock} from '../../components/avm-ui/demos'
+export default {
+	name: 'demo-errorblock',
+	methods: {
+		back() {
+			api.closeWin();
+		}
+	}
+}
+</script>
+<style>
+.page {
+	background: #f2f2f2;
+}
+</style>

@@ -1,0 +1,128 @@
+<template>
+	<safe-area class="page">
+		<avm-nav-bar onBack={this.back}>NumberKeyboard</avm-nav-bar>
+		<scroll-view>
+			<avm-list>
+				<avm-list-item handleClick={() => this.openKeyboard('demo1')}>基础样式</avm-list-item>
+				<avm-list-item handleClick={() => this.openKeyboard('demo2')}>身份证号键盘</avm-list-item>
+				<avm-list-item handleClick={() => this.openKeyboard('demo3')}>自定义样式-1</avm-list-item>
+				<avm-list-item handleClick={() => this.openKeyboard('demo4')}>自定义样式-2</avm-list-item>
+				<avm-list-item handleClick={() => this.openKeyboard('demo5')}>自定义样式-3</avm-list-item>
+			</avm-list>
+		</scroll-view>
+		<avm-number-keyboard
+			visible={this.data.visible === 'demo1'}
+			handleClose={this.data.actions.onClose}
+			handleInput={this.data.actions.onInput}
+			handleDelete={this.data.actions.onDelete}
+			type="default"
+		/>
+		<avm-number-keyboard
+			visible={this.data.visible === 'demo2'}
+			handleClose={this.data.actions.onClose}
+			handleInput={this.data.actions.onInput}
+			handleDelete={this.data.actions.onDelete}
+			type="ID"
+		/>
+		<avm-number-keyboard
+			visible={this.data.visible === 'demo3'}
+			handleClose={this.data.actions.onClose}
+			handleInput={this.data.actions.onInput}
+			handleDelete={this.data.actions.onDelete}
+			clearAll={this.data.actions.onClearAll}
+			type="custom"
+			:showCloseButton="false"
+		/>
+		<avm-number-keyboard
+			visible={this.data.visible === 'demo4'}
+			handleClose={this.data.actions.onClose}
+			handleInput={this.data.actions.onInput}
+			handleDelete={this.data.actions.onDelete}
+			clearAll={this.data.actions.onClearAll}
+			:showCloseButton="false"
+			isShowClearBtn
+			type="custom"
+		/>
+		<avm-number-keyboard
+			visible={this.data.visible === 'demo5'}
+			handleClose={this.data.actions.onClose}
+			handleInput={this.data.actions.onInput}
+			handleDelete={this.data.actions.onDelete}
+			clearAll={this.data.actions.onClearAll}
+			type="custom"
+		/>
+	</safe-area>
+</template>
+<script>
+import '../../components/avm-ui/number-keyboard'
+import '../../components/avm-ui/nav-bar'
+import '../../components/avm-ui/list'
+export default {
+	name: 'demo-numberkeyboard',
+	data() {
+		return {
+			visible: '',
+			value: '',
+			value1: '123',
+			actions: {
+				onClose: () => {
+					api.toast({
+						msg: 'close'
+					})
+					this.setVisible('')
+				},
+				onInput: key => {
+					api.toast({
+						msg: 'input' + key
+					})
+				},
+				onDelete: () => {
+					api.toast({
+						msg: 'delete'
+					})
+					this.setVisible('')
+				},
+				onClearAll: () => {
+					api.toast({
+						msg:'点击清空按钮啦~~'
+					})
+				}
+			}
+		}
+	},
+	methods: {
+		back() {
+			api.closeWin();
+		},
+		setVisible(v) {
+			this.data.visible = v;
+		},
+		openKeyboard(name) {
+			this.setVisible(name)
+		},
+		onInput(v) {
+			api.toast({
+				msg: this.data.value+v
+			})
+			this.data.value = this.data.value+v
+		},
+		onDelete() {
+			const {value} = this.data
+			this.data.value = value.slice(0, value.length - 1)
+		},
+		InputOnInput(val) {
+			api.toast({
+				msg: val
+			})
+		}
+	}
+}
+</script>
+<style src="../../components/avm-ui/number-keyboard/index.css"/>
+<style>
+.page {
+	height: 100%;
+	width: 100%;
+	background: #fff;
+}
+</style>

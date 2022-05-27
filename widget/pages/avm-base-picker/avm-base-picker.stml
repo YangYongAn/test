@@ -1,0 +1,185 @@
+<!--基础组件-->
+<template>
+<safe-area class="page">
+	<avm-nav-bar onBack={this.back}>Picker</avm-nav-bar>
+	<DemoBlock title='普通选择器'>
+		<picker class="picker" id="selector" mode="selector" value={selectorValue} onChange={this.selectorChange}>
+			<view class="text_box">
+				<text class="text_label">选择性别</text>
+				<text class="text_label">{genderDesc || '--'}</text>
+			</view>
+        </picker>
+	</DemoBlock>
+	<DemoBlock title='多列选择器'>
+        <avm-space direction="vertical" gap="20px">
+			<picker class="picker" id="multiSelector" mode="multiSelector" value={multiSelectorValue} onChange={this.multiSelectorChange}>
+				<view class="text_box">
+					<text class="text_label">选择年月</text>
+					<text class="text_label">{dateDesc || '--'}</text>
+				</view>
+			</picker>
+			<picker class="picker" id="areaMltiSelector" mode="multiSelector" range-key="name" value={areaMltiSelectorValue} onchange={this.areaMultiSelectorChange} oncolumnchange={this.areaMultiSelectorColumnChange}>
+				<view class="text_box">
+					<text class="text_label">选择区域</text>
+					<text class="text_label">{areaDesc || '--'}</text>
+				</view>
+			</picker>
+		</avm-space>
+	</DemoBlock>
+</safe-area>
+</template>
+<script>
+import '../../components/avm-ui/nav-bar'
+import '../../components/avm-ui/space'
+import {DemoBlock} from '../../components/avm-ui/demos'
+export default {
+	name: 'avm-base-picker',
+	data(){
+		return {
+			genderDesc: '',
+			dateDesc: '',
+			areaDesc: '',
+			selectorValue: 0,
+			multiSelectorValue: [0, 0],
+			areaMltiSelectorValue: [0, 0, 0],
+			genderList: ['男', '女'],
+			dateList: [[1980, 1981, 1982, 1983, 1984, 1985, 1986, 1987, 1988, 1989, 1990],[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]],
+			areaList: [],
+			areaInfo: [{
+				name: "北京",
+				sub: [{
+					name: "北京市",
+					sub: [{
+						name: "东城区"
+					}, {
+						name: "西城区"
+					}, {
+						name: "海淀区"
+					}, {
+						name: "朝阳区"
+					}, {
+						name: "丰台区"
+					}, {
+						name: "石景山区"
+					}, {
+						name: "昌平区"
+					}, {
+						name: "通州区"
+					}]
+				}]
+			}, {
+				name: "河南省",
+				sub: [{
+					name: "郑州市",
+					sub: [{
+						name: "中原区"
+					}, {
+						name: "金水区"
+					}]
+				}, {
+					name: "驻马店市",
+					sub: [{
+						name: "西平县"
+					}, {
+						name: "泌阳县"
+					}]
+				}]
+			}]
+		}
+    },
+	methods: {
+		back() {
+			api.closeWin();
+		},
+		apiready() {
+			var selector = document.getElementById('selector');
+			selector.setData({
+				data: this.data.genderList
+			});
+
+			var multiSelector = document.getElementById('multiSelector');
+			multiSelector.setData({
+				data: this.data.dateList
+			});
+
+			this.initAreaData(this.data.areaMltiSelectorValue);
+		},
+		initAreaData(values) {
+			var component0 = [];
+			for (var i=0;i<this.data.areaInfo.length;i++) {
+				component0[i] = this.data.areaInfo[i];
+			}
+			var component1 = component0[values[0]]['sub'];
+			var component2 = component1[values[1]]['sub'];
+			var dataList = [component0, component1, component2];
+			this.data.areaList = dataList;
+			var picker = document.getElementById('areaMltiSelector');
+			picker.setData({
+				data: dataList
+			});
+		},
+		selectorChange(e) {
+			this.data.selectorValue = e.detail.value;
+			this.data.genderDesc = this.data.genderList[this.data.selectorValue];
+		},
+		multiSelectorChange(e) {
+			this.data.multiSelectorValue = e.detail.value;
+			this.data.dateDesc = this.data.dateList[0][this.data.multiSelectorValue[0]] + '-' + this.data.dateList[1][this.data.multiSelectorValue[1]];
+		},
+		areaMultiSelectorChange(e) {
+			var value = e.detail.value;
+			this.data.areaMltiSelectorValue = value;
+			var region = '';
+			if (this.data.areaList.length > 0) {
+				for (var i=0;i<value.length;i++) {
+					var index = value[i];
+					var list = this.data.areaList[i];
+					region += list[index].name;
+				}
+			}
+			this.data.areaDesc = region;
+		},
+		areaMultiSelectorColumnChange(e) {
+			var column = e.detail.column;
+			if (column == this.data.areaList.length-1) {
+				return;
+			}
+			var value = e.detail.value;
+			var selectValue = this.data.areaMltiSelectorValue;
+			selectValue[column] = value;
+			if (column == 0) {
+				selectValue[1] = 0;
+				selectValue[2] = 0;
+			} else if (column == 1) {
+				selectValue[2] = 0;
+			}
+			this.initAreaData(selectValue);
+		}
+	}
+}
+</script>
+<style>
+.page {
+	width: 100%;
+	height: 100%;
+	background: #f2f2f2;
+	padding: 0 16px;
+}
+.text_box {
+	flex-direction: row;
+	justify-content: space-between;
+}
+.text {
+	margin: 8px;
+	font-size: 14px;
+	color: #333;
+}
+.slider {
+	margin: 8px;
+	width: 60%;
+}
+.text_label {
+	font-size: 14px;
+	color: #333;
+}
+</style>

@@ -1,0 +1,119 @@
+<template>
+	<view class="address-list">
+		<view class="address-list-item" v-for="(item,index) in dataList" @click="clickAddressItem(item, index)">
+			<view class="address-list-item-inner">
+				<view class="address-list-def">
+					<image class="address-list-def-img" src="http://ae8b3ee28597856d3283.qiniucdn.apicloud-system.com/apicloud/a3f48960e4ee7525559e1bdc57fe1935.png" v-if={item.def==1}></image>
+				</view>
+				<view class="address-list-item-left">
+					<view class="address-list-item-nav">
+						<text class="address-list-item-name">{'收货人：' + item.name}</text>
+						<text class="address-list-item-phone">{this.phoneHash(item.phone.toString())}</text>
+					</view>
+					<text class="address-list-item-content" data-index={index} data-id={item.id}>{'收货地址：' +
+						item.address}</text>
+				</view>
+				<view class="address-list-item-right" @click="editAddress(item, index)">
+					<image class="address-list-item-right-icon" src="http://ae8b3ee28597856d3283.qiniucdn.apicloud-system.com/apicloud/db8dc34b50fa750b4b7464959ee88d2c.png"></image>
+				</view>
+			</view>
+		</view>
+	</view>
+</template>
+<script>
+export default {
+	name: 'hoc-address-list-sgm',
+	apiready() {//like created
+
+	},
+	data() {
+		return {
+			dataList: this.props.addressList || [{
+                def: 2,
+                id: "1",
+                name: "杨飞",
+                phone: "15534212345",
+                address: "北京北京市海淀区北太平庄街道北三环中路44号"
+            }, {
+                def: 2,
+                id: "1",
+                name: "杨飞",
+                phone: "15534212345",
+                address: "北京北京市海淀区北太平庄街道北三环中路44号"
+            }]
+		}
+	},
+	methods: {
+		phoneHash(phone){
+            if(!phone){return ''}
+            phone = phone.substring(0,3) + "****" + phone.substring(7);
+            return phone;
+        },
+		clickAddressItem(item, index) {
+			api.openWin({
+				name: 'edit_address',
+				url:'widget://pages/template-sgm-edit_address/template-sgm-edit_address'
+			})
+			this.fire('clickAddressItem', {item, index})
+		},
+		editAddress(item, index) {
+			this.fire('editAddress', {item, index})
+		} 
+	}
+}
+</script>
+<style>
+.address-list-item {
+	margin: 15px 15px 0;
+	/* box-shadow: 0 0 10px #ddd; */
+}
+.address-list-item-inner {
+	flex-direction: row;
+	align-items: center;
+	border-radius: 4px;
+	height: 106px;
+	background-color: white;
+}
+.address-list-item-left {
+	flex: 1;
+	margin-left: 15px;
+}
+.address-list-item-right {
+	justify-content: center;
+	padding: 10px 15px;
+}
+.address-list-item-right-icon {
+	width: 18px;
+	height: 18px;
+}
+.address-list-def {
+	width: 37px;
+	height: 37px;
+	position: absolute;
+	top: 0;
+	right: 0;
+}
+.address-list-def-img {
+	width: 100%;
+	height: 100%;
+}
+.address-list-item-nav {
+	flex-direction: row;
+	justify-content: space-between;
+}
+.address-list-item-name {
+	font-size: 15px;
+	color: #333333;
+}
+.address-list-item-phone {
+	font-size: 14px;
+	color: #777777;
+}
+.address-list-item-content {
+	height: 50px;
+	line-height: 25px;
+	font-size: 15px;
+	margin-top: 5px;
+	color: #333333;
+}
+</style>

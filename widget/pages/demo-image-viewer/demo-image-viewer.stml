@@ -1,0 +1,66 @@
+<template>
+  <safe-area class="page">
+    <avm-nav-bar onBack={this.back}>ImageViewer</avm-nav-bar>
+    <DemoBlock title='单张图片预览'>
+      <button onclick={ this.openVisible }>打开ImageViewer</button>
+    </DemoBlock>
+    <DemoBlock title='多张图片预览'>
+      <button onclick={ this.openVisible1 }>打开ImageViewer</button>
+    </DemoBlock>
+    <avm-image-viewer
+      image={demoImages[0]}
+      visible={this.data.visible}
+      onClose={ () => { this.data.visible = false} }/>
+    <avm-image-viewer-multi
+      images={ demoImages }
+      visible={ this.data.visible1 }
+      onClose={ this.closeVisible1 }
+      onIndexChange={ (e) => this.change(e) }/>
+  </safe-area>
+</template>
+
+<script>
+import '../../components/avm-ui/image-viewer';
+import '../../components/avm-ui/nav-bar';
+import {DemoBlock} from '../../components/avm-ui/demos';
+export default {
+  name: 'test',
+  data() {
+    return {
+      demoImages: [
+        'https://img95.699pic.com/photo/50033/7459.jpg_wh860.jpg',
+        'https://img95.699pic.com/photo/50033/7459.jpg_wh860.jpg',
+        'https://img95.699pic.com/photo/50033/7459.jpg_wh860.jpg',
+      ],
+      visible: false,
+      visible1: false
+    }
+  },
+  methods: {
+    back() {
+			api.closeWin();
+		},
+    change(key) {
+      api.toast({
+        msg: key
+      })
+    },
+    openVisible() {
+      this.data.visible = true
+    },
+    openVisible1() {
+      this.data.visible1 = true
+    },
+    closeVisible1() {
+      this.data.visible1 = false
+    },
+  }
+}
+</script>
+
+<style scoped>
+.page{
+  position: relative;
+  height: 100%;
+}
+</style>

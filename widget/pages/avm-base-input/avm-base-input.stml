@@ -1,0 +1,57 @@
+<!--基础组件-->
+<template>
+<safe-area class="page">
+	<avm-nav-bar onBack={this.back}>Input</avm-nav-bar>
+	<DemoBlock title='基础用法'>
+		<input placeholder="请输入"/>
+	</DemoBlock>
+	<DemoBlock title='输入字数限制'>
+		<input placeholder="输入限制10个字符" maxlength="10" autofocus/>
+	</DemoBlock>
+	<DemoBlock title='密码输入框'>
+		<input type="password" placeholder="请输入"/>
+	</DemoBlock>
+	<DemoBlock title='数字键盘'>
+		<input placeholder="请输入" keyboard-type="number"/>
+	</DemoBlock>
+	<DemoBlock title='键盘完成按钮文字为搜索'>
+		<input placeholder="请输入" confirm-type="search" onconfirm={this.onconfirm}/>
+	</DemoBlock>
+</safe-area>
+</template>
+<script>
+import '../../components/avm-ui/nav-bar'
+import {DemoBlock} from '../../components/avm-ui/demos'
+export default {
+	name: 'avm-base-input',
+	data(){
+		return {
+			
+		}
+    },
+	methods: {
+		back() {
+			api.closeWin();
+		},
+		onconfirm(e){
+			api.alert({
+				msg: '搜索' + e.detail.value
+			});
+		}
+	}
+}
+</script>
+<style>
+.page {
+	width: 100%;
+	height: 100%;
+	background: #f2f2f2;
+	padding: 0 16px;
+}
+input {
+	margin: 8px;
+	width: auto;
+	padding: 0 8px;
+}
+
+</style>

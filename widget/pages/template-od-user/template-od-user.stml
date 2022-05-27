@@ -1,0 +1,29 @@
+<template>
+    <view class="page">
+        <hoc-nav-bar-od msg="我的" />
+        <hoc-user-card-od />
+        <hoc-user-order-od active="1" num="1" />
+        <hoc-user-menu-od />
+    </view>
+</template>
+<script>
+import '../../components/od/hoc-nav-bar-od.stml';
+import '../../components/od/hoc-user-card-od.stml';
+import '../../components/od/hoc-user-order-od.stml';
+import '../../components/od/hoc-user-menu-od.stml';
+export default {
+    name: 'template-od-user',
+    apiready() { //like created
+    },
+    data() {
+        return {};
+    },
+    methods: {}
+};
+</script>
+<style>
+.page {
+    height: 100%;
+    background-color: #fff;
+}
+</style>

@@ -1,0 +1,72 @@
+<template>
+	<view class="page">
+		<!-- 顶部导航 -->
+		<hoc-nav-bar-od msg='商品详情' isBack />
+		<scroll-view scroll-y="true" :show-scrollbar="false">
+			<!-- 轮播图 -->
+			<hoc-detail-banner-od :list='bannerList' />
+			<!-- 商品信息 -->
+			<hoc-detail-info-od :data='datailInfo' />
+			<!-- 规格 -->
+			<hoc-detail-size-od size='白色/S码' />
+			<!-- 商品详情 -->
+			<hoc-detail-good-od html_detail='<p style="font-size: 14px; color: #444;">2020夏新款韩版连衣裙女收腰显瘦显高A</p><img style="width:100%; height: 345px;" src="http://ae8b3ee28597856d3283.qiniucdn.apicloud-system.com/apicloud/a53acc0734fa8faa9e756168a75e03ab.png"/>'/>
+		</scroll-view>
+		<!-- 底部按钮 -->
+		<hoc-detail-footer-od  :data="footerData" />
+	</view>
+</template>
+<script>
+import '../../components/od/hoc-nav-bar-od.stml'
+import '../../components/od/hoc-detail-banner-od.stml'
+import '../../components/od/hoc-detail-info-od.stml'
+import '../../components/od/hoc-detail-size-od.stml'
+import '../../components/od/hoc-detail-good-od.stml'
+import '../../components/od/hoc-detail-footer-od.stml'
+
+export default {
+	name: 'template-od-detail',
+	apiready() {//like created
+
+	},
+	data() {
+		return {
+			// 轮播图
+			bannerList: [
+				"http://ae8b3ee28597856d3283.qiniucdn.apicloud-system.com/apicloud/52cf5195745061cd23f659c9d9a4e8d1.png",
+				"http://aea8bc2ccdd582de43c1.qiniucdn.apicloud-system.com/apicloud/cdd745ebab4d463b6dc5e2656e6cf84d.png",
+				"http://aea8bc2ccdd582de43c1.qiniucdn.apicloud-system.com/apicloud/02e1b158a350a622fd1132b2f09fc4e4.png"
+			],
+			// 商品详情
+			datailInfo: {
+				title: "夏新款套装女洋气时尚短裤阔腿裤两件套小个子夏装搭配显高",
+				price: 5999,
+				yunfei_type: "none",
+				buy_num: 390000,
+				delprice: 1299,
+				yunfei_money: 0
+			},
+			footerData: {
+				floor_text_left: '分享',
+				floor_text_right: '购物车',
+				floor_icon_left: 'http://ae8b3ee28597856d3283.qiniucdn.apicloud-system.com/apicloud/bb9b74c67da3eb1de2b75b90feb75680.png',
+				floor_icon_right: 'http://ae8b3ee28597856d3283.qiniucdn.apicloud-system.com/apicloud/a19dc37a54accb3f849db181ba512b32.png',
+				floor_btn_left: '加入购物车',
+				floor_btn_right: '立即购买'
+			}
+		}
+	},
+	methods: {
+
+	}
+}
+</script>
+<style>
+.page {
+	height: 100%;
+	background-color: #f8f8f8;
+}
+scroll-view {
+	flex: 1;
+}
+</style>

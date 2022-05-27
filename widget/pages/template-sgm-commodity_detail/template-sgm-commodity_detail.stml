@@ -1,0 +1,73 @@
+<template>
+    <safe-area class="hoc-commodity-detail-sgm">
+        <!-- 头部导航 -->
+        <hoc-nav-bar-sgm title="商品详情" isShowBack />
+        <scroll-view style="flex: 1;" :show-scrollbar="false" scroll-y>
+            <!-- 轮播图 -->
+            <hoc-commodity-swiper-sgm :swiperList="swiperList" />
+            <!--商品基本信息 -->
+            <hoc-goods-baseinfo-sgm
+                isHot={true}
+                price={88}
+                delprice={160}
+                buy_num={30}
+                title="Apple MacBook Pro 2020款13.3英寸苹果笔记本电脑超薄  灰色 19款"
+                yunfei_type="none"
+                yunfei_money="0" />
+            <!-- 规格 -->
+            <hoc-check-list-et :list="checklist" />
+            <!-- 商品详情 -->
+            <hoc-goods-detail-sgm title="商品详情" info='<img style="width: 100%;" src="http://ae8b3ee28597856d3283.qiniucdn.apicloud-system.com/apicloud/89d57c29cf24aff7c0471233e7d0ab46.png"/>'/>
+        </scroll-view>
+        <!-- 操作按钮 -->
+        <hoc-goods-detail-btns-sgm @shareClick="shareClick" @aloneBuyClick="aloneBuyClick" @groupBuyClick="groupBuyClick" price={50} pinPrice={22} shareBtnText="分享" aloneBtnText="单独购买" pinBtnText="发起拼团" />
+    </safe-area>
+</template>
+<script>
+import '../../components/sgm/hoc-nav-bar-sgm.stml';
+import '../../components/sgm/hoc-commodity-swiper-sgm.stml';
+import '../../components/sgm/hoc-goods-baseinfo-sgm.stml';
+import '../../components/sgm/hoc-check-list-et.stml';
+import '../../components/sgm/hoc-goods-detail-sgm.stml';
+import '../../components/sgm/hoc-goods-detail-btns-sgm.stml';
+export default {
+    name: 'template-sgm-commodity_detail',
+    data() {
+        return {
+            swiperList: [
+                'http://ae8b3ee28597856d3283.qiniucdn.apicloud-system.com/apicloud/83ae0824c4ec6a77faf585f94e88e498.png'
+            ],
+            checklist: [{
+                id: "spell",
+                text: "规格",
+                extraText: "银色"
+            }]
+        };
+    },
+    methods: {
+        shareClick() {
+            api.toast({
+                msg:'分享商品信息!'
+            })
+        },
+        aloneBuyClick() {
+            api.openWin({
+                name: 'aloneBuy',
+                url:'../template-sgm-pay/template-sgm-pay.stml'
+            })
+        },
+        groupBuyClick() {
+            api.openWin({
+                name: 'groupBuy',
+                url:'../template-sgm-pay/template-sgm-pay.stml'
+            })
+        }
+    }
+};
+</script>
+<style>
+.hoc-commodity-detail-sgm {
+    height: 100%;
+    background: #fff;
+}
+</style>

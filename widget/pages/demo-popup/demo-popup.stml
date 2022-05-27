@@ -1,0 +1,145 @@
+<template>
+	<view class="page">
+		<safe-area>
+			<avm-nav-bar onBack={this.back}>Popup</avm-nav-bar>
+			<DemoBlock title='不同位置'>
+				<avm-space direction='vertical'>
+					<avm-button @Click="setVisible('visible1', true)">底部弹出-带标题</avm-button>
+					<avm-button onClick={() => this.setVisible('visible2', true)}>顶部弹出-带标题</avm-button>
+					<avm-button onClick={() => this.setVisible('visible3', true)}>左侧弹出</avm-button>
+					<avm-button onClick={() => this.setVisible('visible4', true)}>右侧弹出</avm-button>
+				</avm-space>
+			</DemoBlock>
+			<DemoBlock title='带按钮'>
+				<avm-space direction='vertical'>
+					<avm-button @Click="setVisible('visible5', true)">带按钮</avm-button>
+				</avm-space>
+			</DemoBlock>
+			<DemoBlock title='可返回'>
+				<avm-space direction='vertical'>
+					<avm-button @Click="setVisible('visible6', true)">可返回</avm-button>
+				</avm-space>
+			</DemoBlock>
+		</safe-area>
+		<avm-popup
+			:visible="visible1"
+			isTitle
+			handleClose={() => this.setVisible('visible1', false)}
+			handleBack={() => this.setVisible('visible1', false)}
+			maskClick={() => this.setVisible('visible1', false)}>
+		</avm-popup>
+		<avm-popup
+			isTitle
+			isBack
+			:visible="visible2"
+			position='top'
+			handleClose={() => this.setVisible('visible2', false)}
+			handleBack={() => this.setVisible('visible2', false)}
+			maskClick={() => this.setVisible('visible2', false)}></avm-popup>
+
+		<avm-popup
+			isFooterBtn
+			:visible="visible3"
+			position='left'
+			handleClose={() => this.setVisible('visible3', false)}
+			handleBack={() => this.setVisible('visible3', false)}
+			maskClick={() => this.setVisible('visible3', false)}></avm-popup>
+
+		<avm-popup
+			:visible="visible4"
+			isFooterBtn
+			position='right'
+			handleClose={() => this.setVisible('visible4', false)}
+			handleBack={() => this.setVisible('visible4', false)}
+			maskClick={() => this.setVisible('visible4', false)}></avm-popup>
+		<avm-popup
+			isTitle
+			isFooterBtn
+			:visible="visible5"
+			footBtnClick={() => this.setVisible('visible5', false)}
+			handleClose={() => this.setVisible('visible5', false)}
+			handleBack={() => this.setVisible('visible5', false)}
+			maskClick={() => this.setVisible('visible5', false)}></avm-popup>
+		<avm-popup
+			isTitle
+			:visible="visible6"
+			isBack
+			handleClose={() => this.setVisible('visible6', false)}
+			handleBack={() => this.setVisible('visible6', false)}
+			maskClick={() => this.setVisible('visible6', false)}></avm-popup>
+	</view>
+</template>
+<script>
+import '../../components/avm-ui/popup'
+import '../../components/avm-ui/nav-bar'
+import '../../components/avm-ui/space'
+import '../../components/avm-ui/button'
+import {DemoBlock} from '../../components/avm-ui/demos'
+const bodyStyle1 = {
+	minHeight: '300px',
+	padding: '16px'
+}
+const bodyStyle2 = {
+	minWidth: '200px',
+	padding: '35px 16px 20px'
+}
+const bodyStyle3 = {
+	minHeight: '200px',
+	padding: '35px 16px 20px'
+}
+const bodyStyle4 = {
+	height: '100px',
+	padding: '16px'
+}
+const borderRadiusStyle = {
+	borderRadius: '8px 8px 0 0',
+	minHeight: '300px',
+	padding: '16px'
+}
+export default {
+	name: 'demo-popup',
+	data() {
+		return{
+			visible: false,
+			visible1: false,
+			visible2: false,
+			visible3: false,
+			visible4: false,
+			visible5: false,
+			visible6: false,
+			visible7: false,
+			visible8: false
+		}
+	},
+	methods: {
+		back() {
+			api.closeWin();
+		},
+		setVisible(key, val) {
+			api.toast({
+				msg: key + val.toString()
+			})
+			this.data[key] = val;
+		},
+		toggle() {
+			this.data.visible = !this.data.visible
+		},
+		afterShow() {
+			api.toast({
+				msg:'关闭啦'
+			})
+		}
+	}
+}
+</script>
+<style src="../../components/avm-ui/demos/index.css"/>
+<style>
+.page {
+	height: 100%;
+	width: 100%;
+	background: #f2f2f2;
+}
+.long-scroll-item {
+	line-height: 60px;
+}
+</style>

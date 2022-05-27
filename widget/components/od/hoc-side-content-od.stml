@@ -1,0 +1,116 @@
+<template>
+	<scroll-view class="scroll_right" scroll-y>
+		<view class="right_box">
+			<view @click="onItemClick" class="right_item" v-for="(item,index) in list" data-id={item.id} data-name={item.name}>
+				<image class="right_item_img" src={item.icon}></image>
+				<text class="right_item_zi color_12">{item.name}</text>
+			</view>
+		</view>
+	</scroll-view>
+</template>
+<script>
+export default {
+	name: 'hoc-side-content-od',
+	props: {
+		list: {
+			type: Array,
+			default: function () {
+				return []
+			}
+		}
+	},
+	apiready() {//like created
+
+	},
+	data() {
+		return {
+			list:this.props.list || [
+					{
+					  "id": "258389c0-d532-11ea-9b7c-8f1336202828",
+					  "name": "连衣裙",
+					  "icon": "http://ae8b3ee28597856d3283.qiniucdn.apicloud-system.com/apicloud/51a76d00c46bdc90fa0138601cdb2060.png"
+					},
+					{
+					  "id": "11cca860-d2ff-11ea-a0bc-bd616acc739c",
+					  "name": "针织裙",
+					  "icon": "http://ae8b3ee28597856d3283.qiniucdn.apicloud-system.com/apicloud/bf017f44d8396a43d0c3a5faaba647dd.png"
+					},
+					{
+					  "id": "07bbe7f0-d2ff-11ea-a0bc-bd616acc739c",
+					  "name": "T连衣裙",
+					  "icon": "http://ae8b3ee28597856d3283.qiniucdn.apicloud-system.com/apicloud/c88d14de583f85ef069dd0b1e065bd92.png"
+					},
+					{
+					  "id": "f97b6080-d2fe-11ea-a0bc-bd616acc739c",
+					  "name": "裤子",
+					  "icon": "http://ae8b3ee28597856d3283.qiniucdn.apicloud-system.com/apicloud/19efd0fa529705147316dd696e860ff7.png"
+					},
+					{
+					  "id": "42990ef0-ccb7-11ea-8ee1-07d7d7fa197c",
+					  "name": "吊带裙",
+					  "icon": "http://ae8b3ee28597856d3283.qiniucdn.apicloud-system.com/apicloud/de8a2625b3adafabe55bfe1a7ec2b386.png"
+					},
+					{
+					  "id": "42990ef0-ccb7-11ea-8ee1-07d7d7fa197c",
+					  "name": "长裙",
+					  "icon": "http://ae8b3ee28597856d3283.qiniucdn.apicloud-system.com/apicloud/e240fc0c356abfb2a44d358521881c30.png"
+					},
+					{
+					  "id": "42990ef0-ccb7-11ea-8ee1-07d7d7fa197c",
+					  "name": "短裙",
+					  "icon": "http://ae8b3ee28597856d3283.qiniucdn.apicloud-system.com/apicloud/3ce4698626fce034b2e9aebc33ee0065.png"
+					}
+				  ]
+		}
+	},
+	computed: {
+		itemWidth() {
+			return Math.floor((api.winWidth - 80 - 60 - 30) / 3);
+		}
+	},
+	methods: {
+		onItemClick(){
+			api.openWin({
+				name: 'detail',
+				url:'widget://pages/template-od-detail/template-od-detail'
+			})
+		}
+	}
+}
+</script>
+<style scoped>
+.scroll_right {
+	flex: 1;
+}
+
+.right_box {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	margin: 15px;
+	padding: 15px 0 0 15px;
+	background-color: white;
+	border-radius: 8px;
+}
+
+.right_item {
+	margin-right: 15px;
+	margin-bottom: 15px;
+	width: 60px;
+	height: auto;
+}
+
+.right_item_img {
+	width: 60px;
+	height: 60px;
+	background-color: #f6f6f6;
+	flex-shrink: 0;
+}
+
+.right_item_zi {
+	line-height: 40px;
+	text-align: center;
+	color: #8f8f8f;
+	font-size: 14px;
+}
+</style>

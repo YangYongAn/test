@@ -1,0 +1,43 @@
+<template>
+	<view class="info-title">
+		<text class="title-text">{{ title }}</text>
+		<text class="date-text">{{ date }}</text>
+	</view>
+</template>
+<script>
+export default {
+	name: 'hoc-info-title-es',
+	props: {
+		title: {
+			type: String,
+			default: ''
+		},
+		date: {
+			type: String,
+			default: ''
+		}
+	},
+	data(){
+		return {
+			title:this.props.title || "创业夫妻加盟66天，门店已经排起了长龙",
+			date:this.props.date || "2020-08-24 14:37:20",
+		}
+	}
+}
+</script>
+<style scoped>
+.info-title {
+	padding: 10px 15px;
+	background-color: #fff;
+	margin-bottom: 5px;
+}
+.title-text {
+	color: #262626;
+	font-size: 18px;
+}
+.date-text {
+	margin-top: 5px;
+	color: #999;
+	font-size: 12px;
+}
+</style>

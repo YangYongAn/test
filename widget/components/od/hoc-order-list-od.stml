@@ -1,0 +1,218 @@
+<template>
+	<view class="good-list">
+		<view class="list_one" v-for="(item,index) in list" data-orderid={item.orderid}>
+			<view class="top_box">
+				<text class="top_text">{'订单编号：' + item.orderid}</text>
+				<text class="top_text">{item.status_str}</text>
+			</view>
+			<view class="order-goods-page">
+				<view class="order-goods-item"  data-index={index}>
+					<image @click="onDetailClick" class="order-goods-img" src={item.buy_data_image} mode="aspectFill"></image>
+					<view class="order-goods-right">
+						<text class="order-goods-title">{item.buy_data_title}</text>
+						<view class="order-goods-guige-box">
+							<text class="order-goods-guige">{item.buy_data_key ? ' '+item.buy_data_key : '默认规格'}</text>
+							<text class="order-goods-num">{'x'+(item.buy_data_buynum)}</text>
+						</view>
+						<view class="order-goods-bottom">
+							<text class="order-goods-price">{'¥' + item.buy_data_price}</text>
+						</view>
+					</view>
+				</view>
+			</view>
+			<view class="bot-box">
+				<text class="list_szi">{'共'+(item.buy_num||0)+'件商品，合计:'}</text>
+				<text class="list_rzi">{'￥'+item.pay_price}</text>
+				<view class="flex1"></view>
+				<!-- 取消订单 未支付 -->
+				<text class="btn btn-gray" v-if={item.status==1} data-id={item.id}>取消订单</text>
+				<text class="btn btn-orange" @click="onPayClick" v-if={item.status==1} data-orderid={item.orderid}>立即付款</text>
+				<!-- 取消订单 已支付 -->
+				<text class="btn btn-gray" v-if='item.status > 1 && item.status < 4' data-id={item.id}>取消订单</text>
+				<!-- 确认收货 -->
+				<text class="btn btn-orange" v-if={item.status==4} data-id={item.id}>确认收货</text>
+			</view>
+		</view>
+	</view>
+</template>
+<script>
+export default {
+	name: 'hoc-order-list-od',
+	props: {
+		list:{
+			type: Array,
+		    default: function () {
+			return []
+		}
+		}
+	},
+	apiready() {//like created
+
+	},
+	data() {
+		return {
+			list:this.props.list || [
+					{
+					  "orderid": "517932164548",
+					  "status": 1,
+					  "pay_price": 5999,
+					  "buy_data_title": "夏新款套装女洋气时尚短裤阔腿裤",
+					  "buy_data_image":
+						"http://ae8b3ee28597856d3283.qiniucdn.apicloud-system.com/apicloud/3ee90482ef5b13bdbd9e9dc3f79f495e.png",
+					  "buy_data_price": 699,
+					  "buy_data_key": "白色/S码",
+					  "buy_data_buynum": 2,
+					  "status_str": "已关闭",
+					  "buy_num": 2
+					},
+					{
+					  "orderid": "517932164548",
+					  "status": 9,
+					  "pay_price": 6999,
+					  "buy_data_title":
+						"莫代尔无袖吊带连衣裙春秋侧开叉长裙女夏季内搭修身显瘦打底裙子莫…",
+					  "buy_data_image":
+						"http://ae8b3ee28597856d3283.qiniucdn.apicloud-system.com/apicloud/1cc4b3d74953e9426e83e6e0bb3e5afd.png",
+					  "buy_data_price": 6999,
+					  "buy_data_key": "黑色/M码",
+					  "buy_data_buynum": 2,
+					  "status_str": "已关闭",
+					  "buy_num": 2
+					}
+				  ]
+		}
+	},
+	methods: {
+		onDetailClick(){
+			api.openWin({
+				name: 'detail',
+				url:'widget://pages/template-od-detail/template-od-detail'
+			})
+		},
+		onPayClick(){
+			api.openWin({
+				name: 'place_order',
+				url:'widget://pages/template-od-place_order/template-od-place_order'
+			})
+		}
+	}
+}
+</script>
+<style scoped>
+.list_one {
+	width: 100%;
+	background: #ffffff;
+	margin-top: 8px;
+}
+.top_box {
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	height: 44px;
+	padding: 0 15px;
+	border-bottom: 1px solid #f8f8f8;
+}
+.top_text {
+	font-size: 14px;
+	color: #333333;
+}
+.bot-box {
+	flex-direction: row;
+	align-items: center;
+	height: 44px;
+	padding: 0 15px;
+}
+.list_szi {
+	font-size: 12px;
+	color: #333333;
+}
+.list_rzi {
+	font-size: 16px;
+	color: #fe5c00;
+}
+.flex1 {
+	flex: 1;
+}
+.btn {
+	width: 70px;
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+	margin-left: 8px;
+	border-radius: 2px;
+	font-size: 14px;
+	padding: 0 3px;
+}
+.btn-gray {
+	background-color: white;
+	border: 1px solid #b5b5b5;
+	color: #999999;
+}
+.btn-orange {
+	background-color: #ff7037;
+	color: white;
+}
+
+.order-goods-page {
+	background-color: white;
+}
+.order-goods-item {
+	flex-direction: row;
+	padding-bottom: 15px;
+	margin: 15px 15px 0;
+	border-bottom: 1px solid #f8f8f8;
+}
+.order-goods-img {
+	width: 90px;
+	height: 68px;
+	margin-right: 12px;
+	border-radius: 4px;
+}
+.order-goods-right {
+	align-content: center;
+	flex: 1;
+}
+.order-goods-title {
+	font-size: 14px;
+	color: #333333;
+}
+.order-goods-guige-box {
+	flex-direction: row;
+	justify-content: space-between;
+	margin-top: 5px;
+}
+.order-goods-guige,
+.order-goods-num {
+	font-size: 12px;
+	color: #999999;
+}
+.order-goods-bottom {
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	margin-top: 10px;
+}
+.order-goods-price {
+	font-size: 14px;
+	color: #fe904a;
+}
+.order-goods-btn {
+	width: 70px;
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+	margin-left: 8px;
+	border-radius: 2px;
+	font-size: 14px;
+	padding: 0 3px;
+}
+.order-goods-btn-gray {
+	background-color: white;
+	border: 1px solid #b5b5b5;
+	color: #999999;
+}
+.order-goods-btn-orange {
+	background-color: #ff7037;
+	color: white;
+}
+</style>

@@ -1,0 +1,147 @@
+<template>
+	<safe-area class="main-module">
+		<view :class="`main-module-title ${isShowShadow === true ? 'main-module-title-shadow' : ''}`">
+			<text class="main-module-title-inner">原生模块</text>
+		</view>
+		<scroll-view class="main-module-content" :show-scrollbar="false" scroll-y @scroll="handleScroll">
+			<view v-for="(item, index) in moduleList" :key="index" class="main-module-item" @click="getModuleDetail(item)">
+				<img :src="item.icon_path" class="main-module-item-img"/>
+				<text class="main-module-item-title">{item.mdName}</text>
+				<view class="main-module-item-number">
+					<img src="../../image/phone.png" alt="phone" class="main-module-item-number-icon"/>
+					<text class="main-module-item-number-text">{item.num}</text>
+				</view>
+			</view>
+		</scroll-view>
+		<view class="loading-con" v-if="isLoading">
+			<img class="loading-icon" src="../../image/loading_more.gif" alt="loading"/>
+		</view>
+	</safe-area>
+</template>
+<script>
+export default {
+	name: 'main-module',
+	apiready() {//like created
+		this.getModuleList(0, 200);
+	},
+	data() {
+		return {
+			isShowShadow: false,
+			moduleList: [],
+			isLoading: false
+		}
+	},
+	methods: {
+		handleScroll(e) {
+            if ( e.detail.scrollTop > 0) {
+                this.data.isShowShadow = true
+            } else {
+                this.data.isShowShadow = false
+            }
+        },
+		getModuleDetail(item) {
+			api.ajax({
+				url:`https://www.apicloud.com/getMdInfo?mdId=${item.mdId}`
+			}, (ret, err) => {
+				if (ret && ret.status === 1) {
+					api.openFrame({
+						name: 'module-detail',
+						url:'../main-module-popup/main-module-popup.stml',
+						pageParam: {
+							info: ret.body
+						}
+					})
+				}
+			})
+			
+		},
+		// 获取模块列表
+		getModuleList(startNum, size) {
+			this.isLoading = true;
+			api.ajax({
+				url:`http://www.apicloud.com/getAllMdStore?startNum=${startNum}&size=${size}&platform=-1&type=13&subclass=2&order=1&searchByName=false&searchName=&isfree=-1&provider=-1&green_diamond=-1&green_vip=-1&_=1653015055350`
+			}, (ret, err) => {
+				this.data.moduleList = ret && ret.body ? ret.body : []
+				this.isLoading = false;
+			})
+		}
+	}
+}
+</script>
+<style lang="less">
+.main-module {
+	width: 100%;
+	height: 100%;
+	background: #fff;
+}
+.main-module-title {
+	width: 100%;
+	text-align: center;
+	padding: 22px 0 10px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.main-module-title-inner {
+	font-size: 17px;
+	color: #000;
+	line-height: 24px;
+	font-weight: 500;
+}
+.main-module-content {
+	margin-top: 10px;
+	flex: 1;
+	width: 100%;
+	height: 100%;
+	padding: 0 16px;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: space-between;
+}
+.main-module-item {
+	box-sizing: border-box;
+	width: 50%;
+	margin-bottom: 17px;
+	padding: 8px;
+}
+.main-module-item-img {
+	width: auto;
+	height: 122px;
+	border-radius: 8px;
+}
+.main-module-item-title {
+	padding: 6px 8px 9px;
+	font-size: 16px;
+	font-weight: 500;
+}
+.main-module-item-number {
+	flex-direction: row;
+	align-items: center;
+	padding: 0 8px;
+	font-size: 12px;
+	font-weight: 400;
+}
+.main-module-item-number-icon {
+	width: 12px;
+	height: 12px;
+	margin-right: 4px;
+}
+.main-module-item-number-text {
+	font-size: 12px;
+	color: #999;
+	font-weight: 400;
+	line-height: 17px;
+}
+.loading-con {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.loading-icon {
+	width: 30px;
+	height: 30px;
+}
+</style>

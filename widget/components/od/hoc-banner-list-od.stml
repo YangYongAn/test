@@ -1,0 +1,96 @@
+<template>
+	<view class="banner_box">
+		<swiper class="banner_swiper" circular autoplay onchange="fnSwiperChange">
+			<swiper-item v-for="(item_, index_) in list" @click="onDetailClick">
+				<image class="banner_img" src={item_.icon} data-index={index_} />
+			</swiper-item>
+		</swiper>
+		<view class="banner_dots">
+			<view v-for="(item, index) in list" class={current==index ? 'banner_dot-on' : 'banner_dot' }></view>
+		</view>
+	</view>
+</template>
+<script>
+export default {
+	name: 'hoc-banner-list-od',
+	props: {
+		list: {
+			type: Array,
+			default: function () {
+				return []
+			}
+		}
+	},
+	apiready() {//like created
+
+	},
+	data() {
+		return {
+			current: 0,
+			list: this.props.list || [
+				{
+					"icon": "http://ae8b3ee28597856d3283.qiniucdn.apicloud-system.com/apicloud/3794f574251ab98366a921c0913b3cdc.png"
+				},
+				{
+					"icon": "http://aea8bc2ccdd582de43c1.qiniucdn.apicloud-system.com/apicloud/74f3bc9acdac7fc7554869f7011848df.png"
+				},
+				{
+					"icon": "http://aea8bc2ccdd582de43c1.qiniucdn.apicloud-system.com/apicloud/1d4e6036e2742d1500dfa7c6b0d65e84.png"
+				}
+			]
+		}
+	},
+	methods: {
+		onDetailClick(){
+			api.openWin({
+				name: 'detail',
+				url:'widget://pages/template-od-detail/template-od-detail'
+			})
+		},
+		   fnSwiperChange(e) {
+            this.data.current = e.detail.current;
+        },
+	}
+}
+</script>
+<style scoped>
+/* banner */
+.banner_box {
+	width: 100%;
+	height: 200px;
+	padding: 10px 0;
+	background-color: #fff;
+}
+.banner_swiper {
+	height: 200px;
+	border-radius: 6px;
+}
+.banner_img {
+	width: 100%;
+	height: 173px;
+	border-radius: 6px;
+}
+.banner_dots {
+	flex-direction: row;
+	justify-content: center;
+	width: 100%;
+	height: 4px;
+	position: absolute;
+	bottom: 28px;
+}
+.banner_dot {
+	width: 4px;
+	height: 100%;
+	background-color: rgba(255, 255, 255, 0.4);
+	border-radius: 2px;
+	margin: 0 2px;
+}
+.banner_dot-on {
+	width: 15px;
+	height: 100%;
+	background-color: rgba(255, 255, 255, 1);
+	/* background-color: green; */
+	border-radius: 2px;
+	margin: 0 2px;
+}
+</style>

@@ -1,0 +1,74 @@
+<!--基础组件-->
+<template>
+<safe-area class="page">
+	<avm-nav-bar onBack={this.back}>Frame</avm-nav-bar>
+	<DemoBlock title='基础用法'>
+		<frame class="main" name="main" url="https://www.baidu.com"></frame>
+	</DemoBlock>
+	
+</safe-area>
+</template>
+<script>
+import '../../components/avm-ui/nav-bar'
+import {DemoBlock, DemoDescription} from '../../components/avm-ui/demos'
+export default {
+	name: 'avm-base-frame',
+	data(){
+		return {
+			
+		}
+    },
+	methods: {
+		back() {
+			api.closeWin();
+		},
+		apiready() {
+			this.initData(false);
+		},
+		initData(loadMore) {
+			var that = this;
+			var skip = that.dataList?that.dataList.length:0;
+			var dataList = [];
+			for (var i=0;i<99;i++) {
+				dataList[i] = {
+					title: '项目' + (i + skip)
+				};
+				// 瀑布流效果
+				// dataList[i].itemHeight = Math.floor(200 + Math.random()*50);
+			}
+			var gridView = document.getElementById('gridView');
+			if (loadMore) {
+				that.dataList = that.dataList.concat(dataList);
+				gridView.insert({
+					data: dataList
+				});
+			} else {
+				that.dataList = dataList;
+				gridView.load({
+					data: dataList
+				});
+			}
+		},
+		onscrolltolower() {
+			this.initData(true);
+		},
+		itemClick(e) {
+			api.alert({
+				msg: '点击了项：' + e.currentTarget.index
+			});
+		}
+	}
+}
+</script>
+<style>
+.page {
+	width: 100%;
+	height: 100%;
+	background: #f2f2f2;
+	padding: 0 16px;
+}
+.main {
+	width: 100%;
+	height: 100%;
+}
+</style>

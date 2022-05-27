@@ -1,0 +1,96 @@
+<template>
+	<safe-area class="page">
+		<avm-nav-bar onBack={this.back}>Selector</avm-nav-bar>
+		<scroll-view>
+			<DemoBlock title='单选' background="#f2f2f2">
+				<avm-selector
+					options={ItemList}
+					defaultValue={['1']}
+					handleChange={(arr, extend) => console.log(arr, extend.items)}
+				/>
+			</DemoBlock>
+			<DemoBlock title='多选' background="#f2f2f2">
+				<avm-selector
+					options={ItemList}
+					defaultValue={['2', '3']}
+					multiple={true}
+					handleChange={(arr, extend) => console.log(arr, extend.items)}
+				/>
+			</DemoBlock>
+			<DemoBlock title='全局禁止' background="#f2f2f2">
+				<avm-selector
+					options={ItemList}
+					defaultValue={['1']}
+					disabled={true}
+					handleChange={arr => console.log(arr)}
+				/>
+			</DemoBlock>
+			<!-- <DemoBlock title='固定两列' background="#f2f2f2">
+				<avm-selector
+					columns={2}
+					options={ItemList}
+					defaultValue={['2', '3']}
+					multiple={true}
+					handleChange={arr => console.log(arr)}
+				/>
+			</DemoBlock>
+			<DemoBlock title='固定三列' background="#f2f2f2">
+				<avm-selector
+					columns={3}
+					options={ItemList}
+					defaultValue={['2', '3']}
+					multiple={true}
+					handleChange={arr => console.log(arr)}
+				/>
+			</DemoBlock> -->
+			<DemoBlock title='自定义样式'>
+				<avm-selector
+					color="#f00"
+					checkedColor="#f00"
+					options={ItemList}
+					defaultValue={['1', '2']}
+					multiple={true}
+				/>
+			</DemoBlock>
+		</scroll-view>
+	</safe-area>
+</template>
+<script>
+import '../../components/avm-ui/selector'
+import '../../components/avm-ui/nav-bar'
+import {DemoBlock} from '../../components/avm-ui/demos'
+const ItemList = [
+  {
+    label: '选项一',
+    value: '1',
+  },
+  {
+    label: '选项二',
+    value: '2',
+    disabled: true,
+  },
+  {
+    label: '选项三',
+    value: '3',
+  },
+  {
+    label: '选项四',
+    value: '4',
+  },
+]
+export default {
+	name: 'demo-selector',
+	methods: {
+		back() {
+			api.closeWin();
+		}
+	}
+}
+</script>
+<style src="../../components/avm-ui/demos/index.css"/>
+<style>
+.page {
+	height: 100%;
+	width: 100%;
+}
+</style>

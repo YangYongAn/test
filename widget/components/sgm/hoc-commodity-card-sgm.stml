@@ -1,0 +1,143 @@
+<!--每一个商品展示-->
+<template>
+	<view class="commodity-card" onclick="onclick">
+		<img :src="image" alt="img" class="commodity-card-img"/>
+		<view class="commodity-card-middle">
+			<text class="commodity-card-middle-title">{title}</text>
+            <view class="commodity-card-middle-num" v-if="showHot">
+                <image
+                    class="commodity-card-middle-num-img"
+                    src={this.props.hotIcon ? this.props.hotIcon : 'http://ae8b3ee28597856d3283.qiniucdn.apicloud-system.com/apicloud/784e573cab94112b0e91f5c063fee14f.png'}></image>
+                <text class="commodity-card-middle-num-price">{this.fixBuynum(buy_num)}</text>
+            </view>
+		</view>
+        <view class="commodity-card-bottom">
+            <text class="commodity-card-bottom-label">拼团价</text>
+            <view class="flex1"></view>
+            <text class="commodity-card-bottom-label">￥</text>
+            <text class="commodity-card-bottom-price">{price}</text>
+        </view>
+        <view class="commodity-card-tips">
+            <image
+                class="commodity-card-tips-img"
+                src="http://ae8b3ee28597856d3283.qiniucdn.apicloud-system.com/apicloud/87ed37507c476817e86d9f6c51b9fed8.png"></image>
+            <text class="commodity-card-tips-text">{pnumstr}人团</text>
+        </view>
+	</view>
+</template>
+<script>
+	export default {
+        name: 'hoc-commodity-card-sgm',
+        data() {
+            return {
+                listSwiperHeight: Math.floor((api.winWidth-30)*0.41),
+                showHot: this.props.showHot || false,
+                hotIcon: this.props.hotIcon !== undefined ? this.props.hotIcon : "http://ae8b3ee28597856d3283.qiniucdn.apicloud-system.com/apicloud/784e573cab94112b0e91f5c063fee14f.png",
+                title: this.props.title !== undefined ? this.props.title : "农家自晒野生小鱼干",
+                price: this.props.price !== undefined ? this.props.price : 15,
+                buy_num: this.props.buy_num !== undefined ? this.props.buy_num : 236,
+                image:  this.props.image !== undefined ? this.props.image : "http://a5acb3a72579f0bf5f6c.qiniucdn.apicloud-system.com/apicloud/57eab907dfcf021a3a4e1f48f5ff497f.JPG",
+                pnumstr: this.props.pnumstr !== undefined ? this.props.pnumstr : "双"
+            };
+        },
+		methods: {
+            onclick(){
+                this.fire('itemClick');
+            },
+            fixBuynum(num){
+                if (!num) {return 0;}
+                num = parseInt(num);
+                if (num > 9999) {
+                    num = (num / 10000).toFixed(2);
+                    num = num + 'w';
+                }
+                return num;
+            }
+		}
+	}
+</script>
+<style scoped>
+.commodity-card{
+    background-color: white;
+    border-radius: 8px;
+    margin: 0 15px 15px;
+	box-sizing: border-box;
+}
+.commodity-card:active{
+    opacity: 0.8;
+}
+.commodity-card-banner-img{
+    width: 100%;
+    height: 100%;
+}
+.commodity-card-middle{
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 15px;
+}
+.commodity-card-middle-title{
+    flex: 1;
+    line-height: 22px;
+    max-height: 44px;
+    color: #333333;
+    font-weight: bold;
+    text-overflow: ellipsis;
+    white-space: normal;
+	overflow: hidden;
+}
+.commodity-card-middle-num{
+	flex-direction: row;
+    align-items: center;
+    padding: 1px 6px;
+    background-color: #FEF8F4;
+    border-radius: 8px;
+    border: 1px solid #FE904A;
+    margin-left: 15px;
+}
+.commodity-card-middle-num-img{
+    width: 9px;
+    height: 11px;
+    margin-right: 3px;
+}
+.commodity-card-middle-num-price{
+    color: #FE904A;
+    font-size: 10px;
+}
+.flex1{
+    flex: 1;
+}
+.commodity-card-bottom{
+    flex-direction: row;
+    align-items: center;
+    margin: 0 15px 15px;
+}
+.commodity-card-bottom-label{
+    margin-top: 6px;
+    font-size: 14px;
+    color: #FF7037;
+}
+.commodity-card-bottom-price{
+    font-size: 28px;
+    font-weight: 500;
+    color: #FF7037;
+}
+.commodity-card-tips{
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    width: 52px;
+    height: 21px;
+    top: 15px;
+    left: 0;
+}
+.commodity-card-tips-img{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+.commodity-card-tips-text{
+    font-size: 12px;
+    z-index: 999;
+}
+</style>

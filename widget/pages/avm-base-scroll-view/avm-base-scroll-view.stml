@@ -1,0 +1,69 @@
+<!--基础组件-->
+<template>
+<safe-area class="page">
+	<avm-nav-bar onBack={this.back}>ScrollView</avm-nav-bar>
+	<scroll-view :show-scrollbar="false" scroll-y>
+		<DemoBlock title='水平滚动'>
+			<scroll-view class="scroll-view" scroll-x scroll-y="false">
+				<view class="item item1"></view>
+				<view class="item item2"></view>
+				<view class="item item3"></view>
+			</scroll-view>
+		</DemoBlock>
+		<DemoBlock title='垂直滚动'>
+			<scroll-view class="scroll-view" scroll-y>
+				<view class="item item1"></view>
+				<view class="item item2"></view>
+				<view class="item item3"></view>
+			</scroll-view>
+		</DemoBlock>
+	</scroll-view>
+</safe-area>
+</template>
+<script>
+import '../../components/avm-ui/nav-bar'
+import {DemoBlock} from '../../components/avm-ui/demos'
+export default {
+	name: 'avm-base-scroll-view',
+	data(){
+		return {
+			
+		}
+    },
+	methods: {
+		back() {
+			api.closeWin();
+		},
+		
+	}
+}
+</script>
+<style>
+.page {
+	width: 100%;
+	height: 100%;
+	background: #f2f2f2;
+}
+.scroll-view {
+	width: 100%;
+	height: 150px;
+}
+.title {
+	padding: 10px 0;
+	font-size: 20px;
+}
+.item {
+	width: 100%;
+	height: 100%;
+}
+.item1 {
+	background: #9ac200;
+}
+.item2 {
+	background: #fac200;
+}
+.item3 {
+	background: #1ec200;
+}
+
+</style>

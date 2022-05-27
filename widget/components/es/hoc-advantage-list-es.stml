@@ -1,0 +1,59 @@
+<template>
+	<view class="advantage-list">
+		<view class="cate">
+			<view style={'width:'+cateItemWidth+'px;height:'+(cateItemWidth*0.41)+'px;'} class="cate-item"
+				v-for="(item,index) in list">
+				<image class="cate-img" src={item} />
+			</view>
+		</view>
+	</view>
+</template>
+<script>
+export default {
+	name: 'hoc-advantage-list-es',
+	apiready() {//like created
+
+	},
+	props: {
+		list: {
+			type: Array,
+			defalut: function () {
+				return []
+			}
+		}
+	},
+	data(){
+		return {
+			list:this.props.list || [
+					"http://a3a17abb08c7cc355eb5.qiniucdn.apicloud-system.com/apicloud/d42370efd94ba8249e8e24c96e154313.png",
+					"http://a3a17abb08c7cc355eb5.qiniucdn.apicloud-system.com/apicloud/b6c101bcfbe547e0dc85545342764074.png",
+					"http://a3a17abb08c7cc355eb5.qiniucdn.apicloud-system.com/apicloud/644f407f24cd192913be807488572c2d.png",
+					"http://a3a17abb08c7cc355eb5.qiniucdn.apicloud-system.com/apicloud/39d0bf6bea912a5380d5b9a7c2c77d95.png"
+				]
+		}
+	},
+	computed: {
+		cateItemWidth() {
+			return parseInt((api.winWidth - 40) / 2);
+		}
+	}
+}
+</script>
+<style>
+.cate {
+	flex-direction: row;
+	flex-wrap: wrap;
+	padding: 0 7px 10px 15px;
+}
+.cate-item {
+	margin-right: 8px;
+	margin-bottom: 4px;
+	box-shadow: 0 3px 5px 2px #f1f1f1;
+}
+.cate-img {
+	width: 100%;
+	height: 100%;
+	border-radius: 8px;
+	border: 1px solid #f1f1f1;
+}
+</style>

@@ -1,0 +1,70 @@
+<!--支付页面-底部操作-->
+<template>
+	<view class="pay-footer">
+		<text class="pay-footer-zi">共{{buyNum}}件</text>
+		<text class="pay-footer-rzi">应付：</text>
+		<text class="pay-footer-szi">¥</text>
+		<text class="pay-footer-mzi">{{payPrice}}</text>
+		<text class="pay-footer-btn" onclick="fnGoPay">去支付</text>
+	</view>
+</template>
+<script>
+export default {
+	name: 'hoc-pay-footer-btn-sgm',
+	apiready() {//like created
+
+	},
+	data() {
+		return {
+			buyNum: this.props.buyNum !== undefined ? this.props.buyNum : 10, 
+            payPrice: this.props.payPrice !== undefined ? this.props.payPrice : 132
+		}
+	},
+	methods: {
+		fnGoPay() {
+			this.fire('fnGoPay')
+		}
+	}
+}
+</script>
+<style>
+.pay-footer {
+	background: #fff;
+	padding: 12px 0;
+	flex-direction: row;
+	justify-content: flex-end;
+	align-items: center;
+}
+.pay-footer-zi {
+	font-size: 13px;
+	margin-right: 10px;
+	color: #999999;
+}
+.pay-footer-rzi {
+	font-size: 14px;
+	color: #333333;
+}
+.pay-footer-szi {
+	font-size: 14px;
+	color: #fe5c00;
+}
+.pay-footer-mzi {
+	font-size: 18px;
+	color: #fe5c00;
+	margin-right: 15px;
+}
+.pay-footer-btn {
+	width: 100px;
+	height: 40px;
+	border-radius: 2px;
+	margin-right: 15px;
+	line-height: 40px;
+	text-align: center;
+	font-size: 16px;
+	background-color: #339dff;
+	color: white;
+}
+.pay-footer-btn:active {
+	opacity: 0.7;
+}
+</style>

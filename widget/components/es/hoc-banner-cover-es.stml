@@ -1,0 +1,26 @@
+<template>
+	<view class="banner-cover">
+		<image class="bc-cover" :src="src" mode="widthFix"></image>
+	</view>
+</template>
+<script>
+export default {
+	name: 'hoc-banner-cover-es',
+	props: {
+		src: {
+			type: string,
+			default: ''
+		}
+	},
+	data(){
+		return {
+			src: this.props.src !== undefined ? this.props.src : "http://ae8b3ee28597856d3283.qiniucdn.apicloud-system.com/apicloud/67b9a14f680297491cec517ed9aaf2ed.png"
+		}
+	}
+}
+</script>
+<style>
+.bc-cover {
+	width: 100%;
+}
+</style>

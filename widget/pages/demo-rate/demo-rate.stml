@@ -1,0 +1,65 @@
+<template>
+	<safe-area class="page">
+		<avm-nav-bar onBack={this.back}>Rate</avm-nav-bar>
+		<scroll-view>
+			<DemoBlock title='基础用法'>
+				<avm-rate rateChange={val => api.toast({msg: val})} />
+			</DemoBlock>
+			<DemoBlock title='半星'>
+				<avm-rate allowHalf defaultValue={2.5} />
+			</DemoBlock>
+			<DemoBlock title='只读'>
+				<avm-rate readOnly value={4} />
+			</DemoBlock>
+			<DemoBlock title='清除'>
+				<avm-space direction='vertical'>
+				<avm-space align='center'>
+					<avm-rate defaultValue={3} allowClear={true} />
+					<div>可清除</div>
+				</avm-space>
+				<avm-space align='center'>
+					<avm-rate defaultValue={3} allowClear={false} />
+					<div>不可清除</div>
+				</avm-space>
+				</avm-space>
+			</DemoBlock>
+			<DemoBlock title='自定义字符和样式'>
+				<avm-space direction='vertical'>
+					<avm-rate allowHalf defaultValue={2} character={"棒"} />
+					<avm-rate allowHalf defaultValue={1.5} character={'♤'} />
+					<avm-rate
+						disabled
+						allowHalf
+						defaultValue={3.5}
+						character={'♡'}
+						starSize="32px"
+						activeColor="#ff7f7f"
+					/>
+				</avm-space>
+			</DemoBlock>
+		</scroll-view>
+	</safe-area>
+</template>
+<script>
+import '../../components/avm-ui/rate'
+import '../../components/avm-ui/space'
+import '../../components/avm-ui/nav-bar'
+import {DemoBlock} from '../../components/avm-ui/demos'
+export default {
+	name: 'demo-rate',
+	methods: {
+		back() {
+			api.closeWin();
+		}
+	}
+}
+</script>
+<style src="../../components/avm-ui/demos/index.css"/>
+<style>
+.page {
+	height: 100%;
+	width: 100%;
+	padding: 0 16px;
+	background: #f2f2f2;
+}
+</style>

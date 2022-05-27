@@ -1,0 +1,424 @@
+<template name="main-cart">
+	<view class="main-cart-main-cart">
+		<safe-area>
+			<view class="main-cart-header">
+				<text class="main-cart-title">购物车</text>
+			</view>
+		</safe-area>
+
+		<view class="main-cart-cart-list">
+			<scroll-view class="main-cart-main-cart-scroll-view" :show-scrollbar="false" enable-back-to-top>
+				<view class="main-cart-list-header">
+					<text class="main-cart-list-title">选购的商品</text>
+					<view @click="toggleEdit">
+						<view class="main-cart-action">
+							<img class="main-cart-action-icon" src="../../image/icon/icon-cart-edit.png" alt="" />
+							<text class="main-cart-action-text">编辑</text>
+						</view>
+					</view>
+
+				</view>
+				<view class="main-cart-goods-item">
+
+					<view class="radio-box-radio-box-wrap">
+						<img class="radio-box-radio-box" src="../../image/icon/icon-radio-normal.png" alt="" />
+					</view>
+
+					<img class="main-cart-goods-pic" mode="aspectFill"
+						src="http://a9591bba3d7a4cf76617.qiniucdn.apicloud-system.com/apicloud/6e51da2766d83e1000c165a1277d7683.jpg"
+						alt="" />
+					<view class="main-cart-goods-info">
+						<text class="main-cart-goods-name"> 麻辣捞派滑牛肉 </text>
+						<view class="main-cart-flex-h">
+							<text class="main-cart-goods-price-signal">¥</text>
+							<text class="main-cart-goods-price-num">58.00</text>
+						</view>
+
+					</view>
+
+					<view class="view_2">
+						<view class="num-btn_flex-h">
+							<img class="num-btn num-decrease" src="../../image/icon/icon-cart-num-decrease.png"
+								@click="countChange(-1)" />
+							<text class="num-text">3</text>
+							<img class="num-btn num-increase" src="../../image/icon/icon-cart-num-increase.png"
+								@click="countChange(1)" />
+						</view>
+					</view>
+				</view>
+			</scroll-view>
+			<safe-area class="main-cart-list-footer">
+				<view style="width: 15px"></view>
+
+				<view class="radio-box-radio-box-wrap">
+						<img class="radio-box-radio-box" src="../../image/icon/icon-radio-normal.png" alt="" />
+				</view>
+
+
+				<text class="main-cart-footer-text" style="flex: 1;padding-left: 5px">全选</text>
+				<view class="text-group">
+					<text class="main-cart-footer-text">合计</text>
+					<text class="main-cart-footer-price">¥ 20.00</text>
+					<view class="main-cart-footer-btn" @click="nextStep">
+						<text class="main-cart-footer-btn-text">去结算</text>
+					</view>
+				</view>
+			</safe-area>
+		</view>
+
+
+		<!-- <view class="main-cart-empty" v-else>
+            <empty-block type="cart" text="购物车空空如也"></empty-block>
+            <view class="main-cart-btn" @click="goToBuy">
+                <text class="main-cart-btn-text">去购物</text>
+            </view>
+        </view> -->
+
+	</view>
+</template>
+<script>
+import {
+	setTabBarBadge,
+	setTabBarIndex
+} from "../../script/util";
+export default {
+	name: 'template-of-main-cart',
+	apiready() {
+		this.getCartData();
+		api.addEventListener({
+			name: 'CART-DATA-CHANGED'
+		}, this.getCartData.bind(this));
+	},
+	onshow() {
+		console.log(['cart', 'onshow']);
+		this.getCartData();
+	},
+	data() {
+		return {
+			cartList: [],
+			cartData: {},
+			isEdit: false
+		};
+	},
+	computed: {
+		allChecked() {
+			return !this.cartList.some(item => {
+				return !item.checked;
+			});
+		},
+		totalPrice() {
+			let list = this.data.cartList.filter(item => {
+				return item.checked;
+			});
+			return (list.length ? list.reduce((total, item) => {
+				return total + item.goods.curt_price * item.count;
+			}, 0) : 0).toFixed(2);
+		}
+	},
+	methods: {
+		goToBuy() {
+			setTabBarIndex(1);
+		},
+		getCartData() {
+			let cartData = api.getPrefs({
+				sync: true,
+				key: 'CART-DATA'
+			});
+			if (cartData) {
+				cartData = JSON.parse(cartData);
+				this.data.cartData = cartData;
+				this.computedCartList();
+				setTabBarBadge(2, Object.keys(cartData).length);
+			}
+		},
+		countChange({
+			detail
+		}) {
+			detail.props.item.count += detail.change;
+			this.data.cartData[detail.props.item.goods.id] = detail.props.item;
+			api.setPrefs({
+				key: 'CART-DATA',
+				value: this.data.cartData
+			});
+		},
+		computedCartList() {
+			let cartData = this.data.cartData;
+			let arr = [];
+			for (let i in cartData) {
+				arr.push({
+					checked: true,
+					...cartData[i]
+				});
+			}
+			this.data.cartList = arr;
+		},
+		radioToggle({
+			detail
+		}) {
+			detail.props.item.checked = detail.checked;
+		},
+		checkAll() {
+			const checked = !this.allChecked;
+			for (let i = 0; i < this.data.cartList.length; i++) {
+				this.data.cartList[i].checked = checked;
+			}
+		},
+		toggleEdit() {
+			this.data.isEdit = !this.data.isEdit;
+		},
+		removeGoods() {
+			for (let i = 0; i < this.data.cartList.length; i++) {
+				if (this.data.cartList[i].checked) {
+					delete this.data.cartData[this.data.cartList[i].goods.id];
+				}
+			}
+			api.setPrefs({
+				key: 'CART-DATA',
+				value: this.data.cartData
+			});
+			this.computedCartList();
+			setTabBarBadge(2, Object.keys(this.data.cartData).length);
+		},
+		gotoCrash() {
+			const pageParam = {
+				list: this.data.cartList.filter(item => {
+					return item.checked;
+				})
+			};
+			api.openWin({
+				name: 'pending_order',
+				url: '../template-of-pending_order/template-of-pending_order.stml',
+				pageParam
+			});
+		},
+		nextStep() {
+			if (this.data.isEdit) {
+				this.removeGoods();
+			} else {
+				this.gotoCrash();
+			}
+		}
+	}
+};
+</script>
+<style>
+.main-cart-main-cart {
+	height: 100%;
+	background: #fff;
+}
+
+.main-cart-title {
+	font-weight: 500;
+	color: #020202;
+	font-size: 18px;
+	text-align: center;
+	height: 44px;
+	line-height: 44px;
+}
+
+.main-cart-btn {
+	background: #fe5760;
+	width: 50%;
+	margin-top: 30px;
+	border-radius: 4px;
+	align-self: center;
+}
+
+.main-cart-btn-text {
+	color: #ffffff;
+	text-align: center;
+	height: 44px;
+	line-height: 44px;
+	font-size: 15px;
+}
+
+.main-cart-cart-list {
+	display: flex;
+	flex: 1;
+}
+
+.main-cart-main-cart-scroll-view {
+	flex: 1;
+	padding: 15px;
+	display: flex;
+	box-sizing: border-box;
+}
+
+.main-cart-flex-h {
+	flex-direction: row;
+}
+
+.main-cart-list-header {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+.main-cart-list-title {
+	color: #333;
+	font-weight: bold;
+	font-size: 18px;
+	flex: 1;
+}
+
+.main-cart-action {
+	flex-direction: row;
+}
+
+.main-cart-action-icon {
+	width: 18px;
+	height: 18px;
+}
+
+.main-cart-action-text {
+	background-repeat: no-repeat;
+	background-position: left center;
+	font-size: 14px;
+	color: #999;
+}
+
+.main-cart-finnish-text {
+	font-size: 14px;
+	color: #999;
+	background-image: none;
+}
+
+.main-cart-goods-item {
+	margin: 10px 0;
+	flex-direction: row;
+}
+
+.main-cart-goods-info {
+	margin: 0 5px 0 10px;
+	flex: 1;
+}
+
+.main-cart-goods-pic {
+	width: 70px;
+	height: 70px;
+	border-radius: 5px;
+	margin-left: 10px;
+}
+
+.main-cart-goods-name {
+	font-size: 14px;
+	line-height: 20px;
+	font-weight: 500;
+	color: #333333;
+	flex: 1;
+}
+
+.main-cart-goods-price-signal {
+	font-size: 12px;
+	font-weight: 500;
+	color: #fe5760;
+	line-height: 22px;
+}
+
+.main-cart-goods-price-num {
+	font-size: 15px;
+	font-weight: 500;
+	color: #fe5760;
+	flex: 1;
+}
+
+.main-cart-empty {
+	display: flex;
+	justify-content: center;
+	flex: 1;
+}
+
+.main-cart-list-footer {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	border-top: 1px solid #f9f9f9;
+}
+
+.main-cart-check-all {
+	border: 1px solid red;
+}
+
+.main-cart-footer-text {
+	font-size: 12px;
+	color: #333;
+}
+
+.main-cart-footer-btn {
+	background: #fe5760;
+	width: 120px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 48px;
+}
+
+.main-cart-footer-price {
+	color: #fe5760;
+	font-size: 20px;
+	margin: 0 10px;
+}
+
+.main-cart-footer-btn-text {
+	color: #fff;
+	font-size: 15px;
+}
+
+.text-group {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+.radio-box-radio-box {
+	width: 18px;
+	height: 18px;
+	align-self: center;
+	justify-content: center;
+	align-items: flex-end;
+}
+
+.num-btn_flex-h {
+	flex-direction: row;
+	align-self: center;
+}
+
+.flex-h {
+	flex-direction: row;
+}
+
+.num-btn {
+	width: 22px;
+	height: 22px;
+	background-size: 22px 22px;
+}
+
+.num-text {
+	padding: 0 8px;
+	font-size: 14px;
+	color: #333;
+	margin-top: 2px;
+	min-width: 28px;
+	text-align: center;
+}
+
+
+.radio-box-radio-box-wrap {
+    display: flex;
+    justify-content: center;
+}
+
+
+.view_1 {
+	display: flex;
+	justify-content: center;
+	align-items: flex-end;
+}
+.view_2 {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+	justify-content: center;
+}
+</style>

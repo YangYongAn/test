@@ -1,0 +1,59 @@
+<template>
+    <safe-area class="hoc-pay-pindan-page-sgm">
+        <hoc-nav-bar-sgm title="发起拼团" isShowBack />
+        <scroll-view scroll-y :show-scrollbar="false" style="flex: 1;">
+            <hoc-pay-address-sgm consignee="李丽" />
+            <hoc-order-goods-list-sgm :list="hocOrderGoodsListSgmList" />
+            <hoc-form-list-sgm :formList="hocFormListSgmFormList" />
+            <hoc-pin-rules-sgm content="<p style='color: #999; font-size: 12px;'>1、24小时内没有拼团成功，自动取消订单</p><p style='color: #999; font-size: 12px;'>2、拼团成功平台会在48小时发货</p><p style='color: #999; font-size: 12px;'>3、拼团成功的不能取消订单！</p>" />
+        </scroll-view>
+        <hoc-pay-footer-btn-sgm @fnGoPay="fnGoPay" buyNum={122} payPrice={1322} />
+    </safe-area>
+</template>
+<script>
+import '../../components/sgm/hoc-nav-bar-sgm.stml';
+import '../../components/sgm/hoc-pay-address-sgm.stml';
+import '../../components/sgm/hoc-order-goods-list-sgm.stml';
+import '../../components/sgm/hoc-form-list-sgm.stml';
+import '../../components/sgm/hoc-pin-rules-sgm.stml';
+import '../../components/sgm/hoc-pay-footer-btn-sgm.stml';
+export default {
+    name: 'template-sgm-pay',
+    data() {
+        return {
+            hocOrderGoodsListSgmList: [{
+                title: "苹果笔记本电脑超薄",
+                image: "http://ae8b3ee28597856d3283.qiniucdn.apicloud-system.com/apicloud/02b297b95bd2ae7aa0021ed8df11bede.png",
+                price: 30.9,
+                delprice: 50,
+                key: "小盒/200g",
+                buynum: 1,
+                act: "tuan"
+            }],
+            hocFormListSgmFormList: [{
+                label: "拼团人数",
+                text: "3人"
+            }, {
+                label: "商品金额",
+                text: "￥120"
+            }, {
+                label: "邮费",
+                text: "￥0"
+            }]
+        };
+    },
+    methods: {
+        fnGoPay() {
+            api.toast({
+                msg: '点击支付按钮了!'
+            });
+        }
+    }
+};
+</script>
+<style>
+.hoc-pay-pindan-page-sgm {
+    height: 100%;
+    background: #f8f8f8;
+}
+</style>

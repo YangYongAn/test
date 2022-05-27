@@ -1,0 +1,129 @@
+ <template>
+	<safe-area class="page">
+		<avm-nav-bar onBack={this.back}>Checkbox</avm-nav-bar>
+		<scroll-view>
+			<DemoBlock title='基础用法'>
+				<avm-checkbox/>
+				<avm-checkbox handleChange={val => this.onChange(val)}>有描述的勾选框</avm-checkbox>
+				<avm-checkbox defaultChecked>默认选中</avm-checkbox>
+				<avm-checkbox defaultChecked disabled>禁用状态</avm-checkbox>
+				<!-- <avm-checkbox indeterminate={true}>半选</avm-checkbox> -->
+			</DemoBlock>
+			<DemoBlock title='选项组'>
+				<avm-checkbox-group
+					value={this.data.value}
+					handleChange={val => this.onChange(val)}>
+					<avm-checkbox value="A" label="选项"/>
+					<avm-checkbox value="B" label="选项"/>
+					<avm-checkbox value="C" label="选项"/>
+					<avm-checkbox value="D" label="选项"/>
+				</avm-checkbox-group>
+			</DemoBlock>
+			<DemoBlock title='整组禁用'>
+				<avm-checkbox-group
+					defaultValue={['B', 'C']}
+					disabled>
+					<avm-checkbox value="A" label="选项"/>
+					<avm-checkbox value="B" label="选项"/>
+					<avm-checkbox value="C" label="选项"/>
+					<avm-checkbox value="D" label="选项"/>
+				</avm-checkbox-group>
+			</DemoBlock>
+			<DemoBlock title='添加辅助说明默认样式'>
+				<avm-checkbox-group
+					value={this.data.value}
+					handleChange={val => this.onChange(val)}>
+					<avm-checkbox value="A" label="选项" description="辅助说明辅助说明辅助说明"/>
+					<avm-checkbox value="B" label="选项" description="辅助说明辅助说明辅助说明"/>
+					<avm-checkbox value="C" label="选项" description="辅助说明辅助说明辅助说明"/>
+					<avm-checkbox value="D" label="选项" description="辅助说明辅助说明辅助说明"/>
+				</avm-checkbox-group>
+			</DemoBlock>
+			<DemoBlock title='添加辅助说明跟复选框文本一行展示'>
+				<avm-checkbox-group
+					value={this.data.value}
+					handleChange={val => this.onChange(val)}>
+					<avm-checkbox value="A" label="选项" description="辅助说明" descIsOneLineShow/>
+					<avm-checkbox value="B" label="选项" description="辅助说明" descIsOneLineShow/>
+					<avm-checkbox value="C" label="选项" description="辅助说明" descIsOneLineShow/>
+				</avm-checkbox-group>
+			</DemoBlock>
+			<DemoBlock title='复选icon和复选框文本两头分布展示'>
+				<avm-checkbox-group
+					value={this.data.value}
+					handleChange={val => this.onChange(val)}>
+					<avm-checkbox value="A" label="选项" description="辅助说明" isTwoHeadArrange/>
+					<avm-checkbox value="B" label="选项" description="辅助说明" isTwoHeadArrange/>
+					<avm-checkbox value="C" label="选项" description="辅助说明" isTwoHeadArrange/>
+				</avm-checkbox-group>
+			</DemoBlock>
+			<DemoBlock title='自定义icon'>
+				<avm-checkbox-group
+					value={this.data.value1}
+					handleChange={val => this.onChange(val)}>
+					<avm-checkbox
+						value="A"
+						label="A"
+						icon={<text className={'icon-style'}>未选中</text>}
+						selectedIcon={<text className={'icon-style icon-style-checked'}>选中</text>}/>
+					<avm-checkbox
+						value="B"
+						label="B"
+						icon={<text className={'icon-style'}>未选中</text>}
+						selectedIcon={<text className={'icon-style icon-style-checked'}>选中</text>}/>
+				</avm-checkbox-group>
+			</DemoBlock>
+			<DemoBlock title='自定义大小'>
+				<avm-checkbox iconSize="12px" fontSize="12px" gap="6px">
+					小号的勾选框
+				</avm-checkbox>
+			</DemoBlock>
+		</scroll-view>
+
+
+	</safe-area>
+</template>
+
+<style src="../../components/avm-ui/demos/index.css"/>
+
+<script>
+import '../../components/avm-ui/checkbox'
+import '../../components/avm-ui/nav-bar'
+import '../../components/avm-ui/space'
+import {DemoBlock} from '../../components/avm-ui/demos'
+export default {
+	name: 'demo-checkbox',
+	data() {
+		return {
+			value: []
+		}
+	},
+	methods: {
+		onClick() {
+			api.toast({
+				msg: '点击啦'
+			})
+		},
+		onChange(val) {
+			api.toast({msg: JSON.stringify(val)})
+		},
+		back() {
+			api.closeWin();
+		},
+	}
+}
+</script>
+<style>
+.page {
+	padding: 0 16px;
+	background: #f2f2f2;
+}
+.icon-style {
+	width: 30px;
+	font-size: 10px;
+	color: #666;
+}
+.icon-style-checked {
+	color: #0f0;
+}
+</style>

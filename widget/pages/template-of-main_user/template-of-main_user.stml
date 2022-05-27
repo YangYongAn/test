@@ -1,0 +1,460 @@
+<template>
+    <view class="main-user flex">
+        <safe-area>
+            <view class="header">
+                <text class="title">我的</text>
+            </view>
+        </safe-area>
+        <view class="user-info flex flex-h flex-center-v" @click="logout">
+            <img class="user-avatar" src="../../image/icon/icon-user-avatar.png" alt="" />
+            <text class="user-name">演示账号</text>
+        </view>
+
+
+
+        <scroll-view :show-scrollbar="false" scroll-y class="flex-1 main-user-scroll-view" enable-back-to-top refresher-enabled
+            refresher-triggered={{loading }} @refresherrefresh="onRefresh">
+
+
+            <view class="order-item-order-item">
+                <view class="order-item-order-header">
+                    <view class="order-item-order-num">
+                        <text class="order-item-order-num-key">取餐号</text>
+                        <text class="order-item-order-num-value">001</text>
+                    </view>
+                    <text v-else class="order-item-order-status">订单已完成</text>
+                </view>
+
+                <view class="order-item-order-goods">
+                    <view class="order-item-order-goods-item flex-h">
+                        <img class="order-item-goods-cover"
+                            src="http://a9591bba3d7a4cf76617.qiniucdn.apicloud-system.com/apicloud/6e51da2766d83e1000c165a1277d7683.jpg"
+                            alt="" />
+                        <text class="order-item-goods-title flex-1">麻辣捞派滑牛肉</text>
+                        <text class="order-item-goods-count">× 1</text>
+                    </view>
+                    <view class="order-item-order-goods-item flex-h">
+                        <img class="order-item-goods-cover"
+                            src="http://a565c1d1f30b65a4d46d.qiniucdn.apicloud-system.com/apicloud/3b4905680e5d0d520c4f511361c502b9.png"
+                            alt="" />
+                        <text class="order-item-goods-title flex-1">捞派毛肚</text>
+                        <text class="order-item-goods-count">× 1</text>
+                    </view>
+                </view>
+
+
+                <view class="order-item-order-price flex-h">
+                    <text class="order-item-order-price-text  flex-1">商品总价</text>
+                    <text class="order-item-order-price-text">¥ 2.00</text>
+                </view>
+
+
+                <view class="order-item-order-info">
+                    <view class="order-item-order-info-item flex-h">
+                        <text class="order-item-order-info-key">下单时间</text>
+                        <text class="order-item-order-info-value">2022-05-15 21:43:15</text>
+                    </view>
+                    <view class="order-item-order-info-item flex-h">
+                        <text class="order-item-order-info-key">取餐状态</text>
+                        <text class="order-item-order-info-value">已完成</text>
+                    </view>
+                    <view class="order-item-order-info-item flex-h">
+                        <text class="order-item-order-info-key">取餐号</text>
+                        <text class="order-item-order-info-value">001</text>
+                    </view>
+                    <view class="order-item-order-info-item flex-h">
+                        <text class="order-item-order-info-key">备注</text>
+                        <text class="order-item-order-info-value">老板多加点米饭哦</text>
+                    </view>
+                </view>
+
+
+
+                <view class="order-item-order-action">
+                    <view class="order-item-act-btn act-btn-red">
+                        <text class="order-item-act-text act-text-red">删除订单</text>
+                    </view>
+                </view>
+
+            </view>
+
+
+        </scroll-view>
+    </view>
+</template>
+<style>
+.main-user {
+    height: 100%;
+    background: #fff;
+}
+
+.title {
+    font-weight: 500;
+    color: #020202;
+    font-size: 18px;
+    text-align: center;
+    height: 44px;
+    line-height: 44px;
+}
+
+.user-info {
+    padding: 16px;
+    align-items: center;
+    border-bottom: 2px solid #eee;
+}
+
+.user-avatar {
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+}
+
+.user-name {
+    font-size: 15px;
+    font-weight: bold;
+    color: #333333;
+    margin-left: 10px;
+}
+
+.empty-block {
+    margin-top: 50px;
+}
+
+.order-item-order-item {
+    border: 1px solid #eee;
+    margin: 10px 15px;
+    padding: 10px 10px 0 10px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+}
+
+.order-item-order-header {
+    display: flex;
+    align-items: center;
+    padding-bottom: 10px;
+}
+
+.order-status {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin: 10px;
+    text-align: center;
+}
+
+.order-item-order-num {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.order-item-order-num-key {
+    margin: 5px;
+    color: #333;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.order-item-order-goods {
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+}
+
+.order-item-order-goods-item {
+    margin-top: 10px;
+    align-items: center;
+}
+
+.order-item-goods-title {
+    margin-left: 10px;
+    font-size: 15px;
+    font-weight: bold;
+    color: #333;
+}
+
+.order-item-goods-cover {
+    width: 54px;
+    height: 54px;
+    border-radius: 5px;
+}
+
+.order-item-order-price {
+    padding: 15px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.order-item-order-price-text {
+    color: #333;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.flex-h {
+    flex-direction: row;
+}
+
+.flex-1 {
+    flex: 1;
+}
+
+.order-item-order-num-value {
+    color: #fe5760;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.order-item-order-info {
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.order-item-order-info-item {
+    margin-top: 10px;
+}
+
+.order-item-order-info-key {
+    font-size: 12px;
+    color: #666;
+    width: 60px;
+}
+
+.order-item-order-info-value {
+    font-size: 12px;
+    color: #666;
+}
+
+.order-item-order-action {
+    height: 54px;
+    flex-flow: row;
+    align-items: center;
+    justify-content: flex-end;
+    flex-direction: row;
+}
+
+.order-item-act-btn {
+    padding: 7px 20px;
+    border-radius: 4px;
+    margin-left: 10px;
+    height: 34px;
+}
+
+.order-item-act-text-btn {
+    margin-left: 10px;
+}
+
+.act-text {
+    font-size: 15px;
+    white-space: nowrap;
+}
+
+.act-btn-red {
+    border: 1px solid #fe5760;
+}
+
+.act-text-red {
+    color: #fe5760;
+}
+
+.act-btn-gray {
+    border: 1px solid #999;
+}
+
+.act-text-gray {
+    color: #999;
+}
+</style>
+<script>
+
+import {
+    getDeviceId,
+    getUser,
+    isMP
+} from "../../script/util";
+import {
+    config,
+    GET,
+    POST
+} from '../../script/req';
+export default {
+    name: 'template-of-main-user',
+    data() {
+        return {
+            orderList: [],
+            loading: false,
+        };
+    },
+    apiready() {
+        if (this.data.userInfo) {
+            this.getOrderList();
+        }
+        api.addEventListener({
+            name: 'PAY-SUCCESS'
+        }, _ => {
+            this.getOrderList();
+            if (isMP()) {
+                api.sendEvent({
+                    name: 'CLOSE-GOODS-ADD'
+                });
+            } else {
+                setTimeout(_ => {
+                    api.closeFrame({
+                        name: 'goods_add'
+                    });
+                }, 345);
+            }
+        });
+    },
+    methods: {
+        onRefresh() {
+            this.data.loading = true;
+            if (this.data.userInfo) {
+                this.getOrderList();
+            } else {
+                setTimeout(_ => {
+                    this.data.loading = false;
+                    api.toast({
+                        msg: '请登录后查看历史订单'
+                    });
+                }, 1000);
+            }
+        },
+        doLogin(data) {
+            POST('c_users/app_login', data, {
+                returnAll: false
+            }).then(data => {
+                api.setPrefs({
+                    key: 'COOKIE',
+                    value: data.header.cookie
+                });
+                this.mockLogin();
+            });
+        },
+        wxLogin() {
+            if (isMP()) {
+                this.mpLogin();
+            } else {
+                this.doLogin({
+                    ssid: getDeviceId()
+                });
+            }
+        },
+        // 小程序端登录逻辑
+        mpLogin() {
+            console.log('mpLogin');
+            const baseUrl = `${config.schema}://${config.host}/${config.path}/`;
+            this.getCode().then(code => {
+                wx.request({
+                    url: baseUrl + 'c_users/wxLogin',
+                    //仅为示例，并非真实的接口地址
+                    method: 'POST',
+                    data: {
+                        code
+                    },
+                    header: {
+                        'content-type': 'application/json' // 默认值
+                    },
+                    success: res => {
+                        api.setPrefs({
+                            key: 'COOKIE',
+                            value: res.header['Set-Cookie']
+                        });
+                        this.mockLogin();
+                    },
+                    fail(error) {
+                        api.alert({
+                            title: '微信登录失败',
+                            msg: JSON.stringify(error)
+                        });
+                    }
+                });
+            }).catch(error => {
+                wx.showModal({
+                    title: '获取登录信息失败',
+                    content: error,
+                    showCancel: false
+                });
+            });
+        },
+        // 获取微信的code (调用wx自有api)
+        getCode() {
+            return new Promise((resolve, reject) => {
+                wx.login({
+                    success(res) {
+                        if (res.code) {
+                            //  获取code成功
+                            resolve(res.code);
+                        } else {
+                            console.log('登录失败！' + res.errMsg);
+                            reject(res);
+                        }
+                    },
+                    fail(err) {
+                        reject(err);
+                    }
+                });
+            });
+        },
+        mockLogin() {
+            api.alert({
+                title: '模拟登录',
+                msg: 'APP模拟登录为演示账号'
+            }, _ => {
+                this.loginSuccess({
+                    nickName: '演示账号',
+                    avatarUrl: 'https://file.service.qq.com/user-files/uploads/202004/e0a02a9af8fe637e71f37aea190811e0.png'
+                });
+            });
+        },
+        loginSuccess(userInfo) {
+            api.setPrefs({
+                key: 'USER',
+                value: userInfo
+            });
+            this.data.userInfo = userInfo;
+            this.getOrderList();
+        },
+        logout() {
+            api.confirm({
+                title: '退出账号',
+                msg: '确定要退出当前账号吗',
+                buttons: ['取消', '确认退出']
+            }, _ => {
+                api.removePrefs({
+                    key: 'USER'
+                });
+                api.removePrefs({
+                    key: 'COOKIE'
+                });
+                this.data.userInfo = false;
+                this.data.orderList = [];
+            });
+        },
+        getOrderList() {
+            GET('orders/get_all_user_list').then(data => {
+                this.data.orderList = data;
+                setTimeout(() => {
+                    this.data.loading = false;
+                }, 1000);
+            });
+        },
+        orderAction(e) {
+            const {
+                name,
+                props: {
+                    order: {
+                        id: order_id
+                    }
+                }
+            } = e.detail;
+            POST(name, {
+                order_id
+            }).then(res => {
+                api.toast(res);
+                this.getOrderList();
+            });
+        }
+    }
+};
+</script>

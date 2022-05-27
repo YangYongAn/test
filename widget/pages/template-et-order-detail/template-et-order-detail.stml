@@ -1,0 +1,100 @@
+<template>
+    <view class="page">
+        <hoc-header-bar-et title="预约报名" isBack/>
+        <scroll-view style="flex: 1;" :show-scrollbar="false">
+            <hoc-pay-course-info-et
+                cover="http://aa8954a760b087bd5575.qiniucdn.apicloud-system.com/apicloud/76abf6b3c8df591a726c3156427b1171.png"
+                title="托福基础班"
+                class_hour={20}
+                price="3500" />
+            <hoc-form-list-et title="课程详情" :infoList="formList" />
+        </scroll-view>
+        <view>
+            <view class="cd__bottom--btn" style="background: #CCC;" style="background: #F1C694;">
+                <text class="cd__bottom--text">支付</text>
+            </view>
+            <safe-area></safe-area>
+        </view>
+    </view>
+</template>
+<script>
+import '../../components/et/hoc-header-bar-et.stml';
+import '../../components/et/hoc-pay-course-info-et.stml';
+import '../../components/et/hoc-form-list-et.stml';
+export default {
+    name: "template-et-order-detail",
+    data() {
+        return {
+            formList: [{
+                label: "预约信息",
+                content: "2021-01-14 16:49:36"
+            }, {
+                label: "预约姓名",
+                content: "APP用户60F2"
+            }, {
+                label: "手机号",
+                content: "13466669999"
+            }, {
+                label: "备注",
+                content: "下午三点左右我可能到达，缴纳费用"
+            }]
+        };
+    }
+};
+</script>
+<style>
+.page {
+    background: #F8F8F8;
+    height: 100%;
+}
+
+.pay-top {
+    padding: 20px 15px;
+    flex-flow: row nowrap;
+    align-items: center;
+    background: #FFF;
+}
+
+.cover {
+    width: 124px;
+    height: 70px;
+}
+
+.info {
+    margin-left: 15px;
+}
+
+.title {
+    color: #333;
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.price {
+    font-size: 16px;
+    font-weight: bold;
+    color: #FA6400;
+    line-height: 16px;
+    font-family: monospace;
+}
+
+.intro {
+    margin-top: 10px;
+    background: #FFF;
+}
+
+.cd__bottom--btn {
+    height: 50px;
+    justify-content: center;
+    align-items: center;
+    margin: 15px;
+    border-radius: 5px;
+}
+
+.cd__bottom--text {
+    color: #FFF;
+    font-size: 16px;
+    font-weight: bold;
+}
+</style>

@@ -1,0 +1,191 @@
+<!--编辑收货地址表单-->
+<template name='edit-address'>
+	<view class="edit-address">
+		<view class="edit-address-topform">
+			<view class="edit-address-topform-item">
+				<text class="edit-address-topform-text">收货人</text>
+				<input class="edit-address-topform-input" placeholder="请填写收货人" v-model="this.data.name"
+					:maxlength="20"></input>
+			</view>
+			<view class="edit-address-topform-item">
+				<text class="edit-address-topform-text">联系方式</text>
+				<input class="edit-address-topform-input" placeholder="请填写联系方式" v-model="this.data.phone"
+					keyboard-type="number" :maxlength="11"></input>
+			</view>
+			<view class="edit-address-topform-item">
+				<text class="edit-address-topform-text">收货地址</text>
+				<view class="qu_box">
+					<input class="edit-address-topform-input" placeholder="请填写收货地址" v-model="this.data.qustr"></input>
+				</view>
+			</view>
+			<view class="edit-address-topform-item">
+				<text class="edit-address-topform-text">设为默认地址</text>
+				<switch :checked="this.data.isDefault == true" color="#7FA000" onchange={this.onswitchchange.bind(this)}/>
+			</view>
+		</view>
+		<!-- 备注 -->
+		<text class="edit-address-back">详细地址</text>
+		<view class="edit-address-back-box">
+			<textarea class="edit-address-back-textarea" data-id="address" placeholder="街道、门牌号等"
+				v-model="this.data.address"></textarea>
+		</view>
+
+		<!-- btn -->
+		<view class="flex1"></view>
+		<view class="edit-address-footer">
+			<text v-if="id" class="edit-address-btn btn_orange" onclick={this.fnSubmit.bind(this)}>保存</text>
+			<text v-if="id" class="edit-address-btn btn_red" onclick={this.fnDelete.bind(this)}>删除</text>
+			<text v-if="!id" class="edit-address-btn btn_red" onclick={this.fnSubmit.bind(this)}>提交</text>
+		</view>
+	</view>
+</template>
+<script>
+export default {
+	name: 'hoc-edit-address-sgm',
+	data() {
+		return {
+			id: this.props.id || null,
+			name: this.props.name || '',
+			phone: this.props.phone || '',
+			qustr: this.props.qustr || '',
+			address: this.props.address || '',
+			isDefault: this.props.isDefault || false
+		}
+	},
+	methods: {
+		onswitchchange(e) {
+			this.data.isDefault = e.detail.value;
+		},
+		isMobile(str) {
+			var mobileReg = /^1(3[0-9]|4[0-9]|5[0-9]|6[0-9]|7[0-9]|8[0-9]|9[0-9])\d{8}$/;
+			return mobileReg.test(str);
+		},
+		fnSubmit() {
+			const {name, phone, qustr, address, isDefault, id} = this.data;
+			if (!name) {
+				api.toast({msg: '请输入姓名~'});
+				return;
+			}
+			if (name.length > 14) {
+				api.toast({msg: '收货人姓名不得超过14个字符~'});
+				return;
+			}
+			if (name.length < 2) {
+				api.toast({msg: '收货人姓名不得少于2个字符~'});
+				return;
+			}
+			if (!phone) {
+				api.toast({msg: '请输入联系方式~'});
+				return;
+			}
+			if (!this.isMobile(phone)) {
+				api.toast({msg: '请输入正确的手机号~'});
+				return;
+			}
+			if (!qustr) {
+				api.toast({msg: '请填写收货地址~'});
+				return;
+			}
+			if (!address) {
+				api.toast({msg: '请输入详细地址~'});
+				return;
+			}
+			if (address.length > 50) {
+				api.toast({msg: '详细地址不得超过50个字符~'});
+				return;
+			}
+			this.fire('submitFunc', this.data.formInfo)
+		},
+		fnDelete() {
+			this.fire('deleteFunc', this.data.formInfo)
+		}
+	}
+}
+</script>
+<style>
+.edit-address {
+	height: 100%;
+	background-color: #f6f6f6;
+}
+.edit-address-topform {
+	padding: 0 15px;
+	background-color: white;
+}
+.edit-address-topform-item {
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	height: 51px;
+	border-top: 1px solid #f8f8f8;
+}
+.edit-address-topform-text {
+	font-size: 16px;
+	color: #333333;
+}
+.edit-address-topform-input {
+	width: 210px;
+	height: 30px;
+	text-align: right;
+	color: #333333;
+	border: none;
+}
+.qu_box {
+	flex-direction: row;
+	align-items: center;
+}
+.a_picker {
+	flex-direction: row;
+	justify-content: flex-end;
+	align-items: center;
+}
+.a_gor {
+	width: 10px;
+	height: 10px;
+	margin-left: 8px;
+}
+/* 备注 */
+.edit-address-back {
+	font-size: 14px;
+	margin: 15px 15px 4px;
+	color: #6c7279;
+}
+.edit-address-back-box {
+	height: 122px;
+	box-sizing: border-box;
+	padding: 15px;
+	background-color: white;
+}
+.edit-address-back-textarea {
+	width: 100%;
+	height: 100%;
+	border: none;
+}
+.flex1 {
+	flex: 1;
+}
+/* btn */
+.edit-address-footer {
+	flex-direction: row;
+	padding: 15px;
+}
+.edit-address-btn {
+	flex: 1;
+	height: 45px;
+	border-radius: 4px;
+	font-weight: bold;
+	text-align: center;
+	line-height: 45px;
+	font-size: 16px;
+	color: white;
+}
+.edit-address-btn:active {
+	opacity: 0.7;
+}
+.btn_orange {
+	background-color: #339dff;
+	margin-right: 15px;
+}
+.btn_red {
+	background-color: #ff6600;
+}
+</style>

@@ -1,0 +1,73 @@
+<template>
+	<safe-area class="template-et">
+		<view class="et-tab-bar" >
+			<hoc-tab-bar-et @tabClick="tabClick" />
+		</view>
+	</safe-area>
+</template>
+<script>
+import '../../components/et/hoc-tab-bar-et.stml'
+export default {
+	name: 'template-et',
+	apiready() {//like created
+		this.openFrameGroup()
+	},
+	data() {
+		return {
+
+		}
+	},
+	methods: {
+		tabClick(item) {
+			const iInfo = {
+				index: 0,
+				course: 1,
+				my: 2
+			}
+			api.setFrameGroupIndex({
+				name: 'main-template-et',
+				index: iInfo[item.detail]
+			})
+		},
+		openFrameGroup() {
+			api.openFrameGroup({
+				name: 'main-template-et',
+				scrollEnabled: false,
+				background: '#fff',
+				rect: {
+					matginTop: 0,
+					marginBottom: 90
+				},
+				frames: [{
+					name: 'template-et-home',
+					url: '../template-et-home/template-et-home.stml'
+				}, {
+					name: 'template-et-course',
+					url: '../template-et-course/template-et-course.stml'
+				}, {
+					name: 'template-et-user',
+					url: '../template-et-user/template-et-user.stml'
+				}]
+			}, (ret, err) => {
+				var index = ret.index;
+				api.setFrameGroupIndex({
+				name: 'main-template-et',
+				index
+			})
+			});
+		}
+	}
+}
+</script>
+<style>
+.template-et {
+	width: 100%;
+	height: 100%;
+	background: #fff;
+}
+.et-tab-bar {
+	width: 100%;
+	position: absolute;
+	bottom: 16px;
+}
+</style>

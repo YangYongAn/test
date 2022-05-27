@@ -1,0 +1,58 @@
+<template>
+	<view class="search_container">
+		<view class="search_box" >
+			<image class="search_img" src="http://ae8b3ee28597856d3283.qiniucdn.apicloud-system.com/apicloud/e8ef34b317414172d61a612451b01b78.png"></image>
+			<text class="search_zi">{ placeholder }</text>
+		</view>
+	</view>
+</template>
+<script>
+export default {
+	name: 'hoc-search-bar-od',
+	props:{
+		placeholder:{
+			type:String,
+			default:''
+		}
+	},
+	apiready() {//like created
+
+	},
+	data() {
+		return {
+			placeholder: this.props.placeholder || "请输入商品名称",
+		}
+	},
+	methods: {
+
+	}
+}
+</script>
+<style scoped>
+/* search */
+.search_container {
+	justify-content: center;
+	height: 44px;
+	padding: 0 15px;
+	background-color: #fff;
+	border-bottom: 1px solid #f8f8f8;
+}
+.search_box {
+	flex-direction: row;
+	align-items: center;
+	height: 30px;
+	background-color: #f5f5f5;
+	border-radius: 15px;
+}
+.search_img {
+	width: 12px;
+	height: 12px;
+	margin-left: 13px;
+	margin-right: 6px;
+}
+.search_zi {
+	color: #b5b5b5;
+	font-size: 12px;
+	line-height: 17px;
+}
+</style>

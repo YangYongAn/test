@@ -1,0 +1,126 @@
+<template>
+  <safe-area class="page">
+    <avm-nav-bar onBack={this.back}>Mask</avm-nav-bar>
+    <view style="margin-top: 20px">
+      <DemoBlock title='基础用法'>
+        <button onClick={()=> this.toggle()}>显示遮罩层</button>
+      </DemoBlock>
+      <DemoBlock title='自定义内容'>
+        <button onClick={()=> this.toggle1()}>显示带内容的遮罩层</button>
+      </DemoBlock>
+      <DemoBlock title='遮罩层深色'>
+        <button onClick={()=> this.toggle2()}>显示深一些的遮罩层</button>
+      </DemoBlock>
+      <DemoBlock title='遮罩层浅色'>
+        <button onClick={()=> this.toggle3()}>显示浅一些的遮罩层</button>
+      </DemoBlock>
+      <DemoBlock title='遮罩层自定义透明度'>
+        <button onClick={()=> this.toggle4()}>显示自定义透明度的遮罩层</button>
+      </DemoBlock>
+<!--      <DemoBlock title='白色的遮罩层'>-->
+<!--        <button onClick={()=> this.toggle5()}>显示白色的遮罩层</button>-->
+<!--      </DemoBlock>-->
+    </view>
+    <!--    基础用法-->
+    <avm-mask visible={this.data.visible} onMaskClick={()=> this.toggle()}></avm-mask>
+    <!--    自定义内容-->
+    <avm-mask visible={this.data.visible1} onMaskClick={()=> this.toggle1()}>
+      <view class='overlayContent'><text>内容</text></view>
+    </avm-mask>
+    <!--    遮罩层深色-->
+    <avm-mask
+      visible={this.data.visible2}
+      onMaskClick={()=> this.toggle2()}
+      opacity='thick'>
+    </avm-mask>
+    <!--    遮罩层浅色-->
+    <avm-mask
+      visible={this.data.visible3}
+      onMaskClick={()=> this.toggle3()}
+      opacity='thin'>
+    </avm-mask>
+    <!--    遮罩层自定义透明度-->
+    <avm-mask
+      visible={this.data.visible4}
+      onMaskClick={()=> this.toggle4()}
+      opacity={0.5}>
+    </avm-mask>
+    <!--    白色的遮罩层-->
+<!--    <Mask-->
+<!--      visible={this.data.visible5}-->
+<!--      onMaskClick={()=> this.toggle5()}-->
+<!--      afterShow={() => this.afterShow()}-->
+<!--      color='white'>-->
+<!--    </Mask>-->
+  </safe-area>
+</template>
+
+<script>
+import '../../components/avm-ui/mask';
+import '../../components/avm-ui/nav-bar';
+import {DemoBlock} from '../../components/avm-ui/demos';
+export default {
+  name: 'test',
+  data() {
+    return {
+      visible: false,
+      visible1: false,
+      visible2: false,
+      visible3: false,
+      visible4: false,
+      visible5: false
+    }
+  },
+  methods: {
+    back() {
+      api.closeWin();
+    },
+    toggle() {
+      this.data.visible = !this.data.visible
+    },
+    toggle1() {
+      this.data.visible1 = !this.data.visible1
+    },
+    toggle2() {
+      this.data.visible2 = !this.data.visible2
+    },
+    toggle3() {
+      this.data.visible3 = !this.data.visible3
+    },
+    toggle4() {
+      this.data.visible4 = !this.data.visible4
+    },
+    toggle5() {
+      this.data.visible5 = !this.data.visible5
+    },
+    afterShow() {
+      api.alert({
+        msg: 'afterShow'
+      })
+    }
+  }
+}
+</script>
+
+
+<style scoped>
+.page{
+  position: relative;
+  height: 100%;
+}
+.overlayContent {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 150px;
+  height: 150px;
+  margin-top: -75px;
+  margin-left: -75px;
+  background: white;
+  border-radius: 16px;
+  text-align: center;
+}
+</style>

@@ -1,0 +1,80 @@
+<template>
+
+	<safe-area style="background: #f2f2f2;">
+		<NavBar onBack={this.back}>Image</NavBar>
+		<scroll-view>
+			<DemoBlock title='基础用法'>
+				<avm-space wrap>
+					<avm-image src={demoSrc}/>
+				</avm-space>
+			</DemoBlock>
+			<DemoBlock title='方形图片'>
+				<avm-space wrap>
+					<avm-image src={demoSrc} isSquare fit='contain'/>
+					<avm-image src={demoSrc} isSquare fit='cover'/>
+				</avm-space>
+			</DemoBlock>
+			<DemoBlock title='圆形图片'>
+				<avm-space wrap>
+					<avm-image src={demoSrc} isRound fit='fill'/>
+					<avm-image src={demoSrc} isRound fit='scale-down'/>
+					<avm-image src={demoSrc} isRound fit='none'/>
+				</avm-space>
+			</DemoBlock>
+			<DemoBlock title='自定义圆角、自定义图片宽高'>
+				<avm-space wrap>
+					<avm-image
+						src={demoSrc}
+						width={64}
+						height={64}
+						fit='cover'
+						:style="{borderRadius: 4}"
+					/>
+					<avm-image
+						src={demoSrc}
+						width={64}
+						height={64}
+						fit='cover'
+						:style="{borderRadius: 8}"
+					/>
+					<avm-image
+						src={demoSrc2}
+						width={90}
+						height={90}
+						fit='cover'
+						:style="{borderRadius: 32}"
+					/>
+				</avm-space>
+			</DemoBlock>
+			<DemoBlock title='加载失败'>
+				<avm-image src='/404' width={100} height={100} />
+			</DemoBlock>
+		</scroll-view>
+	</safe-area>
+</template>
+<script>
+import '../../components/avm-ui/image'
+import '../../components/avm-ui/space'
+import NavBar from '../../components/avm-ui/nav-bar'
+import {DemoBlock} from '../../components/avm-ui/demos'
+export default {
+	name: 'demo-image',
+	data() {
+		return {
+			demoSrc: 'https://images.unsplash.com/photo-1567945716310-4745a6b7844b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=60',
+			demoSrc2: 'https://images.unsplash.com/photo-1620476214170-1d8080f65cdb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=3150&q=80'
+		}
+	},
+	methods: {
+		back() {
+			api.closeWin();
+		},
+		handleClick() {
+			api.toast({
+				msg: '点击啦'
+			})
+		}
+	}
+}
+</script>
+<style src="../../components/avm-ui/demos/index.css"></style>

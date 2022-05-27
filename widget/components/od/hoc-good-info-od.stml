@@ -1,0 +1,143 @@
+<template>
+	<view class="good-info">
+		<view class="list_box">
+			<!-- 用于循环的对象 -->
+			<view class="order-goods-page" v-for="(item,index) in list">
+				<view class="order-goods-item"  data-index={index}>
+					<image class="order-goods-img" src={item.image} mode="aspectFill"></image>
+					<view class="order-goods-right">
+						<text class="order-goods-title">{item.title}</text>
+						<view class="order-goods-guige-box">
+							<text class="order-goods-guige">{item.key ? ' '+item.key : '默认规格'}</text>
+							<text class="order-goods-num">{'x'+(item.buynum)}</text>
+						</view>
+					</view>
+				</view>
+					<!-- 小计 -->
+				<view class="list_count">
+					<text class="list_zi">小计</text>
+					<text class="list_all">{'¥' + item.price}</text>
+				</view>
+			</view>			
+		</view>
+	</view>
+</template>
+<script>
+export default {
+	name: 'hoc-good-info-od',
+	props: {
+		list: {
+			type: Array,
+			default: function () {
+				return {}
+			}
+		}
+	},
+	apiready() {//like created
+
+	},
+	data() {
+		return {
+			list:this.props.list || [
+					{
+					  "title": "夏新款套装女洋气时尚短裤阔腿裤两件套小个子夏装搭配显高",
+					  "image":
+						"http://aea8bc2ccdd582de43c1.qiniucdn.apicloud-system.com/apicloud/46e4b8d7a4a8d1febeec082516a8e8f5.png",
+					  "price": 629,
+					  "ku_num": 995,
+					  "delprice": 1236,
+					  "key": "M",
+					  "buynum": 1
+					}
+				  ]
+		}
+	},
+	methods: {
+
+	}
+}
+</script>
+<style scoped>
+/* 商品信息 */
+.list_box {
+	margin-top: 8px;
+	background: white;
+}
+.list_count {
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+	height: 44px;
+	padding: 0 15px;
+}
+.list_zi {
+	font-size: 14px;
+	color: #333333;
+}
+.list_all {
+	font-size: 14px;
+	color: #fe904a;
+}
+.order-goods-page {
+	background-color: white;
+}
+.order-goods-item {
+	flex-direction: row;
+	padding-bottom: 15px;
+	margin: 15px 15px 0;
+	border-bottom: 1px solid #f8f8f8;
+}
+.order-goods-img {
+	width: 90px;
+	height: 68px;
+	margin-right: 12px;
+	border-radius: 4px;
+}
+.order-goods-right {
+	align-content: center;
+	flex: 1;
+}
+.order-goods-title {
+	font-size: 14px;
+	color: #333333;
+}
+.order-goods-guige-box {
+	flex-direction: row;
+	justify-content: space-between;
+	margin-top: 5px;
+}
+.order-goods-guige,
+.order-goods-num {
+	font-size: 12px;
+	color: #999999;
+}
+.order-goods-bottom {
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	margin-top: 10px;
+}
+.order-goods-price {
+	font-size: 14px;
+	color: #fe904a;
+}
+.order-goods-btn {
+	width: 70px;
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+	margin-left: 8px;
+	border-radius: 2px;
+	font-size: 14px;
+	padding: 0 3px;
+}
+.order-goods-btn-gray {
+	background-color: white;
+	border: 1px solid #b5b5b5;
+	color: #999999;
+}
+.order-goods-btn-orange {
+	background-color: #ff7037;
+	color: white;
+}
+</style>

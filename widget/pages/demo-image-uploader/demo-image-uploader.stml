@@ -1,0 +1,117 @@
+<template>
+<safe-area class="page">
+	<avm-nav-bar onBack={this.back}>ImageUploader</avm-nav-bar>
+	<scroll-view>
+		<DemoBlock title='基础用法'>
+			<avm-image-uploader
+				:defaultValue="fileList1"
+				handleChange={imgs => this.setFileList('fileList1', imgs)}/>
+		</DemoBlock>
+		<DemoBlock title='上传状态'>
+			<avm-image-uploader :value="fileList2" handleChange={imgs => this.setFileList('fileList1', imgs)}/>
+			<DemoDescription content='当用户选择的文件超过 1M 时，跳过上传并提示用户'/>
+		</DemoBlock>
+		<DemoBlock title='限制上传大小'>
+			<avm-space direction='vertical'>
+				<avm-image-uploader :value="fileList3" handleChange={imgs => this.setFileList('fileList1', imgs)}/>
+				<DemoDescription content='当用户选择的文件超过 1M 时，跳过上传并提示用户'/>
+			</avm-space>
+		</DemoBlock>
+		<DemoBlock title='限制图片数量'>
+			<avm-space direction='vertical'>
+				<avm-image-uploader
+                    disableUpload={false}
+					:value="fileList4"
+					tipDesc="限制上传三张图片"
+					:maxCount={3}
+					:showUpload="fileList4.length < 3"
+					@countExceed="toastExceed($event)"
+					handleChange={imgs => this.setFileList('fileList1', imgs)}/>
+				<DemoDescription content='限制用户最多上传 3 张图片，当达到最大数量时隐藏掉上传按钮' />
+			</avm-space>
+		</DemoBlock>
+		<DemoBlock title='删除图片确认'>
+			<avm-space direction='vertical'>
+				<avm-image-uploader
+					:value="fileList5"
+					@handleDelete="handleDelete"
+					handleChange={imgs => this.setFileList('fileList1', imgs)}/>
+				<DemoDescription content='当用户删除图片时，进行确认，确认后可删除图片' />
+			</avm-space>
+		</DemoBlock>
+		<DemoBlock title='自定义大小'>
+			<avm-image-uploader
+				cellSize="90px"
+				:value="fileList6"
+				handleChange={imgs => this.setFileList('fileList1', imgs)}/>
+		</DemoBlock>
+		<DemoBlock title='自定义上传按钮'>
+			<avm-image-uploader :value="fileList7" uploadIcon={<view style={myStyle}><img src='../../image/cf.png' alt="自定义"/></view>}/>
+		</DemoBlock>
+	</scroll-view>
+</safe-area>
+</template>
+<script>
+import '../../components/avm-ui/image-uploader'
+import '../../components/avm-ui/nav-bar'
+import '../../components/avm-ui/space'
+import {DemoBlock, DemoDescription} from '../../components/avm-ui/demos'
+const defaultList = [
+	{url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png'},
+]
+export default {
+	name: 'demo-image-uploader',
+	apiready(){//like created
+
+	},
+	data() {
+		return{
+			fileList1: [...defaultList],
+			fileList2: [...defaultList],
+			fileList3: [...defaultList],
+			fileList4: [...defaultList],
+			fileList5: [...defaultList],
+			fileList6: [...defaultList],
+			fileList7: [...defaultList],
+			myStyle: {
+				width: 80,
+				height: 80,
+				borderRadius: 40,
+				backgroundColor: '#f5f5f5',
+				display: 'flex',
+				justifyContent: 'center',
+				alignItems: 'center',
+				color: '#999999',
+			}
+		}
+	},
+	methods: {
+		setFileList(key, val) {
+            api.toast({
+                msg: `key=${key}---val=${JSON.stringify(val)}`
+            })
+			this.data[key] = val;
+		},
+		toastExceed() {
+			api.toast({
+				msg: `最多选择 ${this.data.maxCount} 张图片，你多选了 ${exceed} 张`
+			})
+		},
+		handleDelete() {
+			api.alert({
+				msg: '是否确定删除？'
+			})
+		},
+        back() {
+			api.closeWin();
+		}
+	}
+}
+</script>
+<style src="../../components/avm-ui/demos/index.css"/>
+<style>
+.page {
+	width: 100%;
+	height: 100%;
+}
+</style>

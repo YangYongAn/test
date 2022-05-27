@@ -1,0 +1,101 @@
+<template>
+	<safe-area class="page">
+		<avm-nav-bar onBack={this.back}>Tag</avm-nav-bar>
+		<scroll-view>
+			<DemoBlock title='基础样式'>
+				<avm-space>
+					<avm-tag color='primary'>标签</avm-tag>
+					<avm-tag round color='primary'>标签</avm-tag>
+					<avm-tag color='primary'>正常最多七个字啦啦啦啦啦</avm-tag>
+				</avm-space>
+			</DemoBlock>
+			<DemoBlock title='小尺寸'>
+				<avm-space>
+					<avm-tag color='primary' size="small">标签</avm-tag>
+					<avm-tag round color='primary' size="small">标签</avm-tag>
+					<avm-tag color='primary' size="small">正常最多七个字啦啦啦啦啦</avm-tag>
+				</avm-space>
+			</DemoBlock>
+			<DemoBlock title='大尺寸'>
+				<avm-space>
+					<avm-tag color='primary' size="large">标签</avm-tag>
+					<avm-tag round color='primary' size="large">标签</avm-tag>
+					<avm-tag color='primary' size="large">正常最多七个字啦啦啦啦啦</avm-tag>
+				</avm-space>
+			</DemoBlock>
+			<DemoBlock title='5种通用标签颜色'>
+				<avm-space>
+					<avm-tag color='default'>Default</avm-tag>
+					<avm-tag color='primary'>Primary</avm-tag>
+					<avm-tag color='success'>Success</avm-tag>
+					<avm-tag color='warning'>Warning</avm-tag>
+					<avm-tag color='danger'>Danger</avm-tag>
+				</avm-space>
+			</DemoBlock>
+			<DemoBlock title='线框填充'>
+				<avm-space>
+					<avm-tag color='primary' fill='outline'>
+						正常最多七个字啦啦啦啦啦
+					</avm-tag>
+					<avm-tag color='#87d068' fill='outline'>
+						#87d068
+					</avm-tag>
+					<avm-tag color='#ff6430' fill='outline'>
+						#ff6430
+					</avm-tag>
+				</avm-space>
+			</DemoBlock>
+			<DemoBlock title='自定义颜色'>
+				<avm-space>
+					<avm-tag color='#2db7f5'>#2db7f5</avm-tag>
+					<avm-tag color='#87d068'>#87d068</avm-tag>
+					<avm-tag color='#108ee9'>#108ee9</avm-tag>
+				</avm-space>
+			</DemoBlock>
+			<!-- <DemoBlock title='圆角'>
+				<avm-space>
+					<avm-tag round color='#2db7f5'>
+						kongxin
+					</avm-tag>
+				</avm-space>
+			</DemoBlock>
+			<DemoBlock title='自定义问题颜色/背景色/border色以及border-radius'>
+				<avm-space wrap>
+					<avm-tag textColor='#f00' isDelete>
+						textColor #f00
+					</avm-tag>
+					<avm-tag textColor="#000">
+						textColor #000
+					</avm-tag>
+					<avm-tag borderColor='#f0f'>
+						borderColor #f0f
+					</avm-tag>
+					<avm-tag borderRadius='4px'>
+						borderRadius 20px
+					</avm-tag>
+				</avm-space>
+			</DemoBlock> -->
+		</scroll-view>
+	</safe-area>
+</template>
+<script>
+import '../../components/avm-ui/tag'
+import '../../components/avm-ui/nav-bar'
+import Badge from '../../components/avm-ui/space'
+import {DemoBlock} from '../../components/avm-ui/demos'
+export default {
+	name: 'demo-tag',
+	methods: {
+		back() {
+			api.closeWin();
+		}
+	}
+}
+</script>
+<style src="../../components/avm-ui/demos/index.css"/>
+<style>
+.page {
+	height: 100%;
+	width: 100%;
+}
+</style>

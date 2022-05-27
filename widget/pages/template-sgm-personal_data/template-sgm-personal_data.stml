@@ -1,0 +1,64 @@
+<template>
+    <safe-area class="page">
+        <hoc-user-panel-sgm id="111" nickname="测试账号" avatar="http://aea8bc2ccdd582de43c1.qiniucdn.apicloud-system.com/apicloud/46e4b8d7a4a8d1febeec082516a8e8f5.png" />
+        <hoc-orderbtn-group-sgm title="我的订单" :btnList="hocOrderbtnGroupSgmBtnList" @gotoOrderList="gotoOrderList" @btnClick="btnClick"/>
+        <hoc-user-menu-od :list="hocUserMenuOdList" />
+    </safe-area>
+</template>
+<script>
+import "../../components/sgm/hoc-user-panel-sgm.stml";
+import "../../components/sgm/hoc-orderbtn-group-sgm.stml";
+import "../../components/sgm/hoc-user-menu-od.stml";
+export default {
+    name: 'template-sgm-personal_data',
+    apiready() { //like created
+    },
+    data() {
+        return {
+            hocOrderbtnGroupSgmBtnList: [{
+                icon: "http://ae8b3ee28597856d3283.qiniucdn.apicloud-system.com/apicloud/f9598c0f83fd29b3e4ca2a4841ab0e74.png",
+                title: "待成团",
+                curNum: 3
+            }, {
+                icon: "http://ae8b3ee28597856d3283.qiniucdn.apicloud-system.com/apicloud/ed4e2be97367495159c485945c27f8c1.png",
+                title: "待发货"
+            }, {
+                icon: "http://ae8b3ee28597856d3283.qiniucdn.apicloud-system.com/apicloud/7536dd50631ca84685212723acaef895.png",
+                title: "待收货"
+            }, {
+                icon: "http://ae8b3ee28597856d3283.qiniucdn.apicloud-system.com/apicloud/9e3281f3b18e74bade2d3f34129eb014.png",
+                title: "已完成"
+            }, {
+                icon: "http://ae8b3ee28597856d3283.qiniucdn.apicloud-system.com/apicloud/23d1c533a1a64b2729d340ddb6fb6ecf.png",
+                title: "售后",
+                curNum: 5
+            }],
+            hocUserMenuOdList: [{
+                title: "收货地址"
+            }, {
+                title: "关于我们"
+            }]
+        };
+    },
+    methods: {
+        btnClick() {
+            api.openWin({
+                name: 'myOrder',
+                url:'../template-sgm-order/template-sgm-order.stml'
+            })
+        },
+        gotoOrderList() {
+            api.openWin({
+                name: 'orderList',
+                url:'../template-sgm-order/template-sgm-order.stml'
+            })
+        }
+    }
+};
+</script>
+<style>
+.page {
+    height: 100%;
+    background-color: #f8f8f8;
+}
+</style>

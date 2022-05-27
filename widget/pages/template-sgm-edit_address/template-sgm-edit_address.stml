@@ -1,0 +1,24 @@
+<template>
+    <safe-area class="page">
+        <hoc-nav-bar-sgm isShowBack title="新增收货地址" />
+        <hoc-edit-address-sgm name="" phone="" qustr="" address="" isDefault={false} />
+    </safe-area>
+</template>
+<script>
+import '../../components/sgm/hoc-nav-bar-sgm.stml';
+import '../../components/sgm/hoc-edit-address-sgm.stml';
+export default {
+    name: 'template-sgm-edit_address',
+    apiready() { //like created
+    },
+    data() {
+        return {};
+    },
+    methods: {}
+};
+</script>
+<style>
+.page {
+    height: 100%;
+}
+</style>

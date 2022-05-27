@@ -1,0 +1,109 @@
+<template>
+	<safe-area>
+		<view class="footer_box">
+			<view class="footer_chk">
+				<image class="chkall_img" src={active ? "http://ae8b3ee28597856d3283.qiniucdn.apicloud-system.com/apicloud/015eca78c47045f0c20354ad187a7191.png":"http://ae8b3ee28597856d3283.qiniucdn.apicloud-system.com/apicloud/f9b7e811f27b1a39bb33250a69ffd26e.png"}></image>
+				<text class="chk_zi">全选</text>
+			</view>
+			<view class="footer_zi">
+				<text class="footer_czi">合计：</text>
+				<text class="footer_rzi">{'￥'+price}</text>
+				<text class="footer_btn" @click="onPlaceClick">{{ '结算'+num}}</text>
+			</view>
+		</view>
+	</safe-area>
+</template>
+<script>
+export default {
+	name: 'hoc-shopping-footer-od',
+	props: {
+		price: {
+			type: String,
+			default:""
+		},
+		num: {
+			type: String,
+			default:""
+		},
+		active: {
+			type: Boolean,
+			default:true
+		}
+	},
+	apiready() {//like created
+
+	},
+	data() {
+		return {
+			price:this.props.price || "100",
+			num:this.props.num || "5",
+			active:this.props.active || false,
+		}
+	},
+	methods: {
+		onPlaceClick(){
+			api.openWin({
+				name: 'place_order',
+				url:'widget://pages/template-od-place_order/template-od-place_order'
+			})
+		}
+	}
+}
+</script>
+<style scoped>
+/* footer box */
+.footer_box {
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	height: 51px;
+	background-color: white;
+}
+.footer_chk {
+	flex-direction: row;
+	align-items: center;
+	height: 40px;
+}
+.chkall_img {
+	width: 20px;
+	height: 20px;
+	margin-left: 15px;
+}
+.chk_zi {
+	font-size: 12px;
+	color: #666666;
+	margin-left: 6px;
+}
+.footer_zi {
+	flex-direction: row;
+	align-items: center;
+}
+.footer_czi {
+	font-size: 13px;
+	color: #333333;
+}
+.footer_rzi {
+	font-size: 15px;
+	color: #fe5c00;
+}
+.footer_btn {
+	width: 96px;
+	height: 40px;
+	line-height: 40px;
+	text-align: center;
+	font-size: 14px;
+	color: #ffffff;
+	border-radius: 2px;
+	margin: 0 8px;
+	background-color: #ff7037;
+}
+.footer_btn:active {
+	opacity: 0.7;
+}
+.coverbg {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.4);
+}
+</style>

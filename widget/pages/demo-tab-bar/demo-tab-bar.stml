@@ -1,0 +1,156 @@
+<template>
+	<safe-area class="page">
+		<avm-nav-bar onBack={this.back}>TabBar</avm-nav-bar>
+		<scroll-view>
+			<DemoBlock title='基本用法' padding='0'>
+				<avm-tabbar>
+					<avm-tabbar-item
+						key="home"
+						title="首页"
+						icon={<text className={'icon-style'}>icon占位</text>}/>
+					<avm-tabbar-item
+						key="todo"
+						title="我的待办"
+						icon={<text className={'icon-style'}>icon占位</text>}/>
+					<avm-tabbar-item
+						key="message"
+						title="我的消息"
+						icon={<text className={'icon-style'}>icon占位</text>}/>
+					<avm-tabbar-item
+						key="personalCenter"
+						title="个人中心"
+						icon={<text className={'icon-style'}>icon占位</text>}/>
+				</avm-tabbar>
+			</DemoBlock>
+			<DemoBlock title='徽标' padding='0'>
+				<avm-tabbar>
+					<avm-tabbar-item
+						key="home"
+						title="首页"
+						isDot
+						icon={<text className={'icon-style'}>icon占位</text>}/>
+					<avm-tabbar-item
+						key="todo"
+						title="我的待办"
+						badgeContent={'5'}
+						icon={<text className={'icon-style'}>icon占位</text>}/>
+					<avm-tabbar-item
+						key="message"
+						title="我的消息"
+						badgeContent={'99+'}
+						icon={<text className={'icon-style'}>icon占位</text>}/>
+					<avm-tabbar-item
+						key="personalCenter"
+						title="个人中心"
+						isDot
+						icon={<text className={'icon-style'}>icon占位</text>}/>
+				</avm-tabbar>
+			</DemoBlock>
+			<DemoBlock title='仅图标' padding='0'>
+				<avm-tabbar>
+					<avm-tabbar-item key="home" icon={<text className={'icon-style'}>icon占位</text>}/>
+					<avm-tabbar-item key="todo" icon={<text className={'icon-style'}>icon占位</text>}/>
+					<avm-tabbar-item key="message" icon={<text className={'icon-style'}>icon占位</text>}/>
+					<avm-tabbar-item key="personalCenter" icon={<text className={'icon-style'}>icon占位</text>}/>
+				</avm-tabbar>
+			</DemoBlock>
+			<DemoBlock title='仅标题' padding='0'>
+				<avm-tabbar>
+					{{
+						tabs.map(item => {
+							return (
+								<avm-tabbar-item
+									key={item.key}
+									title={item.title}
+									badgeContent={item.badge}/>
+							)
+						})
+					}}
+				</avm-tabbar>
+			</DemoBlock>
+			<DemoBlock title='受控组件' padding='0'>
+				<avm-tabbar activeKey={activeKey} handleChange={this.setActiveKey}>
+					<avm-tabbar-item
+						key="home"
+						title="首页"
+						className={'icon-style'}
+						icon={<text className={'icon-style'}>icon占位</text>}/>
+					<avm-tabbar-item
+						key="todo"
+						title="我的待办"
+						icon={<text className={'icon-style'}>icon占位</text>}/>
+					<avm-tabbar-item
+						key="message"
+						title="我的消息"
+						icon={<text className={'icon-style'}>icon占位</text>}/>
+					<avm-tabbar-item
+						key="personalCenter"
+						title="个人中心"
+						icon={<text className={'icon-style'}>icon占位</text>}/>
+				</avm-tabbar>
+			</DemoBlock>
+		</scroll-view>
+	</safe-area>
+</template>
+<script>
+import '../../components/avm-ui/tab-bar'
+import '../../components/avm-ui/nav-bar'
+import Badge from '../../components/avm-ui/badge'
+import {DemoBlock} from '../../components/avm-ui/demos'
+
+const tabs = [
+	{
+		key: 'home',
+		title: '首页'
+	},
+	{
+		key: 'todo',
+		title: '我的待办'
+	},
+	{
+		key: 'message',
+		title: '我的消息'
+	},
+	{
+		key: 'personalCenter',
+		title: '个人中心'
+	},
+]
+
+export default {
+	name: 'demo-tabbar',
+	data() {
+		return{
+			activeKey: 'todo'
+		}
+	},
+	methods: {
+		back() {
+			api.closeWin();
+		},
+		setActiveKey(key) {
+			api.toast({
+				msg: key
+			})
+			this.data.activeKey = key
+		},
+		getIcon(key) {
+			return key === this.activeKey ? '../../image/select.png' : '../../image/unSelect.png'
+		}
+	}
+}
+</script>
+<style src="../../components/avm-ui/demos/index.css"/>
+<style>
+.page {
+	height: 100%;
+	width: 100%;
+	background: #f2f2f2;
+}
+.icon-style {
+	width: auto;
+	height: 20px;
+	font-size: 10px;
+	color: #999;
+}
+</style>

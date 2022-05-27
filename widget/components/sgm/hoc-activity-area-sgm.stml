@@ -1,0 +1,248 @@
+<!--首页活动专区-->
+<template>
+	<view class="index-activity-area">
+		<view class="activity-area-card">
+			<view class="activity-area-card-title">
+				<text class="activity-area-card-title-text">{{moduleTitle}}</text>
+				<view class="activity-area-card-morebtn" @click="clickMoreBtn">
+					<text class="activity-area-card-morebtn-text">{{moreText}}</text>
+					<image class="activity-area-card-morebtn-icon"
+						src="http://ae8b3ee28597856d3283.qiniucdn.apicloud-system.com/apicloud/c89316e175437ebce8f361ef3f9c3973.png"></image>
+				</view>
+			</view>
+			<!-- list -->
+			<view class="commodity-cards-wrapper">
+				<view class="commodity-card" v-for="(item, index) in productList" :key="index" @click="itemClick(item)">
+					<img :src="item.image" class="commodity-card-img" />
+					<view class="commodity-card-middle">
+						<text class="commodity-card-middle-title">{{item.title}}</text>
+						<view class="commodity-card-middle-num" v-if="showHot">
+							<img class="commodity-card-middle-num-img" :src="hotIcon" alt="hot" />
+							<text class="commodity-card-middle-num-price">{{fixBuynum(item.buy_num)}}</text>
+						</view>
+					</view>
+					<view class="commodity-card-bottom">
+						<text class="commodity-card-bottom-label">拼团价</text>
+						<text class="commodity-card-bottom-price-prefix">￥</text>
+						<text class="commodity-card-bottom-price">{{item.price}}</text>
+					</view>
+					<view class="commodity-card-tips">
+						<img class="commodity-card-tips-img"
+							src="http://ae8b3ee28597856d3283.qiniucdn.apicloud-system.com/apicloud/87ed37507c476817e86d9f6c51b9fed8.png" />
+						<text class="commodity-card-tips-text">{{item.pnumstr}}人团</text>
+					</view>
+				</view>
+			</view>
+		</view>
+	</view>
+</template>
+<script>
+export default {
+	name: 'hoc-activity-area-sgm',
+	apiready() {//like created
+
+	},
+	data() {
+		return {
+			moduleTitle: this.props.moduleTitle !== undefined ? this.props.moduleTitle : "活动推荐",
+			moreText: this.props.moreText !== undefined ? this.props.moreText : "更多",
+			showHot: this.props.showHot || false,
+			hotIcon: this.props.hotIcon !== undefined ? this.props.hotIcon : "http://ae8b3ee28597856d3283.qiniucdn.apicloud-system.com/apicloud/784e573cab94112b0e91f5c063fee14f.png",
+			productList: this.props.productList || [
+				{
+					"id": "e9fc85d0-d275-11ec-803a-9bb76ce20623",
+					"title": "测血压手环智能心率心脏血氧运动量体温定位",
+					"image": "http://a346b1014469c58049d5.qiniucdn.apicloud-system.com/apicloud/2fffadde6135dda7de6c7567a461c5af.png",
+					"price": 30.9,
+					"delprice": 50,
+					"buy_num": 30,
+					"images": "http://a346b1014469c58049d5.qiniucdn.apicloud-system.com/apicloud/2fffadde6135dda7de6c7567a461c5af.png",
+					"dw": "个",
+					"pnum": 3,
+					"images_show": [
+						"http://a346b1014469c58049d5.qiniucdn.apicloud-system.com/apicloud/2fffadde6135dda7de6c7567a461c5af.png"
+					],
+					"pnumstr": "三"
+				},
+				{
+					"id": "ac3abd20-d275-11ec-803a-9bb76ce20623",
+					"title": "NFC版全面彩屏支付30种运动模式心率检",
+					"image": "http://a346b1014469c58049d5.qiniucdn.apicloud-system.com/apicloud/746f329fbe1b3791e49072c8a05ec60e.png",
+					"price": 30.9,
+					"delprice": 40,
+					"buy_num": 451,
+					"images": "http://a346b1014469c58049d5.qiniucdn.apicloud-system.com/apicloud/746f329fbe1b3791e49072c8a05ec60e.png",
+					"dw": "个",
+					"pnum": 5,
+					"images_show": [
+						"http://a346b1014469c58049d5.qiniucdn.apicloud-system.com/apicloud/746f329fbe1b3791e49072c8a05ec60e.png"
+					],
+					"pnumstr": "五"
+				},
+				{
+					"id": "8839f8f0-d275-11ec-803a-9bb76ce20623",
+					"title": "配充电盒Apple蓝牙耳机",
+					"image": "http://a346b1014469c58049d5.qiniucdn.apicloud-system.com/apicloud/521010247ff5852fe77dff5a943e6d97.png",
+					"price": 30,
+					"delprice": 40,
+					"buy_num": 20,
+					"images": "http://a346b1014469c58049d5.qiniucdn.apicloud-system.com/apicloud/521010247ff5852fe77dff5a943e6d97.png",
+					"dw": "个",
+					"pnum": 3,
+					"images_show": [
+						"http://a346b1014469c58049d5.qiniucdn.apicloud-system.com/apicloud/521010247ff5852fe77dff5a943e6d97.png"
+					],
+					"pnumstr": "三"
+				}
+			]
+		}
+	},
+	methods: {
+		clickMoreBtn(goods) {
+			this.fire('clickMoreBtn')
+		},
+		itemClick(item) {
+			this.fire('clickGoodsItem', item)
+		}
+	}
+}
+</script>
+<style>
+.activity-area-card {
+	height: 100%;
+	background: #fff;
+}
+
+.activity-area-card-title {
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+	margin-top: 5px;
+	padding: 15px;
+	background-color: #fff;
+}
+
+.activity-area-card-title-text {
+	font-size: 20px;
+	height: 28px;
+	line-height: 28px;
+	font-weight: bold;
+	color: #6e552b;
+}
+
+.activity-area-card-morebtn {
+	flex-direction: row;
+	align-items: center;
+}
+
+.activity-area-card-morebtn-text {
+	font-size: 12px;
+	color: #8f8f8f;
+}
+
+.activity-area-card-morebtn-icon {
+	width: 10px;
+	height: 10px;
+}
+
+.index-activity-listbox {
+	background-color: #f8f8f8;
+}
+
+.commodity-cards-wrapper {
+	background: #f8f8f8;
+	padding: 0 16px;
+}
+.commodity-card {
+	position: relative;
+	margin-bottom: 16px;
+	background: #fff;
+	border-radius: 8px;
+	box-sizing: border-box;
+	/* box-shadow: 0 0 3px #e8e8e8; */
+}
+.commodity-card-img {
+	width: 100%;
+	height: 180px;
+	border-radius: 8px 8px 0 0;
+}
+.commodity-card-middle {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+	margin: 15px;
+}
+.commodity-card-middle-title {
+	flex: 1;
+	font-size: 16px;
+	font-weight: 600;
+	line-height: 22px;
+	color: #333;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+	margin-right: 12px;
+}
+.commodity-card-middle-num {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	padding: 1px 6px;
+	background: #fef8f4;
+	border-radius: 8px;
+	border: 1px solid #fe904a;
+	color: #fe904a;
+	font-size: 10px;
+}
+.commodity-card-middle-num-img {
+	width: 9px;
+	height: 11px;
+	margin-right: 3px;
+}
+.commodity-card-bottom {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	padding: 0 15px 15px;
+}
+.commodity-card-bottom-label {
+	flex: 1;
+	color: #ff7037;
+	font-size: 14px;
+}
+.commodity-card-bottom-price-prefix {
+	color: #ff7037;
+	font-size: 14px;
+}
+.commodity-card-bottom-price {
+	font-size: 28px;
+	font-weight: 500;
+	color: #ff7037;
+}
+.commodity-card-tips {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	position: absolute;
+	width: 52px;
+	height: 21px;
+	top: 15px;
+	left: 0;
+}
+.commodity-card-tips-img {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	font-size: 12px;
+	color: #000;
+	font-weight: 500;
+}
+.commodity-card-tips-text {
+	z-index: 999;
+	font-size: 12px;
+	color: #000;
+	font-weight: 500;
+}
+</style>

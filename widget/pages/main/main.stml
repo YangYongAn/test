@@ -1,0 +1,63 @@
+<template>
+	<safe-area>
+		<text class="demo-item" onclick="goto">dropdown</text>
+		<text class="demo-item" onclick="goto">button</text>
+		<text class="demo-item" onclick="goto">tree-select</text>
+		<text class="demo-item" onclick="goto">divider</text>
+		<text class="demo-item" onclick="goto">result</text>
+		<text class="demo-item" onclick="goto">empty</text>
+		<text class="demo-item" onclick="goto">nav-bar</text>
+		<text class="demo-item" onclick="goto">side-bar</text>
+		<text class="demo-item" onclick="goto">desense-text</text>
+		<text class="demo-item" onclick="goto">progress-bar</text>
+		<text class="demo-item" onclick="goto">action-sheet</text>
+		<text class="demo-item" onclick="goto">badge</text>
+		<text class="demo-item" onclick="goto">checkbox</text>
+		<text class="demo-item" onclick="goto">checklist</text>
+		<text class="demo-item" onclick="goto">collapse</text>
+		<text class="demo-item" onclick="goto">error-block</text>
+		<text class="demo-item" onclick="goto">grid</text>
+		<text class="demo-item" onclick="goto">image</text>
+		<text class="demo-item" onclick="goto">infinite-scroll</text>
+		<text class="demo-item" onclick="goto">input</text>
+		<text class="demo-item" onclick="goto">list</text>
+		<text class="demo-item" onclick="goto">notice-bar</text>
+		<text class="demo-item" onclick="goto">number-keyboard</text>
+		<text class="demo-item" onclick="goto">page-indicator</text>
+		<text class="demo-item" onclick="goto">popup</text>
+		<text class="demo-item" onclick="goto">radio</text>
+		<text class="demo-item" onclick="goto">rate</text>
+		<text class="demo-item" onclick="goto">search</text>
+		<text class="demo-item" onclick="goto">selector</text>
+		<text class="demo-item" onclick="goto">space</text>
+		<text class="demo-item" onclick="goto">stepper</text>
+		<text class="demo-item" onclick="goto">steps</text>
+		<text class="demo-item" onclick="goto">switch</text>
+		<text class="demo-item" onclick="goto">tab-bar</text>
+		<text class="demo-item" onclick="goto">tag</text>
+		<text class="demo-item" onclick="goto">textarea</text>
+		<text class="demo-item" onclick="goto">swiper</text>
+		<text class="demo-item" onClick="goto">image-uploader</text>
+	</safe-area>
+</template>
+
+
+<script>
+export default {
+	name: 'main',
+	goto(e) {
+		const demoName = e.target.attributes.text;
+		api.openWin({
+			name: demoName,
+			url: `../demo-${demoName}/demo-${demoName}.stml`
+		})
+	}
+}
+</script>
+
+
+<style scoped>
+.demo-item {
+	padding: 5px;
+}
+</style>

@@ -1,0 +1,38 @@
+<!--基础组件-->
+<template>
+<safe-area class="page">
+	<avm-nav-bar onBack={this.back}>RichText</avm-nav-bar>
+	<scroll-view :show-scrollbar="false" scroll-y>
+		<DemoBlock title='基础使用'>
+			<rich-text nodes={nodes}></rich-text>
+		</DemoBlock>
+	</scroll-view>
+</safe-area>
+</template>
+<script>
+import '../../components/avm-ui/nav-bar'
+import {DemoBlock} from '../../components/avm-ui/demos'
+export default {
+	name: 'avm-base-rich-text',
+	data() {
+		return {
+			nodes: ''
+		}
+	},
+	methods: {
+		back() {
+			api.closeWin();
+		},
+		apiready(){
+			this.data.nodes = `<p>This is <i><b>rich text</b></i>.</p>`;
+		}
+	}
+}
+</script>
+<style>
+.page {
+	width: 100%;
+	height: 100%;
+	background: #f2f2f2;
+}
+</style>

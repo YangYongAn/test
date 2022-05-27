@@ -1,0 +1,114 @@
+<template>
+	<safe-area class="page">
+		<avm-nav-bar onBack={this.back}>Radio</avm-nav-bar>
+		<scroll-view :show-scrollbar="false">
+			<DemoBlock title='基础用法'>
+				<avm-radio/>
+				<avm-radio>有描述的勾选框</avm-radio>
+				<avm-radio defaultChecked>默认选中</avm-radio>
+				<avm-radio defaultChecked disabled>禁用状态</avm-radio>
+			</DemoBlock>
+			<DemoBlock title='选项组'>
+				<avm-radio-group
+					value={this.data.value}
+					groupChange={(e) => this.handleChange(e)}>
+					<avm-radio value='apple' :checked="this.data.value === 'apple'">苹果</avm-radio>
+					<avm-radio value='orange' :checked="this.data.value === 'orange'">橘子</avm-radio>
+					<avm-radio value='banana' :checked="this.data.value === 'banana'">香蕉</avm-radio>
+				</avm-radio-group>
+			</DemoBlock>
+			<DemoBlock title='整组禁用'>
+				<avm-radio-group defaultValue='orange' disabled>
+					<avm-radio value='apple'>苹果</avm-radio>
+					<avm-radio value='orange'>橘子</avm-radio>
+					<avm-radio value='banana'>香蕉</avm-radio>
+				</avm-radio-group>
+			</DemoBlock>
+			<DemoBlock title='添加辅助描述信息默认展示状态'>
+				<avm-radio-group defaultValue='orange' groupChange={(e) => this.handleChange(e)}>
+					<avm-radio value='apple' description="辅助信息辅助信息辅助信息">苹果</avm-radio>
+					<avm-radio value='orange' description="辅助信息辅助信息辅助信息">橘子</avm-radio>
+					<avm-radio value='banana' description="辅助信息辅助信息辅助信息">香蕉</avm-radio>
+				</avm-radio-group>
+			</DemoBlock>
+			<DemoBlock title='添加辅助描述信息跟label信息展示在一行'>
+				<avm-radio-group defaultValue='orange' groupChange={(e) => this.handleChange(e)}>
+					<avm-radio value='apple' description="辅助信息" descIsOneLineShow>苹果</avm-radio>
+					<avm-radio value='orange' description="辅助信息" descIsOneLineShow>橘子</avm-radio>
+					<avm-radio value='banana' description="辅助信息" descIsOneLineShow>香蕉</avm-radio>
+				</avm-radio-group>
+			</DemoBlock>
+			<DemoBlock title='单选icon和label文本分布两头展示'>
+				<avm-radio-group defaultValue='orange' groupChange={(e) => this.handleChange(e)}>
+					<avm-radio value='apple' description="辅助信息" isTwoHeadArrange>苹果</avm-radio>
+					<avm-radio value='orange' description="辅助信息" isTwoHeadArrange>橘子</avm-radio>
+					<avm-radio value='banana' description="辅助信息" isTwoHeadArrange>香蕉</avm-radio>
+				</avm-radio-group>
+			</DemoBlock>
+			<DemoBlock title='自定义 icon'>
+				<avm-radio-group
+					:value="value"
+					groupChange={(e) => this.handleChange(e)}>
+					<avm-radio
+						value='radio1'
+						icon={<text className={'icon-style'}>未选中</text>}
+						selectedIcon={<text className={'icon-style icon-style-checked'}>选中</text>}
+					>单选框一</avm-radio>
+					<avm-radio
+						value='radio2'
+						icon={<text className={'icon-style'}>未选中</text>}
+						selectedIcon={<text className={'icon-style icon-style-checked'}>选中</text>}
+					>单选框二</avm-radio>
+				</avm-radio-group>
+			</DemoBlock>
+			<DemoBlock title='自定义大小'>
+				<avm-radio iconSize="18px" fontSize="14px" gap="8px">小号的勾选框</avm-radio>
+			</DemoBlock>
+		</scroll-view>
+	</safe-area>
+</template>
+<script>
+import '../../components/avm-ui/radio'
+import '../../components/avm-ui/nav-bar'
+import {DemoBlock} from '../../components/avm-ui/demos'
+export default {
+	name: 'demo-radio',
+	data() {
+		return{
+			value: ''
+		}
+	},
+	methods: {
+		back() {
+			api.closeWin();
+		},
+		handleClick() {
+			api.toast({
+				msg: '点击啦'
+			})
+		},
+		handleChange(val) {
+			api.toast({
+				msg: val
+			})
+		}
+	}
+}
+</script>
+<style src="../../components/avm-ui/demos/index.css"/>
+<style>
+.page {
+	height: 100%;
+	width: 100%;
+	background: #f2f2f2;
+	padding: 0 16px;
+}
+.icon-style {
+	width: 50px;
+	font-size: 12px;
+	color: #666;
+}
+.icon-style-checked {
+	color: #0f0;
+}
+</style>

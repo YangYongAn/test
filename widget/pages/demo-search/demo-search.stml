@@ -1,0 +1,95 @@
+<template>
+	<safe-area class="page">
+		<avm-nav-bar onBack={this.back}>Search</avm-nav-bar>
+		<scroll-view>
+			<DemoBlock title='基础用法'>
+				<avm-search placeholder='请输入内容' value="123"/>
+			</DemoBlock>
+			<DemoBlock title='带取消按钮的搜索框'>
+				<avm-search placeholder='请输入内容' showCancelButton  handleChange={val => this.onChange(val)}/>
+			</DemoBlock>
+			<DemoBlock title='取消按钮长显'>
+				<avm-search placeholder='请输入' cancelText="取消" cancelTextColor='#9AC200' showCancelButton={() => true} handleChange={val => this.onChange(val)}/>
+			</DemoBlock>
+			<DemoBlock title='事件监听和 Ref'>
+				<avm-space block direction='vertical'>
+				<avm-search
+					placeholder='请输入内容'
+					showCancelButton
+					inputFocus={() => this.onFocus()}
+					inputBlur={() => this.onBlur()}
+					handleClear={() => this.onClear()}
+					handleCancel={() => this.onCancel()}
+					/>
+				</avm-space>
+			</DemoBlock>
+			<DemoBlock title='自定义样式'>
+				<avm-search
+				placeholder='请输入内容'
+				showCancelButton
+				borderRadius="100px"
+				bgColor="#f5f5f5"
+				placeholderColor="#f00"
+				/>
+			</DemoBlock>
+		</scroll-view>
+	</safe-area>
+</template>
+<script>
+import '../../components/avm-ui/search'
+import '../../components/avm-ui/nav-bar'
+import '../../components/avm-ui/button'
+import '../../components/avm-ui/space'
+import {DemoBlock} from '../../components/avm-ui/demos'
+export default {
+	name: 'demo-search',
+	data() {
+		return{
+			value: ''
+		}
+	},
+	methods: {
+		back() {
+			api.closeWin();
+		},
+		handleClick(e) {
+			api.toast({
+				msg: JSON.stringify(e),
+				location: 'middle'
+			})
+		},
+		onChange(val) {
+			this.data.value = val
+		},
+		onFocus() {
+			api.toast({
+				msg:'获得焦点'
+			})
+		},
+		onBlur() {
+			api.toast({
+				msg:'失去焦点'
+			})
+		},
+		onClear() {
+			api.toast({
+				msg:'清空内容'
+			})
+		},
+		onCancel() {
+			api.toast({
+				msg:'取消搜索'
+			})
+		}
+	}
+}
+</script>
+<style src="../../components/avm-ui/demos/index.css"/>
+<style>
+.page {
+	height: 100%;
+	width: 100%;
+	background: #f2f2f2;
+	padding: 0 16px;
+}
+</style>

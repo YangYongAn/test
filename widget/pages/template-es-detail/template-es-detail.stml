@@ -1,0 +1,27 @@
+<template>
+    <view class="page">
+        <hoc-nav-bar-es msg="案例详情" isBack />
+        <hoc-info-title-es />
+        <hoc-info-detail-es/>
+    </view>
+</template>
+<script>
+import '../../components/es/hoc-nav-bar-es.stml'
+import '../../components/es/hoc-info-title-es.stml';
+import '../../components/es/hoc-info-detail-es.stml';
+export default {
+    name: 'template-es-detail',
+    apiready() { //like created
+    },
+    data() {
+        return {};
+    },
+    methods: {}
+};
+</script>
+<style>
+.page {
+    height: 100%;
+    background-color: #f8f8f8;
+}
+</style>

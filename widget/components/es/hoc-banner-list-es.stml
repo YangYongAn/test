@@ -1,0 +1,56 @@
+<template>
+	<view class="banner">
+		<view class="swiper-box">
+			<swiper class="swiper" autoplay indicator-dots indicator-color="rgba(255,255,255,0.2)"
+				indicator-active-color="rgba(51,51,51,1)">
+				<swiper-item v-for="(item_,index_) in list" data-index={index_}>
+					<image src={item_} class="banner-image" mode="aspectFill"></image>
+				</swiper-item>
+			</swiper>
+		</view>
+
+	</view>
+</template>
+<script>
+export default {
+	name: 'hoc-banner-list-es',
+	props: {
+		list: {
+			type: Array,
+			defalut: function () {
+				return []
+			}
+		}
+	},
+	data(){
+		return {
+			list:this.props.list || [
+                "http://ae8b3ee28597856d3283.qiniucdn.apicloud-system.com/apicloud/c44fc5c4b158c96b414f55ac12562be2.png",
+                "http://a3a17abb08c7cc355eb5.qiniucdn.apicloud-system.com/apicloud/aae0244b645bcf2b0ea70dfde8da8e47.png",
+                "http://a3a17abb08c7cc355eb5.qiniucdn.apicloud-system.com/apicloud/d6f008eb12663454510e42dbe3038e7b.png"
+            ]
+		}
+	},
+	computed: {
+		swiperHeight() {
+			return api.winWidth * 0.42;
+		}
+	}
+}
+</script>
+<style>
+.swiper-box {
+	width: 100%;
+	height: 148px;
+	margin: 12px 0;
+}
+.swiper {
+	width: 100%;
+	height: 100%;
+	border-radius: 8px;
+}
+.banner-image {
+	width: 100%;
+	height: 148px;
+}
+</style>

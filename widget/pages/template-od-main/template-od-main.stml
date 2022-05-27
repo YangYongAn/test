@@ -1,0 +1,134 @@
+<template name='tpl'>
+    <view class="page">
+        <!-- 顶部导航 -->
+        <hoc-nav-bar-od msg='首页' />
+        <scroll-view scroll-y :show-scrollbar="false">
+            <!-- 搜索 -->
+            <hoc-search-bar-od :placeholder='placeholder' />
+            <!-- banner -->
+            <hoc-banner-list-od :list='bannerList' />
+            <!-- 分类列表 -->
+            <hoc-sort-list-od :list='sortList' />
+            <!-- 商品列表纵向 -->
+            <hoc-good-list-lt-od :list='goodsList' :title="title" />
+            <!-- 商品列表横向 -->
+            <hoc-good-list-gr-od :list='goodsList1' title="精品推荐" />
+        </scroll-view>
+    </view>
+</template>
+<script>
+import '../../components/od/hoc-nav-bar-od.stml';
+import '../../components/od/hoc-search-bar-od.stml';
+import '../../components/od/hoc-banner-list-od.stml';
+import '../../components/od/hoc-sort-list-od.stml';
+import '../../components/od/hoc-good-list-lt-od.stml';
+import '../../components/od/hoc-good-list-gr-od.stml';
+export default {
+    name: 'template-od-main',
+    data() {
+        return {
+            placeholder: "请输入商品名称",
+            // 轮播图
+            bannerList: [
+				{
+					"icon": "http://ae8b3ee28597856d3283.qiniucdn.apicloud-system.com/apicloud/3794f574251ab98366a921c0913b3cdc.png"
+				},
+				{
+					"icon": "http://aea8bc2ccdd582de43c1.qiniucdn.apicloud-system.com/apicloud/74f3bc9acdac7fc7554869f7011848df.png"
+				},
+				{
+					"icon": "http://aea8bc2ccdd582de43c1.qiniucdn.apicloud-system.com/apicloud/1d4e6036e2742d1500dfa7c6b0d65e84.png"
+				}
+			],
+            // 分类列表
+            sortList: [{
+                "id": "f4aaeef0-caf6-11ea-8523-0da8a6a49497",
+                "name": "连衣裙",
+                "icon": "http://ae8b3ee28597856d3283.qiniucdn.apicloud-system.com/apicloud/e2eeaa09375067448a2389831afdfafe.png"
+            }, {
+                "id": "fc084f30-caf6-11ea-8523-0da8a6a49497",
+                "name": "衬衫",
+                "icon": "http://ae8b3ee28597856d3283.qiniucdn.apicloud-system.com/apicloud/5cc9c8a23f3b3f039b8584f73c0fb338.png"
+            }, {
+                "id": "1ff38f90-caf7-11ea-8523-0da8a6a49497",
+                "name": "半身裙",
+                "icon": "http://ae8b3ee28597856d3283.qiniucdn.apicloud-system.com/apicloud/07e8b3a6970cac4bd001b47e22526df6.png"
+            }, {
+                "id": "418835c0-caf7-11ea-8523-0da8a6a49497",
+                "name": "针织衫",
+                "icon": "http://ae8b3ee28597856d3283.qiniucdn.apicloud-system.com/apicloud/3869e031b7cf08f0150171c85ea155c1.png"
+            }],
+            // 商品列表标题
+            title: "活动专区",
+            // 商品列表
+            goodsList: [{
+                id: "1",
+                title: "莫代尔无袖吊带连衣裙春秋侧开叉长裙女夏季内搭修身显瘦打底裙子",
+                image: "http://ae8b3ee28597856d3283.qiniucdn.apicloud-system.com/apicloud/7a6f4bb167b352d84a884fcc93c5442e.png",
+                price: 6999,
+                buy_num: 39000,
+                delprice: 7299
+            }, {
+                id: "2",
+                title: "夏新款套装女洋气时尚短裤阔腿裤两件套小个子夏装搭配显高",
+                image: "http://ae8b3ee28597856d3283.qiniucdn.apicloud-system.com/apicloud/d8a697c7e8cf71516074cefde7466e12.png",
+                price: 629,
+                buy_num: 666,
+                delprice: 1236
+            }, {
+                id: "3",
+                title: "2020夏新款韩版连衣裙女收腰显瘦显高A字裙气质法式",
+                image: "http://ae8b3ee28597856d3283.qiniucdn.apicloud-system.com/apicloud/c6f60b449d9112c4aac0b681da880526.png",
+                price: 1299,
+                buy_num: 200,
+                delprice: 2199
+            }, {
+                id: "4",
+                title: "港风套装女复古chic减龄短袖 ins复古穿搭",
+                image: "http://ae8b3ee28597856d3283.qiniucdn.apicloud-system.com/apicloud/6d5eb36bc7afa77efcc6356f021b7625.png",
+                price: 1998,
+                buy_num: 1234,
+                delprice: 2666
+            }],
+            goodsList1: [{
+                id: "1",
+                title: "吊带连衣裙女2020夏季新款夏季雪纺上衣真…",
+                image: "http://ae8b3ee28597856d3283.qiniucdn.apicloud-system.com/apicloud/19e25045ec08361d583a31be8ab2270a.png",
+                price: 399,
+                buy_num: 39000,
+                delprice: 7299
+            }, {
+                id: "2",
+                title: "港风套装女复古chic减龄短袖",
+                image: "http://ae8b3ee28597856d3283.qiniucdn.apicloud-system.com/apicloud/02a33b94f3856b401bc8153ecac56385.png",
+                price: 299,
+                buy_num: 666,
+                delprice: 1236
+            }, {
+                id: "3",
+                title: "休闲时尚套装女夏裤子洋气可盐可甜",
+                image: "http://ae8b3ee28597856d3283.qiniucdn.apicloud-system.com/apicloud/e7754353993fee1251b4b07f6ed60cf5.png",
+                price: 369,
+                buy_num: 200,
+                delprice: 2199
+            }, {
+                id: "4",
+                title: "时尚短裤阔腿裤两件套",
+                image: "http://ae8b3ee28597856d3283.qiniucdn.apicloud-system.com/apicloud/5b5e1dab45b0d7c9850bffb1d693e92c.png",
+                price: 329,
+                buy_num: 1234,
+                delprice: 2666
+            }]
+        };
+    }
+};
+</script>
+<style>
+.page {
+    /* height: 100%; */
+    background-color: white;
+}
+scroll-view {
+    height: 100%;
+}
+</style>

@@ -1,0 +1,59 @@
+<widget id="A6183702447528" version="0.0.1">
+
+	<content src="entry.json"/>
+
+	<name>AVM-UI</name>
+
+	<description>Example For APICloud.</description>
+
+	<author email="developer@apicloud.com" href="http://www.apicloud.com">Developer</author>
+
+	<access origin="*"/>
+
+	<preference name="avm" value="true"/>
+
+	<preference name="android_abi" value="arm64-v8a"/>
+
+	<preference name="pageBounce" value="false"/>
+
+	<preference name="appBackground" value="#FFF"/>
+
+	<preference name="windowBackground" value="rgba(0,0,0,0.0)"/>
+
+	<preference name="frameBackgroundColor" value="rgba(0,0,0,0.0)"/>
+
+	<preference name="hScrollBarEnabled" value="false"/>
+
+	<preference name="vScrollBarEnabled" value="false"/>
+
+	<preference name="autoLaunch" value="true"/>
+
+	<preference name="fullScreen" value="false"/>
+
+	<preference name="autoUpdate" value="true"/>
+
+	<preference name="smartUpdate" value="true"/>
+
+	<preference name="debug" value="true"/>
+
+	<preference name="statusBarAppearance" value="true"/>
+
+	<preference name="font" family="avm-icon" value="widget/components/avm-ui/icon/avm-icon.ttf"/>
+
+	<permission name="readPhoneState"/>
+
+	<permission name="camera"/>
+
+	<permission name="record"/>
+
+	<permission name="location"/>
+
+	<permission name="fileSystem"/>
+
+	<permission name="internet"/>
+
+	<permission name="bootCompleted"/>
+
+	<permission name="hardware"/>
+
+</widget>

@@ -1,0 +1,68 @@
+<template>
+	<safe-area class="template-sgm">
+		<view class="sgm-tab-bar" >
+			<hoc-tab-bar-sgm @tabClick="tabClick"/>
+		</view>
+	</safe-area>
+</template>
+<script>
+import '../../components/sgm/hoc-tab-bar-sgm.stml'
+export default {
+	name: 'template-sgm',
+	apiready() {//like created
+		this.openFrameGroup()
+	},
+	data() {
+		return {
+
+		}
+	},
+	methods: {
+		tabClick(data) {
+			this.setFrameGroupIndex(data.detail.index)
+		},
+		setFrameGroupIndex(index) {
+			api.setFrameGroupIndex({
+				name: 'main-template-sgm',
+				index
+			})
+		},
+		openFrameGroup() {
+			api.openFrameGroup({
+				name: 'main-template-sgm',
+				scrollEnabled: false,
+				background: '#fff',
+				rect: {
+					matginTop: 0,
+					marginBottom: 70
+				},
+				frames: [{
+					name: 'template-sgm-main',
+					url: '../template-sgm-main/template-sgm-main.stml'
+				}, {
+					name: 'template-sgm-sort',
+					url: '../template-sgm-sort/template-sgm-sort.stml'
+				}, {
+					name: 'template-sgm-personal_data',
+					url: '../template-sgm-personal_data/template-sgm-personal_data.stml'
+				}]
+			}, (ret, err) => {
+				var index = ret.index;
+				this.setFrameGroupIndex(index)
+			});
+		}
+	}
+}
+</script>
+<style>
+.template-sgm {
+	width: 100%;
+	height: 100%;
+	background: #fff;
+}
+.sgm-tab-bar {
+	width: 100%;
+	position: absolute;
+	bottom: 16px;
+}
+</style>

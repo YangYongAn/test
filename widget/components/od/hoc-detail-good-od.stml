@@ -1,0 +1,61 @@
+<template>
+	<view class="detail-good">
+		<view class="goods_details_box">
+			<view class="goods_detail_desc">
+				<view class="left_line"></view>
+				<text class="left_zi color_1">商品详情</text>
+			</view>
+			<rich-text nodes={html_detail}></rich-text>
+		</view>
+	</view>
+</template>
+<script>
+export default {
+	name: 'hoc-detail-good-od',
+	props: {
+		html_detail: {
+			type: String,
+			default: ''
+		}
+	},
+	apiready() {//like created
+
+	},
+	data() {
+		return {
+			html_detail:this.props.html_detail || "<p><img style=\"width:100%;\" src=\"https://img.alicdn.com/imgextra/i1/2647621085/O1CN01NyvAmy1JsyJmYJVrU_!!2647621085.jpg\" /></p>\n<p><img style=\"width:100%;\" src=\"https://img.alicdn.com/imgextra/i2/2647621085/O1CN016Bwwo91JsyE6YvQMj_!!2647621085.jpg\" /></p>\n<p><img style=\"width:100%;\" src=\"https://img.alicdn.com/imgextra/i3/2647621085/O1CN013XtO4D1JsyE5ISJhd_!!2647621085.jpg\" /></p>"
+		}
+	},
+	methods: {
+
+	}
+}
+</script>
+<style scoped>
+.goods_details_box {
+	margin-top: 8px;
+	background-color: white;
+	padding: 0 15px 10px;
+}
+.goods_detail_desc {
+	flex-direction: row;
+	align-items: center;
+	height: 52px;
+	border-bottom: 1px solid #f8f8f8;
+}
+.left_line {
+	width: 3px;
+	height: 14px;
+	border-radius: 2px;
+	background-color: #fe904a;
+}
+.left_zi {
+	font-size: 16px;
+	font-weight: bold;
+	color: #333;
+	margin-left: 8px;
+}
+.goods_rich {
+	margin-top: 10px;
+}
+</style>

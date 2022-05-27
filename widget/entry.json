@@ -1,0 +1,53 @@
+{
+  "name": "root",
+  "tabBar": {
+    "color": "#888",
+    "selectedColor": "#9AC200",
+    "scrollEnabled": false,
+    "textOffset": 6,
+    "frames": [
+      {
+        "title": "AVM组件",
+        "name": "avm",
+        "url": "widget://pages/main-avm/main-avm.stml"
+      },
+      {
+        "title": "多端API",
+        "name": "api",
+        "url": "widget://pages/main-api/main-api.stml"
+      },
+      {
+        "title": "原生模块",
+        "name": "module",
+        "url": "widget://pages/main-module/main-module.stml"
+      },
+      {
+        "title": "应用模板",
+        "name": "template",
+        "url": "widget://pages/main-template/main-template.stml"
+      }
+    ],
+    "list": [
+      {
+        "text": "AVM组件",
+        "iconPath": "widget://image/icon_tab_avm.png",
+        "selectedIconPath": "widget://image/icon_tab_avm_.png"
+      },
+      {
+        "text": "多端API",
+        "iconPath": "widget://image/icon_tab_api.png",
+        "selectedIconPath": "widget://image/icon_tab_api_.png"
+      },
+      {
+        "text": "原生模块",
+        "iconPath": "widget://image/icon_tab_module.png",
+        "selectedIconPath": "widget://image/icon_tab_module_.png"
+      },
+      {
+        "text": "应用模板",
+        "iconPath": "widget://image/icon_tab_template.png",
+        "selectedIconPath": "widget://image/icon_tab_template_.png"
+      }
+    ]
+  }
+}

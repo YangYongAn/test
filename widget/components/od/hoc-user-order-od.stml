@@ -1,0 +1,119 @@
+<template>
+	<view class="user-order">
+		<view class="content_item_box">
+			<view class="title_box">
+				<text class="title_zi">我的订单</text>
+				<image class="title_gor"
+					src="http://ae8b3ee28597856d3283.qiniucdn.apicloud-system.com/apicloud/c89316e175437ebce8f361ef3f9c3973.png" />
+			</view>
+			<view class="user_btn_box">
+				<view class="user_btn" @click="fnOrderList" v-for="(item,index) in list" data-type={item.type}>
+					<image class="btn_icon" src={item.icon}></image>
+					<text class="btn_zi">{item.title}</text>
+					<text v-if="active !='' && active == index" class={active==index ? 'user_red' :''}>{ num }</text>
+				</view>
+			</view>
+		</view>
+	</view>
+</template>
+<script>
+export default {
+	name: 'hoc-user-order-od',
+	apiready() {//like created
+
+	},
+	data() {
+		return {
+			list: this.props.list || [{
+				icon: 'http://ae8b3ee28597856d3283.qiniucdn.apicloud-system.com/apicloud/9fbf5ccbba59d2aec005d6d7c3cebaaf.png',
+				title: '待付款',
+				type: 1
+			}, {
+				icon: 'http://ae8b3ee28597856d3283.qiniucdn.apicloud-system.com/apicloud/36e74ff9f2825539ceb2ce5b8381c7aa.png',
+				title: '待发货',
+				type: 2
+			}, {
+				icon: 'http://ae8b3ee28597856d3283.qiniucdn.apicloud-system.com/apicloud/f54bf534bb3ce4419549e9fae82a0eb7.png',
+				title: '待收货',
+				type: 4
+			}, {
+				icon: 'http://ae8b3ee28597856d3283.qiniucdn.apicloud-system.com/apicloud/e3170f85fbe046f40c60103de203490c.png',
+				title: '已完成',
+				type: 5
+			}, {
+				icon: 'http://ae8b3ee28597856d3283.qiniucdn.apicloud-system.com/apicloud/b30dc501219d390d06de8ea751138207.png',
+				title: '售后',
+				type: 0
+			}],
+			active: this.props.active || "",
+			num: this.props.num || "1"
+		}
+	},
+	methods: {
+		fnOrderList(){
+			api.openWin({
+				name: 'order_list',
+				url:'widget://pages/template-od-order_list/template-od-order_list'
+			})
+		}
+	}
+}
+</script>
+<style scoped>
+.user-order {
+	margin: -40px 15px 0 15px;
+}
+.content_item_box {
+	border-radius: 4px;
+	background-color: white;
+	margin-bottom: 10px;
+	padding: 0 10px;
+}
+/* order */
+.title_box {
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	border-bottom: 1px solid #f8f8f8;
+	height: 40px;
+}
+.title_gor {
+	width: 10px;
+	height: 10px;
+}
+.title_zi {
+	font-size: 14px;
+	color: #333333;
+	font-weight: bold;
+}
+.user_btn_box {
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-around;
+	height: 80px;
+}
+.user_btn {
+	align-items: center;
+}
+.btn_icon {
+	width: 24px;
+	height: 24px;
+}
+.btn_zi {
+	font-size: 12px;
+	color: #333333;
+}
+.user_red {
+	position: absolute;
+	height: 12px;
+	line-height: 12px;
+	text-align: center;
+	font-size: 11px;
+	background-color: red;
+	color: #fff;
+	border-radius: 6px;
+	right: 0;
+	top: -6px;
+	padding: 0 3px;
+}
+</style>

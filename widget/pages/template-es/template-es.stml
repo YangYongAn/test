@@ -1,0 +1,68 @@
+<template>
+	<safe-area class="template-es">
+		<view class="es-tab-bar" >
+			<hoc-tab-bar-es @tabClick="tabClick"/>
+		</view>
+	</safe-area>
+</template>
+<script>
+import '../../components/es/hoc-tab-bar-es.stml'
+export default {
+	name: 'template-es',
+	apiready() {//like created
+		this.openFrameGroup()
+	},
+	data() {
+		return {
+
+		}
+	},
+	methods: {
+		tabClick(data) {
+			this.setFrameGroupIndex(data.detail)
+		},
+		setFrameGroupIndex(index) {
+			api.setFrameGroupIndex({
+				name: 'main-template-es',
+				index
+			})
+		},
+		openFrameGroup() {
+			api.openFrameGroup({
+				name: 'main-template-es',
+				scrollEnabled: false,
+				background: '#fff',
+				rect: {
+					matginTop: 0,
+					marginBottom: 90
+				},
+				frames: [{
+					name: 'template-es-main',
+					url: '../template-es-main/template-es-main.stml'
+				}, {
+					name: 'template-es-case',
+					url: '../template-es-case/template-es-case.stml'
+				}, {
+					name: 'template-es-join',
+					url: '../template-es-join/template-es-join.stml'
+				}]
+			}, (ret, err) => {
+				var index = ret.index;
+				this.setFrameGroupIndex(index)
+			});
+		}
+	}
+}
+</script>
+<style>
+.template-es {
+	width: 100%;
+	height: 100%;
+	background: #fff;
+}
+.es-tab-bar {
+	width: 100%;
+	position: absolute;
+	bottom: 16px;
+}
+</style>

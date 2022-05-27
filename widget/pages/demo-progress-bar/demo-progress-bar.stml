@@ -1,0 +1,79 @@
+<template>
+	<safe-area>
+		<NavBar onBack={this.back}>avm-progress-bar</NavBar>
+		<DemoBlock title='基本用法'>
+			<view class="space">
+				<Button color='primary' disabled={this.data.disabled} onClick={this.setPercent.bind(this,10)}>
+					进度+10
+				</Button>
+				<Button class="btn" color='primary' fill='outline' onClick={this.resetPercent}>
+					重置
+				</Button>
+			</view>
+			<avm-progress-bar percent={this.data.percent} />
+		</DemoBlock>
+		<DemoBlock title='指定线条宽度'>
+			<Space direction='vertical' block>
+				<avm-progress-bar percent={75} trackWidth={2} />
+				<avm-progress-bar percent={75} trackWidth={5} />
+				<avm-progress-bar percent={75} trackWidth={20} />
+			</Space>
+		</DemoBlock>
+		<DemoBlock title='指定颜色'>
+			<avm-progress-bar percent={60} trackColor='rgb(154, 194, 0)' fillColor='pink' />
+		</DemoBlock>
+	</safe-area>
+</template>
+
+<style src="../../components/avm-ui/button/index.css"/>
+<style src="../../components/avm-ui/nav-bar/index.css"/>
+<style src="../../components/avm-ui/progress-bar/index.css"/>
+<style src="../../components/avm-ui/demos/index.css"/>
+<style src="../../components/avm-ui/space/index.css"/>
+<style src="../../components/avm-ui/demos/index.css"/>
+<style>
+.adm-progress-bar-trail {
+	margin-top: 20px;
+}
+</style>
+<script>
+import { DemoBlock } from '../../components/avm-ui/demos'
+import  '../../components/avm-ui/progress-bar'
+import Badge from '../../components/avm-ui/badge'
+import NavBar from '../../components/avm-ui/nav-bar'
+import Space from '../../components/avm-ui/space'
+import Button from '../../components/avm-ui/button'
+
+export default {
+
+	name: 'demo-progress-bar',
+	data() {
+		return {
+			disabled: false,
+			percent: 10
+		}
+	},
+	methods: {
+		setPercent(val) {
+			this.data.percent += val
+		},
+		resetPercent() {
+			this.data.percent = 0
+		},
+		back() {
+			api.closeWin();
+		}
+	}
+
+}
+</script>
+<style scoped>
+.space{
+	display: flex;
+	flex-direction: row;
+	width: 100%;	
+}
+.adm-button {
+	margin-right: 20px;
+}
+</style>

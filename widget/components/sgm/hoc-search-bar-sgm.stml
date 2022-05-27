@@ -1,0 +1,87 @@
+<!--首页-搜索框-->
+<template>
+    <view class="search-bar" @click="searchClick">
+		<view class="search-bar-inner">
+			<img src="http://ae8b3ee28597856d3283.qiniucdn.apicloud-system.com/apicloud/e8ef34b317414172d61a612451b01b78.png" alt="search" class="search-bar-inner-icon"/>
+			<input
+				:placeholder="this.props.placeholder !== undefined ? this.props.placeholder : '请输入商品名称'"
+				type="text"
+				@input="handleInput"
+				class="search-bar-inner-input"
+				v-if="!this.props.isClick"/>
+			<text class="search-bar-inner-input search-bar-inner-placeholder" v-else>{{this.props.placeholder !== undefined ? this.props.placeholder : '请输入商品名称'}}</text>
+		</view>
+		<text @click="handleCancel" class="search-bar-cancel-text" v-if="this.props.isCancel">取消</text>
+    </view>
+</template>
+<script>
+export default {
+	name: 'hoc-search-bar-sgm',
+	apiready(){//like created
+
+	},
+	data() {
+		return{
+
+		}
+	},
+	methods: {
+		handleInput(e) {
+			this.fire('handleInput', e.detail.value)
+		},
+		handleCancel() {
+			api.toast({
+				msg: '点击取消按钮了!'
+			})
+			this.fire('handleCancel')
+		},
+		searchClick() {
+			this.fire('searchClick')
+		}
+	}
+}
+</script>
+<style>
+.search-bar {
+	z-index: 999;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	height: 44px;
+	background-color: #fff;
+	border-bottom: 1px solid #f8f8f8;
+	margin: 0 15px;
+	padding: 8px 0;
+}
+.search-bar-inner {
+	flex: 1;
+	height: 30px;
+	background: #f5f5f5;
+	border-radius: 15px;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	padding: 0 13px;
+}
+.search-bar-inner-icon {
+	width: 12px;
+    height: 12px;
+    margin-right: 6px;
+}
+.search-bar-inner-input {
+	flex: 1;
+    font-size: 12px;
+    line-height: 17px;
+	color: #333;
+	background: transparent;
+	border: none;
+}
+.search-bar-cancel-text {
+	color: #666;
+    font-size: 12px;
+	margin-left: 15px;
+}
+.search-bar-inner-placeholder {
+	color: #999;
+}
+</style>

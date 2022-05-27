@@ -1,0 +1,46 @@
+<template>
+	<view class="sotr-content">
+		<view class="sc-content-item" v-for="(item,index) in list" id={'content'+item.id}>
+			<text class="sc-content-title">{item.title}</text>
+			<rich-text nodes={item.content} />
+		</view>
+	</view>
+</template>
+<script>
+export default {
+	name:"hoc-sort-content-es",
+	props: {
+		list: {
+			type: Array,
+			default: function () {
+				return []
+			}
+		}
+	},
+	data(){
+		return {
+			list:this.props.list || [
+					{
+					   "id": "1",
+					   "title": "代理政策",
+					   "content":"<div class=\"p1\" style=\"margin-top: 0; \"><span style=\"color: #6d6d6d; font-size: 14px; line-height: 24px; display: block; \">丹东凤凰山自古有辽东第一山的美誉。常年吸引全国各地游客前来观赏。山上的泉水清甜甘洌，是大自然对于小镇市民最好的馈赠。而老毕纯粮就坐落在凤凰山脚下，坚持纯粮酿造，借凤凰山名号可以作为特产出售。我们不生产酒，我们只是大自然的搬运工。</span></div>\n<div class=\"p1\" style=\"margin-top: 0; \"><span style=\"color: #6d6d6d; font-size: 14px; line-height: 24px; display: block; \">茶叶源于中国，茶叶最早是被作为祭品使用的。但从春秋后期就被人们作为菜食，在西汉中期发展为药用，西汉后期才发展为宫廷高级饮料，普及民间作为普通饮料那是西晋以后的事。</span></div>\n<div class=\"p1\" style=\"margin-top: 0; \"><span style=\"color: #6d6d6d; font-size: 14px; line-height: 24px; display: block; \"><img style=\"width: 100%;\" src=\"http://ae8b3ee28597856d3283.qiniucdn.apicloud-system.com/apicloud/088027e418a92d499df3067228bcd536.png\" /></span></div>\n<div class=\"p1\" style=\"margin-top: 0; \"><span style=\"color: #6d6d6d; font-size: 14px; line-height: 24px; display: block; \">中国目前白酒市场上，至少有60%-70%的白酒属于非纯粮酿造的酒精勾兑酒。尽管国家允许白酒生产使用食用酒精，但添加食用酒精勾兑与纯粮酿造酒成本悬殊至少在2倍以上，然而许多白酒企业却“用而不标”。</span></div>"
+					 }
+				   ]
+		}
+	}
+}
+</script>
+<style scoped>
+.sotr-content {
+	padding: 10px 15px;
+	background-color: #fff;
+	top: -9px;
+}
+.sc-content-title {
+	font-weight: 500;
+	padding: 10px 0;
+	font-size: 16px;
+  	color: #333;
+	display: block;
+}
+</style>

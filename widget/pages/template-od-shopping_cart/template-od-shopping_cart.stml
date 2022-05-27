@@ -1,0 +1,69 @@
+<template>
+	<view class="page">
+		<!-- 顶部导航 -->
+		<hoc-nav-bar-od msg="购物车" isBack />
+		<!-- 顶部title -->
+		<hoc-shopping-header-od />
+		<!-- 购物车列表 -->
+		<hoc-shopping-list-od :list="cartList" />
+		<!-- 结算底部 -->
+		<hoc-shopping-footer-od />
+	</view>
+</template>
+<script>
+import '../../components/od/hoc-nav-bar-od.stml';
+import '../../components/od/hoc-shopping-header-od.stml';
+import '../../components/od/hoc-shopping-list-od.stml';
+import '../../components/od/hoc-shopping-footer-od.stml';
+export default {
+	name: 'template-od-shopping_cart',
+	apiready() { //like created
+	},
+	data() {
+		return {
+			cartList: [
+				{
+					"key": "S",
+					"buynum": 1,
+					"id": "6117fcc80-d2f4-11ea-a0bc-bd616acc739c",
+					"title": "港风套装女复古chic减龄短袖 ins复古穿搭",
+					"image":
+						"http://ae8b3ee28597856d3283.qiniucdn.apicloud-system.com/apicloud/3ee90482ef5b13bdbd9e9dc3f79f495e.png",
+					"price": 1299,
+					"isjia": 0
+				},
+				{
+					"key": "M",
+					"buynum": 3,
+					"id": "27b5c380-d2f7-11ea-a0bc-bd616ac2c739c",
+					"title": "休闲时尚套装女夏裤子洋气可盐可甜",
+					"image":
+						"http://ae8b3ee28597856d3283.qiniucdn.apicloud-system.com/apicloud/1cc4b3d74953e9426e83e6e0bb3e5afd.png",
+					"price": 629,
+					"isjia": 1
+				},
+				{
+					"key": "S",
+					"buynum": 6,
+					"id": "9d739ce0-d2fd-11ea-a0bc-bd616acc739c",
+					"title": "碎花连衣裙两件套装女温柔可人",
+					"image":
+						"http://ae8b3ee28597856d3283.qiniucdn.apicloud-system.com/apicloud/2c8bbe302662ca7261a3f43a0a725d43.png",
+					"price": 699,
+					"isjia": 1
+				}
+			]
+		};
+	},
+	methods: {}
+};
+</script>
+<style>
+.page {
+	height: 100%;
+	background-color: #fff;
+}
+scroll-view {
+	height: 100%;
+}
+</style>

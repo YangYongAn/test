@@ -1,0 +1,118 @@
+<template>
+	<view class="goods-baseinfo">
+		<view class="goods-baseinfo-top">
+			<view class="goods-baseinfo-price">
+				<text class="goods-baseinfo-price-symbol">¥</text>
+				<text class="goods-baseinfo-price-price">{{price || 16}}</text>
+				<text class="goods-baseinfo-price-delprice">{{delprice ? '￥'+delprice : '￥66'}}</text>
+			</view>
+			
+			<view class="goods-baseinfo-hot" v-if="isHot">
+				<image class="goods-baseinfo-hot-img" src="http://ae8b3ee28597856d3283.qiniucdn.apicloud-system.com/apicloud/784e573cab94112b0e91f5c063fee14f.png"></image>
+				<text class="goods-baseinfo-hot-num">{this.fixBuynum(buy_num || 22)}</text>
+			</view>
+		</view>
+		<text class="goods-baseinfo-title">{{title}}</text>
+		<text v-if="yunfei_type" class="goods-baseinfo-freight">
+			快递：{{yunfei_type == 'none' ? '包邮' : `${yunfei_money}元`}}
+		</text>
+	</view>
+</template>
+<script>
+	export default {
+		name: 'hoc-goods-baseinfo-sgm',
+		data(){
+			return {
+				isHot: this.props.isHot || true,
+				price: this.props.price !== undefined ? this.props.price : 66,
+				delprice: this.props.delprice !== undefined ? this.props.delprice : 166,
+				buy_num: this.props.buy_num !== undefined ? this.props.buy_num : 122,
+				title: this.props.title !== undefined ? this.props.title : '农家自晒野生小鱼干',
+				yunfei_type: this.props.yunfei_type !== undefined ? this.props.yunfei_type : '自费',
+				yunfei_money: this.props.yunfei_money !== undefined ? this.props.yunfei_money : 15
+			}
+		},
+		methods: {
+			fixBuynum(num){
+				if (!num) {return 0;}
+				num = parseInt(num);
+				if (num > 9999) {
+					num = (num / 10000).toFixed(2);
+					num = num + 'w';
+				}
+				return num;
+			}
+		}
+	}
+</script>
+<style scoped>
+.goods-baseinfo { 
+	padding: 15px;
+	background-color: white;
+	margin-bottom: 10px;
+	margin-top: 310px;
+}
+
+.goods-baseinfo-top {
+	display: flex;
+	flex-direction: row;
+    align-items: center;
+	justify-content: space-between;
+}
+.goods-baseinfo-price {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+.goods-baseinfo-price-symbol {
+	margin-top: 5px;
+	margin-right: 3px;
+    font-size: 16px;
+	color: #FE904A;
+}
+
+.goods-baseinfo-price-price {
+    font-size: 23px;
+	color: #FE904A;
+}
+
+.goods-baseinfo-price-delprice {
+    font-size: 12px;
+    text-decoration: line-through;
+    margin-left: 10px;
+	margin-top: 8px;
+	color: #B5B5B5;
+}
+
+.goods-baseinfo-hot {
+	flex-direction: row;
+    align-items: center;
+    padding: 1px 6px;
+    background-color: #FEF8F4;
+    border-radius: 8px;
+    border: 1px solid #FE904A;
+}
+.goods-baseinfo-hot-img {
+    width: 9px;
+    height: 11px;
+    margin-right: 3px;
+}
+.goods-baseinfo-hot-num {
+    color: #FE904A;
+    font-size: 10px;
+}
+.goods-baseinfo-title {
+	font-size: 18px;
+    margin-top: 15px;
+    line-height: 22px;
+    color: #333333;
+    font-weight: bold;
+    text-overflow: ellipsis;
+    white-space: normal;
+}
+.goods-baseinfo-freight {
+    font-size: 14px;
+    margin-top: 8px;
+	color: #666;
+}
+</style>

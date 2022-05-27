@@ -1,0 +1,413 @@
+<template>
+	<view class="main-home">
+		<img class="shop-photo" style={{'height:'+photoRealHeight+'px'}}
+			src="http://a9591bba3d7a4cf76617.qiniucdn.apicloud-system.com/apicloud/fdab4e4b956dad43d21661c645b6f32c.jpg"
+			alt="" />
+			<scroll-view scroll-y class="flex-1 scroll-view" enable-back-to-top @scroll="onScroll" :show-scrollbar="false">
+			<view class="shop" style="margin-top:210px;">
+				<view class="shop-header flex-h">
+					<text class="shop-name flex-1 ellipsis-1">小龙坎老火锅（西直门店）</text>
+					<img class="shop-phone" @click="callPhone" src="../../image/icon/icon-home-phone.png" alt="" />
+				</view>
+				<view class="content-wrap">
+					<text class="shop-text shop-address">
+						北京市 海淀区 文教产业园44号院F座4层 柚子科技
+					</text>
+				</view>
+				<view class="shop-operation content-wrap">
+					<text class="shop-text">营业中 09:00 - 13:00，16:00 - 22:00</text>
+				</view>
+			</view>
+
+
+			<view class="list">
+
+				<view class="goods-list-item-home-goods">
+					<text class="goods-list-item-goods-channel">限时折扣</text>
+					<view class="goods-list-item-goods-list">
+						<view class="goods-list-item-goods-item" @click="intoGoodsDetail({})">
+							<img class="goods-list-item-goods-cover"
+								src="http://a9591bba3d7a4cf76617.qiniucdn.apicloud-system.com/apicloud/6e51da2766d83e1000c165a1277d7683.jpg"
+								alt="" />
+							<view class="goods-list-item-goods-info">
+								<text class="goods-list-item-goods-name">麻辣捞派滑牛肉</text>
+							</view>
+							<view class="goods-list-item-goods-info flex-h flex-center-v">
+								<text class="goods-list-item-goods-price">¥ 48.00</text>
+								<text class="goods-list-item-goods-price-deleted">¥ 68.00</text>
+							</view>
+						</view>
+
+
+
+						<view class="goods-list-item-goods-item" @click="intoGoodsDetail({})">
+							<img class="goods-list-item-goods-cover"
+								src="http://a9591bba3d7a4cf76617.qiniucdn.apicloud-system.com/apicloud/cb5ac9803faf2e2a9098e25fdb003328.jpg"
+								alt="" />
+							<view class="goods-list-item-goods-info">
+								<text class="goods-list-item-goods-name">招牌厚切牛肉</text>
+							</view>
+							<view class="goods-list-item-goods-info flex-h flex-center-v">
+								<text class="goods-list-item-goods-price">¥ 58.00</text>
+								<text class="goods-list-item-goods-price-deleted">¥ 68.00</text>
+							</view>
+						</view>
+					</view>
+				</view>
+
+
+				<view class="goods-list-item-home-goods">
+					<text class="goods-list-item-goods-channel">推荐菜品</text>
+					<view class="goods-list-item-goods-list">
+
+
+
+						<view class="goods-list-item-goods-item" @click="intoGoodsDetail({})">
+							<img class="goods-list-item-goods-cover"
+								src="http://a9591bba3d7a4cf76617.qiniucdn.apicloud-system.com/apicloud/62b0154b1a846987d550e626c4b987c0.jpg"
+								alt="" />
+							<view class="goods-list-item-goods-info">
+								<text class="goods-list-item-goods-name">捞派毛肚</text>
+							</view>
+							<view class="goods-list-item-goods-info flex-h flex-center-v">
+								<text class="goods-list-item-goods-price">¥ 58.00</text>
+								<text class="goods-list-item-goods-price-deleted">¥ 68.00</text>
+							</view>
+						</view>
+						<view class="goods-list-item-goods-item" @click="intoGoodsDetail({})">
+							<img class="goods-list-item-goods-cover"
+								src="http://a9591bba3d7a4cf76617.qiniucdn.apicloud-system.com/apicloud/6591903d20151263236bc94434699027.jpg"
+								alt="" />
+							<view class="goods-list-item-goods-info">
+								<text class="goods-list-item-goods-name">招牌雪花牛肉</text>
+							</view>
+							<view class="goods-list-item-goods-info flex-h flex-center-v">
+								<text class="goods-list-item-goods-price">¥ 50.00</text>
+								<text class="goods-list-item-goods-price-deleted">¥ 68.00</text>
+							</view>
+						</view>
+
+
+						<view class="goods-list-item-goods-item" @click="intoGoodsDetail({})">
+							<img class="goods-list-item-goods-cover"
+								src="http://a9591bba3d7a4cf76617.qiniucdn.apicloud-system.com/apicloud/5c5ed91e788d31fd0080f859c72bee24.jpg"
+								alt="" />
+							<view class="goods-list-item-goods-info">
+								<text class="goods-list-item-goods-name">招牌深海虾</text>
+							</view>
+							<view class="goods-list-item-goods-info flex-h flex-center-v">
+								<text class="goods-list-item-goods-price">¥ 48.00</text>
+								<text class="goods-list-item-goods-price-deleted">¥ 68.00</text>
+							</view>
+						</view>
+						<view class="goods-list-item-goods-item" @click="intoGoodsDetail({})">
+							<img class="goods-list-item-goods-cover"
+								src="http://a9591bba3d7a4cf76617.qiniucdn.apicloud-system.com/apicloud/d3152cab6eb78e4c525fcef1d473785c.jpg"
+								alt="" />
+							<view class="goods-list-item-goods-info">
+								<text class="goods-list-item-goods-name">三文鱼籽拼盘</text>
+							</view>
+							<view class="goods-list-item-goods-info flex-h flex-center-v">
+								<text class="goods-list-item-goods-price">¥ 48.00</text>
+								<text class="goods-list-item-goods-price-deleted">¥ 68.00</text>
+							</view>
+						</view>
+
+
+					</view>
+				</view>
+
+
+
+				<view class="goods-list-item-home-goods">
+					<text class="goods-list-item-goods-channel">优质菜品</text>
+					<view class="goods-list-item-goods-list">
+						<view class="goods-list-item-goods-item" @click="intoGoodsDetail({})">
+							<img class="goods-list-item-goods-cover"
+								src="http://a9591bba3d7a4cf76617.qiniucdn.apicloud-system.com/apicloud/2c19491954ad0d9a737859ecff762331.jpg"
+								alt="" />
+							<view class="goods-list-item-goods-info">
+								<text class="goods-list-item-goods-name">芝士糯米福袋</text>
+							</view>
+							<view class="goods-list-item-goods-info flex-h flex-center-v">
+								<text class="goods-list-item-goods-price">¥ 0.01</text>
+								<text class="goods-list-item-goods-price-deleted">¥ 2.00</text>
+							</view>
+						</view>
+					</view>
+				</view>
+
+
+
+			</view>
+		</scroll-view>
+		<view class="header-bar" style={{'opacity:'+this.data.opacity+';padding-top:'+safeAreaTop+'px'}}>
+			<text class="nav-title shop-name">小龙坎老火锅（西直门店）</text>
+		</view>
+	</view>
+</template>
+<script>
+
+import { GET } from "../../script/req";
+import { isMP, setTabBarBadge } from "../../script/util";
+
+export default {
+	name: 'template-of-main-home',
+	apiready() {
+		this.data.safeAreaTop = api.safeArea ? api.safeArea.top : 0;
+		this.initEventListener();
+		this.getData();
+		this.getClassifiesData();
+		this.getCartNum();
+
+
+		// 初始状态栏是白色的
+		api.setStatusBarStyle && api.setStatusBarStyle({
+			style: 'light',
+			color: '-'
+		});
+	},
+	onshow() {
+		let cartData = api.getPrefs({ sync: true, key: 'CART-DATA' });
+		if (cartData) {
+			cartData = JSON.parse(cartData);
+			setTabBarBadge(2, Object.keys(cartData).length);
+		}
+	},
+	data() {
+		return {
+			photoHeight: 210,
+			opacity: 0,
+			shopInfo: {
+				shopName: '小龙坎老火锅（西直门店）',
+				address: '北京市 海淀区 文教产业园44号院F座4层 柚子科技',
+				operation: {
+					status: 1,
+					times: ['09:00 - 13:00', '16:00 - 22:00']
+				},
+			},
+			safeAreaTop: 0,
+			classifyList: []
+		}
+	},
+	computed: {
+		photoRealHeight() {
+			return this.data.photoHeight + this.data.safeAreaTop
+		},
+		statusBarStyle() {
+			return this.data.opacity < 0.5 ? 'light' : 'dark';
+		}
+	},
+	methods: {
+		onScroll(e) {
+			const y = isMP() ? e.detail.scrollTop : e.detail.y;
+
+			let threshold = this.photoRealHeight - y;
+			if (threshold < 0) {
+				threshold = 0;
+			}
+			this.data.opacity = 1 - threshold / this.photoRealHeight;
+			api.setStatusBarStyle && api.setStatusBarStyle({
+				style: this.statusBarStyle
+			});
+		},
+		initEventListener() {
+			// 监听来自其他页面逻辑主动触发的切换tabBar请求，后续需要手动调用setTabIndex来切换
+			api.addEventListener({
+				name: 'SET-TAB-INDEX',
+			}, ret => {
+				console.log('收到了')
+				this.setTabIndex(ret.value);
+			})
+
+			// 监听来自tabBar本身点击触发的切换tabBar请求，后续需要手动调用setTabIndex来切换
+			api.addEventListener({
+				name: 'tabitembtn'
+			}, this.setTabIndex);
+		},
+		setTabIndex(ret) {
+			const { index } = ret;
+			api.setTabBarAttr({ index });// 切换tabBar
+			api.setStatusBarStyle && api.setStatusBarStyle({// 设置状态栏
+				style: index ? 'dark' : this.statusBarStyle
+			});
+		},
+		getCartNum() {
+			let cartList = api.getPrefs({ sync: true, key: 'CART-DATA' });
+			if (cartList) {
+				cartList = JSON.parse(cartList);
+				setTabBarBadge(2, Object.keys(cartList).length);
+			}
+		},
+		getData(format) {
+			GET('shops/getInfo')
+				.then(data => {
+					this.data.shopInfo = data;
+				})
+		},
+		callPhone() {
+			if (isMP()) {
+				wx.makePhoneCall({
+					phoneNumber: this.data.shopInfo.phone
+				})
+			} else {
+				api.call({
+					type: 'tel_prompt',
+					number: this.data.shopInfo.phone
+				});
+			}
+		},
+		getClassifiesData() {
+			GET('classifies/getClassifyGoodsList').then(data => {
+				this.data.classifyList = data;
+			})
+		},
+		intoGoodsDetail(item) {
+			api.openWin({
+				name: 'goods_detail',
+				url: '../../pages/template-of-goods_detail/template-of-goods_detail.stml',
+				pageParam: {
+					item
+				}
+			})
+		}
+	}
+}
+</script>
+
+<style scoped>
+.main-home {
+	height: 100%;
+	background: #f6f2f2;
+	position: relative;
+	display: flex;
+}
+
+.content-wrap {
+	padding: 10px 15px;
+}
+
+.header-bar {
+	position: absolute;
+	opacity: 0;
+	width: 100%;
+	z-index: 999;
+	background: #f9f9f9;
+}
+
+.nav-title {
+	height: 44px;
+	line-height: 44px;
+	text-align: center;
+}
+
+.scroll-view {
+	margin-top: -11px;
+}
+
+.shop {
+	background: #fff;
+	border-radius: 10px 10px 0 0;
+}
+
+.shop-photo {
+	position: absolute;
+	width: 100%;
+}
+
+.shop-header {
+	padding: 10px 15px 0;
+}
+
+.shop-name {
+	font-size: 18px;
+	font-weight: 500;
+}
+
+.shop-phone {
+	width: 22px;
+	height: 22px;
+}
+
+.shop-operation {
+	border-top: 1px solid #eee;
+}
+
+.shop-text {
+	color: #666;
+	font-size: 15px;
+}
+
+.shop-address {
+	width: 80%;
+}
+
+.list {
+	padding-top: 10px;
+	background: #f6f2f2;
+}
+
+.flex-h {
+	flex-direction: row;
+}
+.flex-1 {
+	-webkit-box-flex: 1;
+	-webkit-flex: 1;
+	flex: 1;
+}
+
+.goods-list-item-home-goods {
+	background: #fff;
+	padding: 10px 0;
+}
+
+.goods-list-item-goods-channel {
+	font-size: 18px;
+	font-weight: 500;
+	padding: 9px 15px;
+}
+
+.goods-list-item-goods-list {
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: row;
+	padding: 7px;
+}
+
+.goods-list-item-goods-item {
+	box-sizing: border-box;
+	width: 50%;
+	padding: 0 8px;
+	margin-bottom: 10px;
+}
+
+.goods-list-item-goods-cover {
+	width: 100%;
+	height: 110px;
+	border-radius: 5px;
+	margin-bottom: 5px;
+}
+
+.goods-list-item-goods-info {
+	height: 20px;
+	line-height: 20px;
+}
+
+.goods-list-item-goods-name,
+.goods-list-item-goods-price {
+	font-size: 14px;
+	color: #333333;
+	font-weight: 500;
+	margin-right: 8px;
+}
+
+.goods-list-item-goods-price-deleted {
+	color: #999;
+	text-decoration-line: line-through;
+	font-size: 12px;
+}
+
+.flex-h {
+	flex-direction: row;
+}
+</style>

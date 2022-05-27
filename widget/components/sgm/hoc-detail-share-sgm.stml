@@ -1,0 +1,100 @@
+<template>
+	<view class="popups_share_bg">
+		<view class="detail-share" style={'bottom:'+bottom+'px;'}>
+			<text class="detail-share-title">分享至</text>
+			<view class="detail-share-content">
+				<view class="detail-share-item" v-for="(item,index) in shareList" open-type="share" hover-class="none" data-name={item.name} onclick="handleShare">
+					<img class="detail-share-item-img" src={item.icon}/>
+					<text class="detail-share-item-text">{item.name}</text>
+				</view>
+			</view>
+			<text class="detail-share-btn" onclick="handleCancel">取消</text>
+			<safe-area></safe-area>
+		</view>
+	</view>
+</template>
+<script>
+	export default {
+		name: 'hoc-detail-share-sgm',
+		data(){
+			return {
+				bottom: -200,
+				shareList: this.props.shareList || [{
+					name: '微信',
+					icon: 'http://ae8b3ee28597856d3283.qiniucdn.apicloud-system.com/apicloud/c1946ae84a37fa867b0399b93917f627.png'
+				}]
+			}
+		},
+		methods: {
+			installed(){
+				setTimeout(()=>{
+					this.data.bottom = 0;
+				}, 50);
+			},
+			handleCancel(){
+				this.fire('handleCancel');
+			},
+			handleShare(e){
+				let name = e.currentTarget.dataset.name;
+				this.fire('handleShare', {name:name});
+			}
+		}
+	}
+</script>
+<style scoped>
+/* coverbg */
+.popups_share_bg{
+	position: absolute;
+	width: 100%;
+	height: 100%;
+    background-color: rgba(0,0,0,0.4);
+}
+.detail-share{
+	align-items: center;
+    position: absolute;
+    width: 100%;
+	background-color: white;
+    box-sizing: border-box;
+	transition-property: bottom;
+	transition-duration: 0.3s;
+}
+.detail-share-title{
+	color: #555555;
+    margin-top: 15px;
+    font-size: 15px;
+}
+.detail-share-content{
+	flex-direction: row;
+	justify-content: center;
+	padding: 15px 0;
+}
+.detail-share-item{
+	align-items: center;
+	margin: 0 10px;
+	background-color: transparent;
+	border: none;
+}
+button::after{
+   border: none;
+}
+.detail-share-item-img{
+    width: 50px;
+    height: 50px;
+}
+.detail-share-item-text{
+	margin-top: 10px;
+	font-size: 14px;
+	color: #333333;
+}
+.detail-share-btn{
+	width: 100%;
+    font-size: 16px;
+    text-align: center;
+    line-height: 50px;
+    height: 50px;
+	border-top: 1px solid #f5f5f5;
+}
+.detail-share-btn:active{
+	opacity: 0.8;
+}
+</style>

@@ -1,0 +1,151 @@
+<template>
+	<safe-area class="main-api">
+		<text class="main-api-title">多端API</text>
+		<scroll-view class="main-api-con">
+			<view class="main-api-desc">
+                <image
+                    src="../../image/avm_left_comma.png"
+                    alt="avm_left_comma"
+                    class="main-api-desc-icon main-api-desc-icon-left" />
+                <text class="main-api-desc-text">多端API是您入门APICloud必须了解和熟练掌握的一个基础对象。多端API提供了构建应用程序所需要的一些基本的方法(Method)，以及一些常见的属性(Attribute)，还有一些常用事件(Event)。</text>
+                <image
+                    src="../../image/avm_right_comma.png"
+                    alt="avm_right_comma"
+                    class="main-api-desc-icon main-api-desc-icon-right"/>
+            </view>
+            <view class="api-list">
+                <view class="api-list-item" v-for="item in apiList" :key="item.name">
+                    <!--标题-->
+                    <view class="api-list-item-title" @click="itemClick(item)">
+                        <text class="api-list-item-name">{{item.name}}</text>
+                        <img class="api-list-item-icon" :src="`../../image/${item.icon}.png`" :alt="item.icon"/>
+                    </view>
+                    <!--字内容列表-->
+                    <view class="api-list-child" v-if="item.name === curTab && item.children">
+                        <view v-for="cItem in item.children" :key="cItem.name" class="api-list-child-item" @click="openProDetail(cItem)">
+                            <text class="api-list-child-item-name">{{cItem.name}}</text>
+                            <img class="api-list-child-item-icon" src="../../image/right_arrow.png" alt="right_arrow"/>
+                        </view>
+                    </view>
+                </view>
+            </view>
+		</scroll-view>
+	</safe-area>
+</template>
+<script>
+import {apiList} from '../../utils/constant'
+export default {
+	name: 'main-api',
+	apiready() {//like created
+
+	},
+	data() {
+		return {
+            curTab: null
+		}
+	},
+	methods: {
+        itemClick(item) {
+            item.name === this.data.curTab ? (this.data.curTab = null) : (this.data.curTab = item.name)
+        },
+        openProDetail(item) {
+            api.openWin({
+                name: 'apiDetail',
+                url:'../main-api-detail/main-api-detail.stml',
+                pageParam: {
+                    detailInfo: item
+                }
+            })
+        }
+	}
+}
+</script>
+<style>
+.main-api {
+	width: 100%;
+	height: 100%;
+	background: #fff;
+}
+.main-api-title {
+	font-size: 17px;
+	color: #000;
+	font-weight: 500;
+	margin: 22px auto 26px;
+}
+.main-api-con {
+	flex: 1;
+}
+.main-api-desc {
+    margin: 0 16px 10px;
+    flex-direction: row;
+    align-items: center;
+}
+.main-api-desc-icon {
+    width: 12px;
+    height: 10px;
+}
+.main-api-desc-icon-left {
+    position: absolute;
+    top: 7px;
+    left: 0;
+}
+.main-api-desc-icon-right {
+    position: absolute;
+    bottom: 7px;
+    right: 0;
+}
+.main-api-desc-text {
+    font-size: 13px;
+    color: #aaa;
+    font-weight: 400;
+    line-height: 24px;
+    text-indent: 22px;
+}
+.api-list {
+    padding-top: 10px;
+}
+.api-list-item {
+    background: #fff;
+}
+.api-list-item-title {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 0;
+    border-bottom: 0.5px solid #eee;
+    margin: 0 16px;
+}
+.api-list-item-name {
+    font-size: 16px;
+    color: #333;
+    font-weight: 400;
+    line-height: 22px;
+}
+.api-list-item-icon {
+    width: 22px;
+    height: 22px;
+}
+.api-list-child {
+    background: #f6f6f6;
+    padding: 0 16px;
+}
+.api-list-child-item {
+    border-bottom: 0.5px solid #eee;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 0;
+}
+.api-list-child-item-name {
+    font-size: 15px;
+    color: #333;
+    font-weight: 400;
+    line-height: 21px;
+}
+.api-list-child-item-icon {
+    width: 10px;
+    height: 10px;
+}
+</style>

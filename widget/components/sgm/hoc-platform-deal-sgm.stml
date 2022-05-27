@@ -1,0 +1,27 @@
+<!--平台协议-->
+<template>
+    <view class="platform-deal">
+			<rich-text :nodes="content"></rich-text>
+		</view>
+</template>
+<script>
+	export default {
+		name: 'hoc-platform-deal-sgm',
+		apiready(){//like created
+
+		},
+		data() {
+			return{
+				content: this.props.content !== undefined ? this.props.content : '<text style="color: #999; font-size: 12px;">我是平台协议</text>'
+			}
+		}
+	}
+</script>
+<style>
+.platform-deal{
+    margin: 15px 15px 0;
+    background-color: #FFFFFF;
+    border-radius: 4px;
+    padding: 15px;
+}
+</style>

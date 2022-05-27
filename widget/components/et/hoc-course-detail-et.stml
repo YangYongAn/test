@@ -1,0 +1,53 @@
+<!--课程详情-课程详细说明-->
+<template>
+    <view class="course-detail-desc">
+		<view class="course-detail--title">
+			<text class="course-detail--title-line"></text>
+			<text class="course-detail--title-text">{{moduleTitle}}</text>
+		</view>
+		<rich-text nodes={this.data.content}></rich-text>
+    </view>
+</template>
+<script>
+	export default {
+		name: 'hoc-course-detail-et',
+		apiready(){//like created
+
+		},
+		data() {
+			return{
+				moduleTitle: this.props.moduleTitle !== undefined ? this.props.moduleTitle : '课程详情',
+				content: this.props.content !== undefined ? this.props.content :  "<img src='http://aa8954a760b087bd5575.qiniucdn.apicloud-system.com/apicloud/ee81799a56acb99a6bf2f76dc14c7a99.png' style='width: 100%;'/>"
+			}
+		},
+		methods: {
+
+		}
+	}
+</script>
+<style>
+.course-detail-desc {
+	width: 100%;
+	margin-bottom: 10px;
+	background: #fff;
+	padding: 16px;
+}
+.course-detail--title {
+  margin-bottom: 16px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.course-detail--title-line {
+  width: 4px;
+  height: 18px;
+  background: #F1C694;
+  margin-right: 8px;
+  border-radius: 4px;
+}
+.course-detail--title-text {
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+}
+</style>

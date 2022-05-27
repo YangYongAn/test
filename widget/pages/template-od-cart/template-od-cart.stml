@@ -1,0 +1,36 @@
+<template>
+    <view class="page">
+        <!-- 顶部导航 -->
+        <hoc-nav-bar-od msg="购物车" />
+        <!-- 顶部title -->
+        <hoc-shopping-header-od />
+        <!-- 购物车列表 -->
+        <hoc-shopping-list-od />
+        <!-- 结算底部 -->
+        <hoc-shopping-footer-od />
+    </view>
+</template>
+<script>
+import '../../components/od/hoc-nav-bar-od.stml';
+import '../../components/od/hoc-shopping-header-od.stml';
+import '../../components/od/hoc-shopping-list-od.stml';
+import '../../components/od/hoc-shopping-footer-od.stml';
+export default {
+    name: 'template-od-cart',
+    apiready() { //like created
+    },
+    data() {
+        return {};
+    },
+    methods: {}
+};
+</script>
+<style>
+.page {
+    height: 100%;
+    background-color: #fff;
+}
+scroll-view {
+    height: 100%;
+}
+</style>

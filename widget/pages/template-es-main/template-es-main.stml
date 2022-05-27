@@ -1,0 +1,53 @@
+<template name='tpl'>
+    <view class="page">
+        <!-- 顶部导航 -->
+        <hoc-nav-bar-es :msg='navText' />
+        <scroll-view scroll-y>
+            <!-- 轮播图 -->
+            <hoc-banner-list-es :list='bannersList' />
+            <!-- 企业优势列表 -->
+            <hoc-advantage-list-es :list='advantageList' />
+            <!-- 企业详情 -->
+            <hoc-company-detail-es :html_detail='product_description' />
+            <!-- 关于我们 -->
+            <hoc-about-us-es :html_detail='about_us' />
+        </scroll-view>
+    </view>
+</template>
+<script>
+import '../../components/es/hoc-nav-bar-es.stml';
+import '../../components/es/hoc-banner-list-es.stml';
+import '../../components/es/hoc-advantage-list-es.stml';
+import '../../components/es/hoc-company-detail-es.stml';
+import '../../components/es/hoc-about-us-es.stml';
+export default {
+    name: 'template-es-main',
+    data() {
+        return {
+            // 顶部导航
+            navText: '首页',
+            // 轮播图列表
+            bannersList: [
+                "http://ae8b3ee28597856d3283.qiniucdn.apicloud-system.com/apicloud/c44fc5c4b158c96b414f55ac12562be2.png",
+                "http://a3a17abb08c7cc355eb5.qiniucdn.apicloud-system.com/apicloud/aae0244b645bcf2b0ea70dfde8da8e47.png",
+                "http://a3a17abb08c7cc355eb5.qiniucdn.apicloud-system.com/apicloud/d6f008eb12663454510e42dbe3038e7b.png"
+            ],
+            // 优势列表
+            advantageList: ["http://a3a17abb08c7cc355eb5.qiniucdn.apicloud-system.com/apicloud/d42370efd94ba8249e8e24c96e154313.png", "http://a3a17abb08c7cc355eb5.qiniucdn.apicloud-system.com/apicloud/b6c101bcfbe547e0dc85545342764074.png", "http://a3a17abb08c7cc355eb5.qiniucdn.apicloud-system.com/apicloud/644f407f24cd192913be807488572c2d.png", "http://a3a17abb08c7cc355eb5.qiniucdn.apicloud-system.com/apicloud/39d0bf6bea912a5380d5b9a7c2c77d95.png"],
+            // 企业详情
+            product_description: '<img style=\"width: 100%;\" src="http://ae8b3ee28597856d3283.qiniucdn.apicloud-system.com/apicloud/049597870908fc92d2fe5f19541cfa1c.png" alt="detail"/>\n',
+            // 关于我们
+            about_us: "<div><span style='color: #222222; font-size: 18px;'>柚子深山茶叶有限公司</span></div>\n<div><span style='color: #888888; font-size: 14px;'>北京市朝阳区中关村科技园区电子城科技园A1座2层</span></div>\n<div><span style='color: #888888; font-size: 14px;'>www.apicloud.com</span></div>\n<div><span style='color: #888888; font-size: 14px; display: block;'>18642511611</span></div>"
+        };
+    }
+};
+</script>
+<style>
+.page {
+    height: 100%;
+    background-color: #fff;
+}
+scroll-view {
+    height: 100%;
+}
+</style>

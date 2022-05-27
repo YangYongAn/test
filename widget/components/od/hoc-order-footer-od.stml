@@ -1,0 +1,83 @@
+<template>
+	<view class="footer-btn">
+		<view class="floor_btns">
+			<text class="floor_zi">{'共' + data.orderBuynum + '件'}</text>
+			<text class="floor_rzi">合计：</text>
+			<text class="floor_szi">¥</text>
+			<text class="floor_mzi">{data.payPrice}</text>
+			<text class="floor_btn" >去支付</text>
+		</view>
+		<safe-area></safe-area>
+	</view>
+</template>
+<script>
+export default {
+	name: 'hoc-order-footer-od',
+	props: {
+		data: {
+			type: Object,
+			default: function () {
+				return {}
+			}
+		}
+	},
+	apiready() {//like created
+
+	},
+	data() {
+		return {
+			data:this.props.orderBuy || {
+					"orderBuynum": 1,
+					"payPrice": 666
+				}
+		}
+	},
+	methods: {
+
+	}
+}
+</script>
+<style scoped>
+/* 按钮 */
+.footer-btn {
+	background-color: white;
+}
+.floor_btns {
+	flex-direction: row;
+	justify-content: flex-end;
+	align-items: center;
+	height: 54px;
+}
+.floor_zi {
+	font-size: 13px;
+	margin-right: 10px;
+	color: #999999;
+}
+.floor_rzi {
+	font-size: 14px;
+	color: #333333;
+}
+.floor_szi {
+	font-size: 14px;
+	color: #fe5c00;
+}
+.floor_mzi {
+	font-size: 18px;
+	color: #fe5c00;
+	margin-right: 15px;
+}
+.floor_btn {
+	width: 100px;
+	height: 40px;
+	border-radius: 2px;
+	margin-right: 15px;
+	line-height: 40px;
+	text-align: center;
+	font-size: 16px;
+	background-color: #ff7037;
+	color: white;
+}
+.floor_btn:active {
+	opacity: 0.7;
+}
+</style>

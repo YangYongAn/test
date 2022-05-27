@@ -1,0 +1,74 @@
+<template>
+
+	<safe-area>
+		<NavBar onBack={this.back}>Result</NavBar>
+		<scroll-view>
+			<DemoBlock title='Success'>
+        <Result
+          status='success'
+          title='操作成功'
+          description='内容详情可折行，建议不超过两行建议不超过两行建议不超过两行'
+        />
+      </DemoBlock>
+
+      <DemoBlock title='Error'>
+        <Result
+          status='error'
+          title='无法完成操作'
+          description='内容详情可折行，建议不超过两行建议不超过两行建议不超过两行'
+        />
+      </DemoBlock>
+
+      <DemoBlock title='Info'>
+        <Result
+          status='info'
+          title='信息提示'
+          description='内容详情可折行，建议不超过两行建议不超过两行建议不超过两行'
+        />
+      </DemoBlock>
+
+      <DemoBlock title='Waiting'>
+        <Result
+          status='waiting'
+          title='等待处理'
+          description='内容详情可折行，建议不超过两行建议不超过两行建议不超过两行'
+        />
+      </DemoBlock>
+
+      <DemoBlock title='Warning'>
+        <Result
+          status='warning'
+          title='警告提示'
+          description='内容详情可折行，建议不超过两行建议不超过两行建议不超过两行'
+        />
+      </DemoBlock>
+
+      <DemoBlock title='自定义 icon'>
+        <Result
+          status='success'
+          title='Well done'
+          description='内容详情可折行，建议不超过两行建议不超过两行建议不超过两行'
+        ><SmileOutline fontSize={52} color="#1677ff"/></Result>
+      </DemoBlock>
+		</scroll-view>
+	</safe-area>
+</template>
+
+<style src="../../components/avm-ui/result/index.css"/>
+<style src="../../components/avm-ui/icon/index.css"/>
+<style src="../../components/avm-ui/nav-bar/index.css"/>
+<style src="../../components/avm-ui/demos/index.css"/>
+
+<script>
+import Result from '../../components/avm-ui/result';
+import SmileOutline from '../../components/avm-ui/icon';
+import NavBar from '../../components/avm-ui/nav-bar';
+import {DemoBlock} from '../../components/avm-ui/demos';
+
+export default {
+	name: 'demo-result',
+	back() {
+		api.closeWin();
+	}
+}
+</script>

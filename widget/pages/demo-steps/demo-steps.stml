@@ -1,0 +1,112 @@
+<template>
+	<safe-area class="page">
+		<avm-nav-bar onBack={this.back}>Steps</avm-nav-bar>
+		<scroll-view>
+			<DemoBlock title='基础样式'>
+				<avm-steps current={1}>
+					<avm-step title="标题文字"/>
+					<avm-step title="标题文字"/>
+					<avm-step title="标题文字"/>
+				</avm-steps>
+			</DemoBlock>
+
+			<DemoBlock title='异常状态'>
+				<avm-steps current={2}>
+					<avm-step title="标题文字" description="小正文"/>
+					<avm-step title="标题文字" status="error" description="小正文"/>
+					<avm-step title="标题文字" status="wait" description="小正文"/>
+				</avm-steps>
+
+			</DemoBlock>
+
+			<DemoBlock title='纵向'>
+				<avm-steps direction='vertical'>
+					<avm-step title="填写机构信息" status="process"/>
+					<avm-step title="签约机构" status="wait"/>
+					<avm-step title="关联服务区" status="wait"/>
+				</avm-steps>
+			</DemoBlock>
+
+			<DemoBlock title='纵向（失败状态）'>
+				<avm-steps direction='vertical'>
+					<avm-step title="填写机构信息" status="finish" description='完成时间：2020-12-01 12:30'/>
+					<avm-step title="签约机构" status="finish" description='完成时间：2020-12-01 12:30'/>
+					<avm-step title="关联服务区" status="finish" description='完成时间：2020-12-01 12:30'/>
+					<avm-step title="审批失败" status="error" description='完成时间：2020-12-01 12:30'/>
+				</avm-steps>
+			</DemoBlock>
+
+			<DemoBlock title='自定义显示节点'>
+				<avm-steps direction='vertical'>
+					<avm-step
+						title="第一步"
+						status="finish"
+						description='完成人111'
+						icon={<text style="font-size: 12px; color: #0ff">一</text>}/>
+					<avm-step
+						title="第二步"
+						status="finish"
+						description='完成人222'
+						icon={<text style="font-size: 12px; color: #00f">二</text>}/>
+					<avm-step
+						title="第三步"
+						status="wait"
+						description='完成人333'
+						icon={<text style="font-size: 12px">三</text>}/>
+				</avm-steps>
+			</DemoBlock>
+			<DemoBlock title='小圆点显示节点'>
+				<avm-steps direction='vertical'>
+					<avm-step
+						title="第一步"
+						status="finish"
+						description='完成人111'/>
+					<avm-step
+						title="第二步"
+						status="finish"
+						description='完成人222'
+						:isDot="true"/>
+					<avm-step
+						title="第三步"
+						status="wait"
+						description='完成人333'
+						:isDot="true"/>
+				</avm-steps>
+			</DemoBlock>
+		</scroll-view>
+	</safe-area>
+</template>
+<script>
+import '../../components/avm-ui/steps'
+import '../../components/avm-ui/nav-bar'
+import {DemoBlock} from '../../components/avm-ui/demos'
+export default {
+	name: 'demo-steps',
+	data() {
+		return {
+            current: 0
+		};
+	},
+	methods: {
+		back() {
+			api.closeWin();
+		}
+	}
+}
+</script>
+<style src="../../components/avm-ui/demos/index.css"/>
+<style>
+.page {
+	height: 100%;
+	width: 100%;
+}
+.text-style {
+	font-size: 16px;
+	color: #f0f;
+	background: #ff0;
+}
+.icon-style {
+	width: 20px;
+	height: 20px;
+}
+</style>

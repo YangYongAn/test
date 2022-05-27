@@ -1,0 +1,86 @@
+<!--首页-课程类别菜单-->
+<template>
+	<view class="main__menu" scroll-x :show-scrollbar="false">
+		<view class="main__menu--item" v-for="(item, index) in menuList" :key="`menu-et-${index}`" @click="goto(item)">
+			<img :src="item.image" class="main__menu--item-img" />
+			<text class="main__menu--item-text">{item.name}</text>
+		</view>
+	</view>
+</template>
+<script>
+const course_category = [
+	{
+		name: "雅思培训",
+		image:
+			"http://aa8954a760b087bd5575.qiniucdn.apicloud-system.com/apicloud/62d63d588551d1c75bd11404e0666d9f.png"
+	},
+	{
+		name: "托福培训",
+		image:
+			"http://aa8954a760b087bd5575.qiniucdn.apicloud-system.com/apicloud/936c24de0b3049dea6162b5d9bcf01cb.png"
+	},
+	{
+		name: "商务英语",
+		image:
+			"http://aa8954a760b087bd5575.qiniucdn.apicloud-system.com/apicloud/06a6961f626afd2d539e66a30725c3e3.png"
+	},
+	{
+		name: "少儿英语",
+		image:
+			"http://aa8954a760b087bd5575.qiniucdn.apicloud-system.com/apicloud/12cb821ff1c86094e67f55c08b8d5f6c.png"
+	}
+]
+export default {
+	name: 'hoc-course-menu-et',
+	apiready() {//like created
+
+	},
+	data() {
+		return {
+			menuList: this.props.menuList || course_category
+		}
+	},
+	methods: {
+		goto(item) {
+			this.fire('itemClick', item)
+		}
+	}
+}
+</script>
+<style>
+.main__menu {
+	flex-flow: row nowrap;
+	white-space: nowrap;
+	flex-shrink: 0;
+	margin-bottom: 10px;
+	/* box-shadow: 0 2px 2px #DDD; */
+	padding: 16px 12px;
+	align-items: center;
+	justify-content: space-between;
+	background: #fff;
+	overflow: auto;
+}
+.main__menu--item {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 80px;
+	flex-shrink: 0;
+}
+.main__menu--item-img {
+	width: 60px;
+	height: 60px;
+	border-radius: 8px;
+}
+.main__menu--item-text {
+	color: #333;
+	font-size: 12px;
+	padding-top: 12px;
+	text-align: center;
+	width: 80px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+</style>

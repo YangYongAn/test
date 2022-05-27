@@ -1,0 +1,50 @@
+<!--付款备注-->
+<template>
+	<view class="pay-remark">
+		<text class="pay-remark-label">备注</text>
+		<view class="pay-remark-box">
+			<textarea v-model="value" class="pay-remark-area" id="beizhu" :placeholder="this.props.placeholder || '留下您想对商家说的话!'"
+				oninput={()=> this.oninput.bind(this)}></textarea>
+		</view>
+	</view>
+</template>
+<script>
+export default {
+	name: 'hoc-pay-remark-sgm',
+	apiready() {//like created
+
+	},
+	data() {
+		return {
+			value: this.props.inputVal || ''
+		}
+	},
+	methods: {
+		oninput(e) {
+			this.fire('handleInput', e)
+		}
+	}
+}
+</script>
+<style>
+.pay-remark-label {
+	font-size: 14px;
+	padding: 15px;
+	color: #6c7279;
+	background: #f8f8f8;
+}
+.pay-remark-box {
+	height: 122px;
+	background-color: white;
+	margin-bottom: 10px;
+	box-shadow: 0 0 3px #f5f5f5;
+}
+.pay-remark-area {
+	padding: 12px 16px;
+	width: 100%;
+	height: 100%;
+	border: none;
+	font-size: 14px;
+    color: #6c7279;
+}
+</style>

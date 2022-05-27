@@ -1,0 +1,193 @@
+<template>
+	<view class="main-module-popup">
+		<view class="mask-layout" @click="closeFrame"></view>
+		<view class="main-module-popup-con">
+			<view class="module-popup-top">
+				<img class="module-popup-top-left" :src="info.icon_path" alt="info.mdId"/>
+				<view class="module-popup-top-right">
+					<text class="module-popup-name">{{info.mdName}}</text>
+					<view class="module-popup-desc">
+						<text class="module-popup-desc-text">V{{info.mdVer}}</text>
+						<img src="../../image/module-people-icon.png" alt="people" class="module-popup-icon"/>
+						<text class="module-popup-desc-text">{{info.userName}}提供</text>
+					</view>
+				</view>
+			</view>
+			<text class="module-popup-title">适配平台</text>
+			<view class="module-popup-platform">
+				<view class="module-popup-platform-item" v-for="item in platformList" :key="item.text">
+					<img class="module-popup-platform-icon" :src="item.icon" :alt="item.text"/>
+					<text class="module-popup-platform-text">{item.text}</text>
+				</view>
+			</view>
+			<text class="module-popup-title">模块概述</text>
+			<text class="module-popup-overview">{info.outline}</text>
+			<view class="close-con" @click="closeFrame">
+				<img src="../../image/down-arrow.png" alt="down-arrow" class="close-con-icon"/>
+			</view>
+		</view>
+	</view>
+</template>
+<script>
+export default {
+	name: 'main-module-popup',
+	apiready(){//like created
+
+	},
+	data() {
+		return{
+			
+		}
+	},
+	computed: {
+		info() {
+			return api.pageParam.info;
+		},
+		platformList() {
+			let list = []
+			const mdPlatform = api.pageParam.info.mdPlatform || null
+			const android = [{
+				icon: '../../image/android-icon.png',
+				text: 'Android'
+			}]
+			const ios = [{
+				icon: '../../image/ios-icon.png',
+				text: 'ios'
+			}]
+			const applet = [{
+				icon: 'http://www.apicloud.com/img/moduledetail/miniprogram.png',
+				text: '小程序'
+			}]
+			const h5 = [{
+				icon: 'http://www.apicloud.com/img/moduledetail/h5.png',
+				text: 'H5'
+			}]
+
+			if (mdPlatform === 0) {
+				list = ios;
+			} else if (mdPlatform === 2) {
+				list = [].concat(android, ios)
+			} else if (mdPlatform === 10) {
+				list = [].concat(android, ios, applet)
+			} else if (mdPlatform === 11) {
+				list = [].concat(android, ios, h5)
+			} else if (mdPlatform === 14) {
+				list = [].concat(android, ios, applet, h5)
+			}
+			return list
+		}
+	},
+	methods: {
+		closeFrame() {
+			api.closeFrame({
+				name: 'module-detail'
+			})
+		}
+	}
+}
+</script>
+<style>
+.main-module-popup {
+	width: 100%;
+	height: 100%;
+}
+.mask-layout {
+	position: absolute;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	background: rgba(0, 0, 0, 0.5);
+	z-index: 1;
+}
+.main-module-popup-con {
+	z-index: 999;
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	border-radius: 10px 10px 0 0;
+	background: #fff;
+	padding: 16px;
+}
+.module-popup-top {
+	display: flex;
+	flex-direction: row;
+	margin-bottom: 26px;
+}
+.module-popup-top-left {
+	width: 82px;
+	height: 60px;
+	flex-shrink: 0;
+	margin-right: 16px;
+}
+.module-popup-top-right {
+	flex: 1;
+}
+.module-popup-name {
+	font-size: 18px;
+	font-weight: 500;
+	color: #333;
+	line-height: 25px;
+}
+.module-popup-desc {
+	margin-top: 16px;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+.module-popup-desc-text {
+	font-size: 12px;
+	color: #999;
+	margin-right: 16px;
+}
+.module-popup-icon {
+	width: 12px;
+	height: 12px;
+	margin-right: 4px;
+}
+.module-popup-title {
+	font-size: 15px;
+	color: #333;
+	font-weight: 500;
+	padding: 24px 0 10px;
+}
+.module-popup-platform {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+.module-popup-platform-item {
+	margin-right: 16px;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+.module-popup-platform-icon {
+	width: 16px;
+	height: 16px;
+	margin-right: 4px;
+}
+.module-popup-platform-text {
+	font-size: 14px;
+	color: #666;
+	font-weight: 400;
+	line-height: 24px;
+}
+.module-popup-overview {
+	font-size: 14px;
+	color: #666;
+	line-height: 24px;
+	font-weight: 400;
+}
+.close-con {
+	padding: 30px 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.close-con-icon {
+	width: 24px;
+	height: 24px;
+}
+</style>

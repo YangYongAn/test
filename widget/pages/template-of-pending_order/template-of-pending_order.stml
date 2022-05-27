@@ -1,0 +1,265 @@
+<template>
+
+	<safe-area class="page">
+
+		<view class="header">
+			<img src="../../image/icon/icon-header-back.png" alt="" class="header-icon" @click="close" />
+			<text class="header-text">待付款订单</text>
+			<view class="header-icon"></view>
+		</view>
+
+		<scroll-view class="list" :show-scrollbar="false">
+			<text class="list-title">商品列表</text>
+			<view class="list-item">
+				<img class="goods-cover" mode="aspectFill"
+					src="http://a9591bba3d7a4cf76617.qiniucdn.apicloud-system.com/apicloud/6e51da2766d83e1000c165a1277d7683.jpg"
+					alt="" />
+				<view class="goods-info">
+					<view class="goods-main">
+						<text class="goods-title">麻辣捞派滑牛肉</text>
+						<text class="goods-price-signal">¥</text>
+						<text class="goods-price"> 58.00</text>
+					</view>
+					<text class="goods-count">× 2</text>
+				</view>
+			</view>
+
+			<view class="list-item">
+				<img class="goods-cover" mode="aspectFill"
+					src="http://a565c1d1f30b65a4d46d.qiniucdn.apicloud-system.com/apicloud/3b4905680e5d0d520c4f511361c502b9.png"
+					alt="" />
+				<view class="goods-info">
+					<view class="goods-main">
+						<text class="goods-title">捞派毛肚</text>
+						<text class="goods-price-signal">¥</text>
+						<text class="goods-price"> 48.00</text>
+					</view>
+					<text class="goods-count">× 1</text>
+				</view>
+			</view>
+
+			<view class="order-note">
+				<text class="order-note-key">备注</text>
+				<input class="order-note-input" placeholder="如需备注请输入" onBlur="onBlur" maxlength="30" id="remark" />
+			</view>
+		</scroll-view>
+
+
+		<view class="order-footer">
+			<text class="total-text">合计：</text>
+			<text class="total-price">¥ 28880.00</text>
+			<view class="order-pay-btn" @click="addOrder">
+				<text class="order-pay-btn-text">
+					立即支付
+				</text>
+			</view>
+		</view>
+
+	</safe-area>
+</template>
+
+<script>
+import { POST } from "../../script/req";
+import { setTabBarBadge } from "../../script/util";
+
+export default {
+	name: "template-of-pending_order",
+	apiready() {
+		this.data.list = api.pageParam.list;
+	},
+	data() {
+		return {
+			list: [],
+			remark: ''
+		}
+	},
+	computed: {
+		totalPrice() {
+			let list = this.data.list;
+			return (list.length ? list.reduce((total, item) => {
+				return total + item.goods.curt_price * item.count;
+			}, 0) : 0).toFixed(2);
+		},
+		formData() {
+			let remark = this.data.remark;
+			let list = this.data.list.map(item => {
+				return { goods_id: item.goods.id, num: item.count }
+			});
+			return { remark, list };
+		}
+	},
+	methods: {
+		close() {
+			api.closeWin();
+		},
+		onBlur(e) {
+			this.data.remark = e.target.value;
+		},
+		addOrder() {
+
+
+			// 打开结果页
+			api.openWin({
+				name: 'pay_result',
+				url: '../template-of-pay_result/template-of-pay_result.stml'
+			});
+
+
+			// 清空购物车
+			api.setPrefs({
+				key: 'CART-DATA',
+				value: {}
+			});
+
+			setTabBarBadge(2, 0);
+
+
+		}
+	}
+}
+</script>
+
+<style scoped>
+.page {
+	height: 100%;
+	display: flex;
+	background: #fff;
+}
+
+.header {
+	height: 44px;
+	align-items: center;
+	justify-content: space-between;
+	flex-direction: row;
+}
+
+.header-icon {
+	width: 22px;
+	height: 22px;
+	margin: 10px;
+}
+
+.header-text {
+	color: #020202;
+	font-size: 18px;
+	font-weight: bold;
+}
+
+.list {
+	flex: 1;
+	padding: 15px;
+	box-sizing: border-box;
+}
+
+.list-title {
+	font-size: 18px;
+	font-weight: bold;
+	color: #666;
+}
+
+.list-item {
+	margin-top: 20px;
+	flex-direction: row;
+}
+
+.goods-cover {
+	width: 70px;
+	height: 70px;
+	border-radius: 4px;
+}
+
+.goods-info {
+	display: flex;
+	margin-left: 10px;
+	flex: 1;
+}
+
+.goods-main {
+	flex-direction: row;
+}
+
+.goods-title {
+	font-size: 15px;
+	color: #333;
+	font-weight: bold;
+	flex: 1;
+}
+
+.goods-price-signal {
+	color: #fe5760;
+	font-weight: bold;
+	font-size: 14px;
+	margin-top: 3px;
+}
+
+.goods-price {
+	color: #fe5760;
+	font-weight: bold;
+	font-size: 18px;
+}
+
+.goods-sub {
+	flex: 1;
+	justify-content: center;
+	align-items: flex-end;
+}
+
+.goods-count {
+	font-size: 15px;
+	color: #999;
+	display: block;
+	text-align: right;
+}
+
+.order-note {
+	flex-direction: row;
+	padding: 15px 0;
+	align-items: center;
+}
+
+.order-note-key {
+	font-size: 15px;
+	color: #333;
+	font-weight: bold;
+}
+
+.order-note-input {
+	flex: 1;
+	text-align: right;
+	font-size: 15px;
+	border: none;
+}
+
+.order-footer {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	border-top: 1px solid #eee;
+}
+
+.total-text {
+	color: #333;
+	font-size: 12px;
+	margin-left: 15px;
+}
+
+.total-price {
+	color: #fe5760;
+	font-size: 20px;
+	font-weight: bold;
+	flex: 1;
+}
+
+.order-pay-btn {
+	width: 120px;
+	height: 48px;
+	background: #fe5760;
+	align-items: center;
+	justify-content: center;
+}
+
+.order-pay-btn-text {
+	color: #fff;
+	font-size: 15px;
+}
+</style>

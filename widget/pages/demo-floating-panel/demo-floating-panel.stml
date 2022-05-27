@@ -1,0 +1,50 @@
+<template>
+  <safe-area class="page">
+    <avm-nav-bar onBack={this.back}>FloatingPanel</avm-nav-bar>
+    <avm-floating-panel anchors={[100, 200, 400]}>
+      <text v-for="item in list">{item}</text>
+    </avm-floating-panel>
+  </safe-area>
+</template>
+
+<script>
+import '../../components/avm-ui/floating-panel';
+import '../../components/avm-ui/nav-bar';
+export default {
+	name: 'test',
+    data() {
+        return {
+            list: [
+                'A',
+                'B',
+                'C',
+                'D',
+                'E',
+                'F',
+                'G',
+                'H',
+                'I',
+                'J',
+                'K',
+                'L',
+                'M',
+                'N',
+                'O',
+                'P',
+                'Q',
+            ]
+        }
+    },
+    back() {
+      api.closeWin();
+    },
+}
+</script>
+
+
+<style scoped>
+.page{
+    position: relative;
+    height: 100%;
+}
+</style>

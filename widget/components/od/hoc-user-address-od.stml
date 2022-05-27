@@ -1,0 +1,104 @@
+<template>
+	<!-- 地址信息 -->
+	<view class="address_container">
+		<view class="address_box">
+			<image class="address_img" src="http://ae8b3ee28597856d3283.qiniucdn.apicloud-system.com/apicloud/1b4989f12f30b3faddb0b21375e2b7c0.png"></image>
+			<view class="address_wrap">
+				<!-- 无地址 -->
+				<!-- <text class="noaddress" v-if={ptype==1 && !useraddress}>请添加收货地址</text> -->
+				<!-- 配送 -->
+				<view class="address_cont">
+					<view class="address_tit">
+						<text class="address_name">{'收货人：' + data.name}</text>
+						<view class="flex1"></view>
+						<text class="address_phone">{data.phone}</text>
+					</view>
+					<text class="address_details">{data.qustr + data.address}</text>
+				</view>
+			</view>
+			<image class="address_gor" src="http://ae8b3ee28597856d3283.qiniucdn.apicloud-system.com/apicloud/7158c8c5425bd78b31d74da4ca8563f2.png"></image>
+		</view>
+	</view>
+</template>
+<script>
+export default {
+	name: 'hoc-user-address-od',
+	props: {
+		data: {
+			tpe: Object,
+			default: function () {
+				return {}
+			}
+		}
+	},
+	apiready() {//like created
+
+	},
+	data() {
+		return {
+			data:this.props.data || {
+					"name": "测试姓名",
+					"phone": "17733553555",
+					"qustr": "北京市,北京市,东城区",
+					"address": "幸福小区"
+				}
+		}
+	},
+	methods: {
+
+	}
+}
+</script>
+<style scoped>
+/* 地址 */
+.address_container {
+	background-color: white;
+}
+.address_box {
+	flex-direction: row;
+	align-items: center;
+	min-height: 85px;
+	margin: 15px;
+	border: 1px solid #f5f5f5;
+	border-radius: 4px;
+}
+.address_img {
+	width: 32px;
+	height: 32px;
+	margin-left: 10px;
+}
+.address_wrap {
+	justify-content: center;
+	flex: 1;
+	margin: 0 15px;
+}
+.noaddress {
+	font-size: 15px;
+	color: #333333;
+}
+.address_tit {
+	flex-direction: row;
+}
+.address_name {
+	font-size: 15px;
+	color: #333333;
+}
+.flex1 {
+	flex: 1;
+}
+.address_phone {
+	margin-top: 2px;
+	font-size: 13px;
+	color: #777777;
+}
+.address_details {
+	margin-top: 5px;
+	font-size: 12px;
+	color: #333333;
+}
+.address_gor {
+	width: 14px;
+	height: 14px;
+	margin-right: 10px;
+}
+</style>

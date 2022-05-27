@@ -1,0 +1,23 @@
+<template>
+	<view class="about">
+		<rich-text :nodes='html_detail' />
+	</view>
+</template>
+<script>
+export default {
+	name: 'hoc-about-us-es',
+	props: {
+		html_detail: {
+			type: String,
+			default: ''
+		}
+	},
+	data(){
+		return{
+			html_detail: this.props.html_detail !== undefined ? this.props.html_detail : "<div><span style='color: #222222; font-size: 18px;'>柚子深山茶叶有限公司</span></div>\n<div><span style='color: #888888; font-size: 14px;'>北京市朝阳区中关村科技园区电子城科技园A1座2层</span></div>\n<div><span style='color: #888888; font-size: 14px;'>www.apicloud.com</span></div>\n<div><span style='color: #888888; font-size: 14px; display: block;'>18642511611</span></div>"
+		}
+	}
+}
+</script>
+<style>
+</style>

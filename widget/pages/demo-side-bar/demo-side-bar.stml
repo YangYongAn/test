@@ -1,0 +1,114 @@
+<template>
+	<scroll-view>
+		<safe-area>
+			<NavBar onBack={this.back}>avm-side-bar</NavBar>
+			<DemoBlock title='基本用法' padding='0'>
+				<avm-side-bar>
+					{this.data.tabs.map(item => (
+					<avm-side-bar-item key={item.key} title={item.title} />
+					))}
+				</avm-side-bar>
+			</DemoBlock>
+			<DemoBlock title='配合 Badge 使用' padding='0'>
+				<avm-side-bar>
+					{this.data.tabs.map(item => (
+					<avm-side-bar-item key={item.key} title={item.title} badgeContent={item.badgeContent}
+						isDot={item.isDot} />
+					))}
+				</avm-side-bar>
+			</DemoBlock>
+			<DemoBlock title='禁用某个选项' padding='0'>
+				<avm-side-bar>
+					{this.data.tabs.map(item => (
+					<avm-side-bar-item key={item.key} title={item.title} disabled={item.disabled} />
+					))}
+				</avm-side-bar>
+			</DemoBlock>
+			<DemoBlock title='受控组件' padding='0'>
+				<div className={'container'}>
+					<div>
+						<avm-side-bar activeKey={this.data.activeKey} onChange={this.setActiveKey}>
+							{this.data.tabs.map(item => (
+							<avm-side-bar-item key={item.key} title={item.title} />
+							))}
+						</avm-side-bar>
+					</div>
+					<div>
+						<text>{{ this.data.activeKey }}</text>
+						<div class={ this.data.activeKey=='key1' ? 'isVisable' : 'isHidden' }>A</div>
+						<div class={ this.data.activeKey=='key2' ? 'isVisable' : 'isHidden' }>B</div>
+						<div class={ this.data.activeKey=='key3' ? 'isVisable' : 'isHidden' }>C</div>
+					</div>
+				</div>
+			</DemoBlock>
+			<DemoBlock title='自定义宽度' padding='0'>
+				<avm-side-bar style="width:120px">
+					{this.data.tabs.map(item => (
+					<avm-side-bar-item key={item.key} title={item.title} />
+					))}
+				</avm-side-bar>
+			</DemoBlock>
+		</safe-area>
+	</scroll-view>
+</template>
+
+<style src="../../components/avm-ui/demos/index.css"/>
+<style src="../../components/avm-ui/side-bar/index.css"/>
+<style src="../../components/avm-ui/badge/index.css"/>
+<style src="../../components/avm-ui/nav-bar/index.css"/>
+<style>
+.demoBlock {
+	background-color: #f5f7fa;
+}
+.container {
+	display: flex;
+	flex-direction: row;
+}
+.isVisable {
+	display: block;
+}
+.isHidden {
+	display: none;
+}
+</style>
+<script>
+import { DemoBlock } from '../../components/avm-ui/demos'
+import '../../components/avm-ui/side-bar'
+import Badge from '../../components/avm-ui/badge'
+import NavBar from '../../components/avm-ui/nav-bar'
+export default {
+
+	name: 'demo-side-bar',
+	data() {
+		return {
+			activeKey: 'key2',
+			tabs: [{
+				key: 'key1',
+				title: '选项一',
+				badgeContent: '1111',
+				isDot:false
+			},
+			{
+				key: 'key2',
+				title: '选项二',
+				badge: '5',
+			},
+			{
+				key: 'key3',
+				title: '选项三',
+				badge: '99+',
+				disabled: true,
+			}]
+		}
+	},
+	methods: {
+		setActiveKey(val) {
+			this.data.activeKey = val
+		},
+		back() {
+			api.closeWin();
+		}
+	}
+
+}
+</script>

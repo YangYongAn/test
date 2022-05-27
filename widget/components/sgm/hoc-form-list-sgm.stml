@@ -1,0 +1,75 @@
+<template>
+	<view class="form-list">
+		<view
+			v-for="(item, index) in list"
+			:key="item.id"
+			:class="`form-list-item ${index === list.length - 1 ? 'form-list-item-nobottom-border' : ''}`">
+			<text class="form-list-item-left">{item.label}</text>
+			<text class="form-list-item-right">{item.text}</text>
+		</view>
+	</view>
+</template>
+<script>
+export default {
+	name: 'hoc-form-list-sgm',
+	apiready() {//like created
+
+	},
+	data() {
+		return {
+			list: this.props.formList || [{
+				label: '拼团人数',
+				text: '3人',
+				id: '11'
+			}, {
+				label: '商品金额',
+				text: '￥120',
+				id: '22'
+			}, {
+				label: '邮费',
+				text: '￥0',
+				id: '33'
+			}]
+		}
+	},
+	methods: {
+
+	}
+}
+</script>
+<style>
+.form-list {
+	width: 100%;
+	background: #fff;
+	padding: 0 16px;
+    margin-bottom: 10px;
+}
+.form-list-item {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	padding: 16px 0;
+	border-bottom: 0.5px solid #e8e8e8;
+}
+.form-list-item-nobottom-border {
+	border-bottom: none;
+}
+.form-list-item-left {
+	font-size: 16px;
+	color: #393f44;
+	width: 100px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+.form-list-item-right {
+	font-size: 14px;
+	color: #979ea6;
+	flex: 1;
+	margin-left: 8px;
+	text-align: right;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+</style>

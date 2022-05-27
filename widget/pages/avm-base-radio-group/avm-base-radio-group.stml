@@ -1,0 +1,72 @@
+<!--基础组件-->
+<template>
+<safe-area class="page">
+	<avm-nav-bar onBack={this.back}>RadioGroup</avm-nav-bar>
+	<DemoBlock title='基础用法'>
+		<radio-group class="group" onchange={this.radiogroupChanged}>
+            <label class="radio_label">
+                <radio color="#9ac200" value="radio_one" class="radio_label_icon"/>
+                <text class="radio_label_text">选项一</text>
+            </label>
+            <label class="radio_label">
+                <radio color="#9ac200" value="radio_two" class="radio_label_icon"/>
+                <text class="radio_label_text">选项二</text>
+            </label>
+        </radio-group>
+	</DemoBlock>
+	<DemoBlock title='自定义icon'>
+		<radio-group class="group" onchange={this.radiogroupChanged}>
+            <label class="radio_label">
+                <radio icon="../../image/unSelect.png" selectedIcon="../../image/select.png" value="radio_one" class="radio_label_icon"/>
+                <text class="radio_label_text">选项一</text>
+            </label>
+            <label class="radio_label">
+                <radio icon="../../image/unSelect.png" selectedIcon="../../image/select.png" value="radio_two" class="radio_label_icon"/>
+                <text class="radio_label_text">选项二</text>
+            </label>
+        </radio-group>
+	</DemoBlock>
+</safe-area>
+</template>
+<script>
+import '../../components/avm-ui/nav-bar'
+import {DemoBlock} from '../../components/avm-ui/demos'
+export default {
+	name: 'avm-base-radio-group',
+	data(){
+		return {
+			
+		}
+    },
+	methods: {
+		back() {
+			api.closeWin();
+		},
+		radiogroupChanged(e) {
+			api.toast({
+				msg: JSON.stringify(e.detail.value)
+			});
+		}
+	}
+}
+</script>
+<style>
+.page {
+	width: 100%;
+	height: 100%;
+	background: #f2f2f2;
+	padding: 0 16px;
+}
+.radio_label {
+	margin: 8px 0;
+}
+.radio_label_icon {
+	margin-right: 8px;
+	width: 22px;
+	height: 22px;
+}
+.radio_label_text {
+	font-size: 14px;
+	color: #333;
+}
+</style>

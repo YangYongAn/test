@@ -1,0 +1,92 @@
+<template>
+	<safe-area class="template-od">
+		<view class="od-tab-bar" >
+			<hoc-tab-bar-od @tabClick="tabClick" :tabList="tabList"/>
+		</view>
+	</safe-area>
+</template>
+<script>
+import '../../components/od/hoc-tab-bar-od.stml'
+export default {
+	name: 'template-od',
+	apiready() {//like created
+		this.openFrameGroup()
+	},
+	data() {
+		return {
+			tabList: [
+				{
+					icon: '../../image/icon-tab-home.png',
+					selectedIcon: '../../image/icon-tab-home-selected.png',
+					msg: "首页"
+				},
+				{
+					icon: '../../image/icon-tab-menu.png',
+					selectedIcon: '../../image/icon-tab-menu-selected.png',
+					msg: "菜单"
+				},
+				{
+					icon: '../../image/icon-tab-cart.png',
+					selectedIcon: '../../image/icon-tab-cart-selected.png',
+					msg: "购物车"
+				},
+				{
+					icon: '../../image/icon-tab-user.png',
+					selectedIcon: '../../image/icon-tab-user-selected.png',
+					msg: "我的"
+				}
+			]
+		}
+	},
+	methods: {
+		tabClick(item) {
+			this.setFrameGroupIndex(item.detail)
+		},
+		setFrameGroupIndex(index) {
+			api.setFrameGroupIndex({
+				name: 'main-template-od',
+				index
+			})
+		},
+		openFrameGroup() {
+			api.openFrameGroup({
+				name: 'main-template-od',
+				scrollEnabled: false,
+				background: '#fff',
+				rect: {
+					matginTop: 0,
+					marginBottom: 90
+				},
+				frames: [{
+					name: 'template-of-main_home',
+					url: '../template-of-main_home/template-of-main_home.stml'
+				}, {
+					name: 'template-of-main_menu',
+					url: '../template-of-main_menu/template-of-main_menu.stml'
+				}, {
+					name: 'template-of-main_cart',
+					url: '../template-of-main_cart/template-of-main_cart.stml'
+				}, {
+					name: 'template-of-main_user',
+					url: '../template-of-main_user/template-of-main_user.stml'
+				}]
+			}, (ret, err) => {
+				var index = ret.index;
+				this.setFrameGroupIndex(index)
+			});
+		}
+	}
+}
+</script>
+<style>
+.template-od {
+	width: 100%;
+	height: 100%;
+	background: #fff;
+}
+.od-tab-bar {
+	width: 100%;
+	position: absolute;
+	bottom: 16px;
+}
+</style>

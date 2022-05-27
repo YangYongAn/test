@@ -1,0 +1,76 @@
+<template>
+    <view class="user-info">
+		<view class="user-info-item user-info-item-one">
+			<text class="user-info-item-label">头像</text>
+			<image class="user-info-item-icon" :src="avatar" mode="aspectFill"></image>
+		</view>
+		<view class="user-info-item user-info-item-two">
+			<text class="user-info-item-label">昵称</text>
+			<text class="user-info-item-text">{{nickName}}</text>
+		</view>
+		<text class="user-info-btn" onclick="logout">{{btnText}}</text>
+    </view>
+</template>
+<script>
+export default {
+	name: 'hoc-personal-data-sgm',
+	data() {
+		return {
+			avatar: this.props.avatar !== undefined ? this.props.avatar :  "http://ae8b3ee28597856d3283.qiniucdn.apicloud-system.com/apicloud/4bb17d1e558c34b813965d8b35e05407.png",
+            nickName: this.props.nickName !== undefined ? this.props.nickName : '樱桃小丸子',
+            btnText: this.props.btnText !== undefined ? this.props.btnText : '退出登录'
+		}
+	},
+	methods: {
+		logout(){
+			this.fire('logout')
+		}
+	}
+}
+</script>
+<style>
+.user-info {
+	height: 100%;
+	padding: 0 15px;
+	background-color: white;
+}
+.user-info-item{
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	border-bottom: 1px solid #f8f8f8;
+}
+.user-info-item-one{
+	height: 90px;
+}
+.user-info-item-label{
+    font-size: 16px;
+	color: #333333;
+}
+.user-info-item-icon{
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+}
+.user-info-item-text{
+    font-size: 16px;
+	color: #777777;
+}
+.user-info-item-two{
+	height: 44px;
+}
+.user-info-btn{
+    height: 45px;
+    border-radius: 4px;
+	font-weight: bold;
+	margin: 40px 15px 15px;
+    text-align: center;
+    line-height: 45px;
+    font-size: 16px;
+	background-color: #339DFF;
+	color: white;
+}
+.user-info-btn:active{
+	opacity: 0.7;
+}
+</style>

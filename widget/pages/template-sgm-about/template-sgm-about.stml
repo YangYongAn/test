@@ -1,0 +1,25 @@
+<template>
+    <safe-area class="page">
+        <hoc-nav-bar-sgm isShowBack title="关于我们" version="1.0.98" image="http://ae8b3ee28597856d3283.qiniucdn.apicloud-system.com/apicloud/4bb17d1e558c34b813965d8b35e05407.png" url="www.apicloud.com" />
+        <hoc-aboutus-sgm title="拼团商城" version="1.0.98" url="www.apicloud.com" />
+    </safe-area>
+</template>
+<script>
+import '../../components/sgm/hoc-aboutus-sgm.stml';
+import '../../components/sgm/hoc-nav-bar-sgm.stml';
+export default {
+    name: 'template-sgm-about',
+    apiready() { //like created
+    },
+    data() {
+        return {};
+    },
+    methods: {}
+};
+</script>
+<style>
+.page {
+    height: 100%;
+    background-color: #f8f8f8;
+}
+</style>

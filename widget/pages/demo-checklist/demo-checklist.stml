@@ -1,0 +1,66 @@
+<template>
+
+	<safe-area class="page">
+		<avm-nav-bar onBack={this.back}>CheckList</avm-nav-bar>
+		<scroll-view :show-scrollbar="false">
+			<DemoBlock title='基础用法' padding='0' border='none'>
+				<avm-check-list defaultValue={['B']} list={list1} handleChange={val => this.onChange(val)}/>
+			</DemoBlock>
+			<DemoBlock title='多选' padding='0' border='none'>
+				<avm-check-list multiple defaultValue={['B', 'C']} list={list2} handleChange={(val) => this.onChange(val)}/>
+			</DemoBlock>
+			<DemoBlock title='自定义选中图标' padding='0' border='none'>
+				<avm-check-list defaultValue={['B']} list={list2} activeIcon={<text style="color: #9ac200">选中</text>}/>
+			</DemoBlock>
+			<DemoBlock title='整组只读' padding='0' border='none'>
+				<avm-check-list defaultValue={['B']} readOnly list={list3}/>
+			</DemoBlock>
+			<DemoBlock title='整组禁用' padding='0' border='none'>
+				<avm-check-list disabled list={list3}/>
+			</DemoBlock>
+		</scroll-view>
+	</safe-area>
+</template>
+
+<script>
+import '../../components/avm-ui/check-list'
+import '../../components/avm-ui/nav-bar'
+import {DemoBlock} from '../../components/avm-ui/demos'
+
+const list1 = [
+  {value: 'A', label: '选项', onClick: () => {api.toast({msg: '点击了A!'})}},
+  {value: 'B', label: '选项'},
+  {value: 'C', label: '选项', disabled: true},
+  {value: 'D', label: '选项', readOnly: true}
+]
+const list2 = [
+  {value: 'A', label: '选项'},
+  {value: 'B', label: '选项'},
+  {value: 'C', label: '选项'}
+]
+const list3 = [
+  {value: 'A', label: '选项'},
+  {value: 'B', label: '选项'}
+]
+export default {
+	name: 'demo-checklist',
+	methods: {
+		back() {
+			api.closeWin();
+		},
+		onChange(val) {
+			console.log(val)
+			api.toast({
+				msg: JSON.stringify(val)
+			})
+		}
+	}
+}
+</script>
+<style src="../../components/avm-ui/demos/index.css"></style>
+<style>
+.page {
+	background: #f2f2f2;
+	padding: 0 16px;
+}
+</style>

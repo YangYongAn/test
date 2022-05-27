@@ -1,0 +1,92 @@
+<template>
+	<safe-area>
+		<NavBar onBack={this.back}>avm-dropdown</NavBar>
+	
+		<DemoBlock title='一列' padding={'0'}>
+			<avm-dropdown>
+				<avm-dropdown-item key='sorter' title='排序'>
+
+					<Space direction='vertical' block>
+						<Radio block value='default'>
+							综合排序
+						</Radio>
+						<Radio block value='nearest'>
+							距离最近
+						</Radio>
+						<Radio block value='top-rated'>
+							评分最高
+						</Radio>
+					</Space>
+
+				</avm-dropdown-item>
+
+			</avm-dropdown>
+		</DemoBlock>
+
+		<DemoBlock title='两列' padding={'0'}>
+			<avm-dropdown>
+				<avm-dropdown-item key='sorter' title='排序'>
+					<div style="padding: 12px">
+						<span>排序内容</span>
+						<span>排序内容</span>
+						<span>排序内容</span>
+					</div>
+				</avm-dropdown-item>
+				<avm-dropdown-item key='bizop' title='商机筛选'>
+					<div style="padding: 12px">
+						<span>商机筛选内容</span>
+						<span>商机筛选内容</span>
+						<span>商机筛选内容</span>
+					</div>
+				</avm-dropdown-item>
+			</avm-dropdown>
+		</DemoBlock>
+		<DemoBlock title='自定义arrow' padding={'0'}>
+			<avm-dropdown  arrow={<avm-icon name='StarFill' fontSize={12}/>}>
+				<avm-dropdown-item key='sorter' title='排序' >
+					<div style="padding: 12px">
+						<span>排序内容</span>
+						<span>排序内容</span>
+						<span>排序内容</span>
+					</div>
+				</avm-dropdown-item>
+				<avm-dropdown-item key='bizop' title='商机筛选' >
+					<div style="padding: 12px">
+						<span>商机筛选内容</span>
+						<span>商机筛选内容</span>
+						<span>商机筛选内容</span>
+					</div>
+				</avm-dropdown-item>
+				<avm-dropdown-item key='more' title='更多筛选'>
+					<div style="padding: 12px">
+						<span>更多筛选内容</span>
+						<span>更多筛选内容</span>
+					</div>
+				</avm-dropdown-item>
+			</avm-dropdown>
+		</DemoBlock>
+	</safe-area>
+</template>
+
+<style src="../../components/avm-ui/demos/index.css"/>
+<style src="../../components/avm-ui/avm-dropdown/index.css"/>
+<style src="../../components/avm-ui/radio/index.css"/>
+<style src="../../components/avm-ui/nav-bar/index.css"/>
+<style src="../../components/avm-ui/space/index.css"/>
+
+<script>
+
+import { DemoBlock } from '../../components/avm-ui/demos'
+import '../../components/avm-ui/dropdown'
+import Radio from '../../components/avm-ui/radio'
+import NavBar from '../../components/avm-ui/nav-bar'
+import Space from '../../components/avm-ui/space'
+import '../../components/avm-ui/icon'
+
+export default {
+	name: 'demo-divider',
+	back() {
+		api.closeWin();
+	}
+}
+</script>

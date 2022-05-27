@@ -1,0 +1,101 @@
+<!--付款-地址卡片-->
+<template>
+	<view class="pay-address">
+		<view class="pay-address-box" @click="handleClick">
+			<image class="pay-address-img" src="http://ae8b3ee28597856d3283.qiniucdn.apicloud-system.com/apicloud/0d5e497818619d204390eb9163f55086.png"></image>
+			<view class="pay-address-wrap">
+				<!-- 无地址 -->
+				<text class="pay-address-noaddress" v-if="!consignee">请添加收货地址</text>
+				<!-- 配送 -->
+				<view v-else>
+					<view class="pay-address-info-item">
+						<text class="pay-address-name">收货人：{{consignee}}</text>
+						<view class="flex1"></view>
+						<text class="pay-address-phone">{this.phoneHash(phone.toString())}</text>
+					</view>
+					<text class="pay-address-details">{{area}}{{detailAddress}}</text>
+				</view>
+			</view>
+			<image class="pay-address-gor" src="http://ae8b3ee28597856d3283.qiniucdn.apicloud-system.com/apicloud/c89316e175437ebce8f361ef3f9c3973.png"></image>
+		</view>
+	</view>
+</template>
+<script>
+export default {
+	name: 'hoc-pay-address-sgm',
+	apiready() {//like created
+
+	},
+	data() {
+		return {
+			consignee: this.props.consignee !== undefined ? this.props.consignee : '李丽',
+            phone:  this.props.phone !== undefined ? this.props.phone : 1234556789,
+            area:  this.props.area !== undefined ? this.props.area : '北京',
+            detailAddress:  this.props.detailAddress !== undefined ? this.props.detailAddress : '北京市海淀区用友产业园'
+		}
+	},
+	methods: {
+		handleClick() {
+			this.fire('handleClick')
+		},
+		phoneHash(phone){
+            if(!phone){return ''}
+            phone = phone.substring(0,3) + "****" + phone.substring(7);
+            return phone;
+        },
+	}
+}
+</script>
+<style>
+.pay-address {
+	background-color: white;
+	margin-bottom: 10px;
+}
+.pay-address-box {
+	flex-direction: row;
+	align-items: center;
+	min-height: 85px;
+	margin: 15px;
+	border: 1px solid #f5f5f5;
+	border-radius: 4px;
+}
+.pay-address-img {
+	width: 32px;
+	height: 32px;
+	margin-left: 10px;
+}
+.pay-address-wrap {
+	justify-content: center;
+	flex: 1;
+	margin: 0 15px;
+}
+.pay-address-noaddress {
+	font-size: 15px;
+	color: #333333;
+}
+.pay-address-info-item {
+	flex-direction: row;
+}
+.pay-address-name {
+	font-size: 15px;
+	color: #333333;
+}
+.flex1 {
+	flex: 1;
+}
+.pay-address-phone {
+	margin-top: 2px;
+	font-size: 13px;
+	color: #777777;
+}
+.pay-address-details {
+	margin-top: 5px;
+	font-size: 12px;
+	color: #333333;
+}
+.pay-address-gor {
+	width: 14px;
+	height: 14px;
+	margin-right: 10px;
+}
+</style>

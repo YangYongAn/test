@@ -1,0 +1,61 @@
+<!--报名-头部课程信息-->
+<template>
+	<view class="b-basecourse-card">
+		<img :src="cover" class="b-basecourse-card-cover"/>
+		<view class="b-basecourse-card-info">
+			<text class="b-basecourse-card-title">{{ title }}</text>
+			<text class="b-basecourse-card-price"> {{ class_hour }}课时 / {{ price }}元</text>
+		</view>
+	</view>
+</template>
+<script>
+	export default {
+		name: 'hoc-pay-course-info-et',
+		apiready(){//like created
+
+		},
+		data() {
+			return{
+				cover: this.props.cover !== undefined ? this.props.cover : "http://aa8954a760b087bd5575.qiniucdn.apicloud-system.com/apicloud/76abf6b3c8df591a726c3156427b1171.png",
+				title: this.props.title !== undefined ? this.props.title : "托福基础班",
+				class_hour: this.props.class_hour !== undefined ? this.props.class_hour : 2,
+				price: this.props.price !== undefined ? this.props.price : 20
+			}
+		},
+		methods: {
+
+		}
+	}
+</script>
+<style>
+.b-basecourse-card {
+  padding: 20px 15px;
+  flex-flow: row nowrap;
+  align-items: center;
+  background: #FFF;
+}
+
+.b-basecourse-card-cover {
+  width: 124px;
+  height: 70px;
+}
+
+.b-basecourse-card-info {
+  margin-left: 15px;
+}
+
+.b-basecourse-card-title {
+  color: #333;
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.b-basecourse-card-price {
+  font-size: 16px;
+  font-weight: bold;
+  color: #FA6400;
+  line-height: 16px;
+  font-family: monospace;
+}
+</style>

@@ -1,0 +1,78 @@
+<template>
+	<safe-area class="page">
+		<NavBar onBack={this.back}>Grid</NavBar>
+		<scroll-view>
+			<DemoBlock title='基础用法'>
+				<avm-grid columns={3} gap={8}>
+					<avm-grid-item>
+						<span class='grid-demo-item-block'>A</span>
+					</avm-grid-item>
+					<avm-grid-item>
+						<span class='grid-demo-item-block'>B</span>
+					</avm-grid-item>
+					<avm-grid-item>
+						<span class='grid-demo-item-block'>C</span>
+					</avm-grid-item>
+					<avm-grid-item>
+						<span class='grid-demo-item-block'>D</span>
+					</avm-grid-item>
+					<avm-grid-item>
+						<span class='grid-demo-item-block'>E</span>
+					</avm-grid-item>
+				</avm-grid>
+			</DemoBlock>
+			<DemoBlock title='控制格子的跨度'>
+				<avm-grid columns={3} gap={8}>
+					<avm-grid-item>
+						<span class='grid-demo-item-block'>A</span>
+					</avm-grid-item>
+					<avm-grid-item span={2}>
+						<span class='grid-demo-item-block'>B</span>
+					</avm-grid-item>
+					<avm-grid-item span={2}>
+						<span class='grid-demo-item-block'>C</span>
+					</avm-grid-item>
+					<avm-grid-item @click="handleClick">
+						<span class='grid-demo-item-block'>D</span>
+					</avm-grid-item>
+					<avm-grid-item span={3} @click="handleClick">
+						<span class='grid-demo-item-block'>E</span>
+					</avm-grid-item>
+				</avm-grid>
+			</DemoBlock>
+		</scroll-view>
+	</safe-area>
+</template>
+
+<script>
+import '../../components/avm-ui/grid'
+import NavBar from '../../components/avm-ui/nav-bar'
+import {DemoBlock} from '../../components/avm-ui/demos'
+export default {
+	name: 'demo-grid',
+	methods: {
+		back() {
+			api.closeWin();
+		},
+		handleClick() {
+			api.toast({
+				msg: '点击啦'
+			})
+		}
+	}
+}
+</script>
+<style src="../../components/avm-ui/demos/index.css"></style>
+<style lang="less">
+.page {
+	background: #f2f2f2;
+}
+.grid-demo-item-block {
+	border: solid 1px #999;
+	background: #f5f5f5;
+	text-align: center;
+	color: #999999;
+	height: 30px;
+	line-height: 30px;
+}
+</style>

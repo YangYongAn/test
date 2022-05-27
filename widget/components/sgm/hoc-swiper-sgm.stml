@@ -1,0 +1,115 @@
+<!--首页-图片轮播-->
+<template>
+	<view class="index-swiper-wrapper">
+		<swiper class="index-swiper" circular autoplay @change="fnSwiperChange">
+			<swiper-item v-for="(item, index) in swiperList" style="width: 100%; height: 180px;">
+				<image class="index-swiper-img" :src="item.icon" @click="fnBannerPage(item)"
+					:data-index="index" />
+			</swiper-item>
+		</swiper>
+		<view class="index-swiper-dots">
+			<view v-for="(item, index) in swiperList"
+				:class="this.data.current == index ? 'index-swiper-dot-on' : 'index-swiper-dot'"></view>
+		</view>
+	</view>
+</template>
+<script>
+const banerList = [{
+	"id": "0cdfb640-d2db-11ea-ab34-1b0cd727d0eb",
+	"title": "333",
+	"type": "class",
+	"orderby": 1,
+	"addtime": "2020-07-31T03:08:04.388Z",
+	"goodsid": "",
+	"topid": "top1",
+	"classid": "765fdbc0-dba2-11ea-a68f-873831895ca3",
+	"icon": "http://a346b1014469c58049d5.qiniucdn.apicloud-system.com/apicloud/0a26deb65cb6e537a5e619241d382ecc.png"
+}, {
+	"id": "df67a270-dba1-11ea-a68f-873831895ca3",
+	"title": "拼团4",
+	"type": "none",
+	"orderby": 1,
+	"addtime": "2020-08-11T07:11:27.255Z",
+	"goodsid": "",
+	"icon": "http://a346b1014469c58049d5.qiniucdn.apicloud-system.com/apicloud/746f329fbe1b3791e49072c8a05ec60e.png"
+}, {
+	"id": "f6c3c4f0-d2da-11ea-ab34-1b0cd727d0eb",
+	"title": "222",
+	"type": "top",
+	"orderby": 1,
+	"addtime": "2020-07-31T03:07:27.295Z",
+	"goodsid": "",
+	"topid": "top2",
+	"icon": "http://a346b1014469c58049d5.qiniucdn.apicloud-system.com/apicloud/521010247ff5852fe77dff5a943e6d97.png"
+}, {
+	"id": "d8ebd8a0-d2da-11ea-ab34-1b0cd727d0eb",
+	"title": "111",
+	"type": "item",
+	"orderby": 1,
+	"addtime": "2020-07-31T03:06:37.226Z",
+	"goodsid": "a304eb50-d2df-11ea-ab34-1b0cd727d0eb",
+	"topid": "top1",
+	"icon": "http://a346b1014469c58049d5.qiniucdn.apicloud-system.com/apicloud/0a26deb65cb6e537a5e619241d382ecc.png"
+}]
+export default {
+	name: 'hoc-swiper-sgm',
+	apiready() {//like created
+
+	},
+	data() {
+		return {
+			current: this.props.current !== undefined ? this.props.current : 0,
+			swiperList: this.props.list || banerList
+		}
+	},
+	methods: {
+		fnSwiperChange(e) {
+			this.data.current = e.detail.current;
+			this.fire('swiperChange', e.detail)
+		},
+		fnBannerPage(item) {
+			console.log(JSON.stringify(item))
+			this.fire('itemClick', item)
+		}
+	}
+}
+</script>
+<style>
+.index-swiper-wrapper {
+	height: 180px;
+	margin: 10px 15px;
+	background-color: #fff;
+	/* box-shadow: 0 0 5px #f9f9f9; */
+}
+.index-swiper {
+	height: 180px;
+	border-radius: 6px;
+}
+.index-swiper-img {
+	width: 100%;
+	height: 97%;
+	border-radius: 6px;
+}
+.index-swiper-dots {
+	flex-direction: row;
+	justify-content: center;
+	width: 100%;
+	height: 4px;
+	position: absolute;
+	bottom: 12px;
+}
+.index-swiper-dot {
+	width: 4px;
+	height: 100%;
+	background-color: rgba(255, 255, 255, 0.4);
+	border-radius: 2px;
+	margin: 0 2px;
+}
+.index-swiper-dot-on {
+	width: 15px;
+	height: 100%;
+	background-color: rgba(255, 255, 255, 1);
+	border-radius: 2px;
+	margin: 0 2px;
+}
+</style>

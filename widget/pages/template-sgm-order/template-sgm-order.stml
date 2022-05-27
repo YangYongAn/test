@@ -1,0 +1,80 @@
+<template>
+    <safe-area class="page">
+        <hoc-nav-bar-sgm isShowBack title="我的订单" />
+        <hoc-tab-switch-sgm :tabList="hocTabSwitchSgmTabList"/>
+        <hoc-order-list-sgm :ordeBaseInfo="hocOrderListSgmOrdeBaseInfo" :buyProductList="hocOrderListSgmBuyProductList" @goodsItemClick="goodsItemClick"/>
+    </safe-area>
+</template>
+<script>
+import '../../components/sgm/hoc-nav-bar-sgm.stml';
+import '../../components/sgm/hoc-tab-switch-sgm.stml';
+import '../../components/sgm/hoc-order-list-sgm.stml';
+export default {
+    name: 'template-sgm-order',
+    apiready() { //like created
+    },
+    data() {
+        return {
+            hocTabSwitchSgmTabList: [{
+                text: "全部",
+                value: "all"
+            }, {
+                text: "待付款",
+                value: "pay"
+            }, {
+                text: "待成团",
+                value: "pin"
+            }, {
+                text: "待发货",
+                value: "sendGoods"
+            }, {
+                text: "待收货",
+                value: "getGoods"
+            }, {
+                text: "已完成",
+                value: "done"
+            }],
+            hocOrderListSgmOrdeBaseInfo: {
+                orderid: "202203290948386376",
+                status: 5,
+                pay_price: 4198.88,
+                buy_num: 2,
+                endmiao: 2000000,
+                status_str: "已关闭",
+                cnum: 3
+            },
+            hocOrderListSgmBuyProductList: [{
+                title: "苹果笔记本电脑超薄",
+                image: "http://ae8b3ee28597856d3283.qiniucdn.apicloud-system.com/apicloud/02b297b95bd2ae7aa0021ed8df11bede.png",
+                price: 30.9,
+                delprice: 50,
+                key: "小盒/200g",
+                buynum: 1,
+                act: "tuan"
+            }, {
+                title: "Apple 2019新款 Mac Pro 32G 256G八核 Intel Xeon W（3.5GHz…",
+                image: "http://ae8b3ee28597856d3283.qiniucdn.apicloud-system.com/apicloud/899e2ba871eb98a66e22004747fb12df.png",
+                price: 30.9,
+                delprice: 40,
+                key: "小盒/200g",
+                buynum: 1,
+                act: "buy"
+            }]
+        };
+    },
+    methods: {
+        goodsItemClick() {
+            api.openWin({
+                name: 'orderDetail',
+                url:'../template-sgm-order_detail/template-sgm-order_detail.stml'
+            })
+        }
+    }
+};
+</script>
+<style>
+.page {
+    height: 100%;
+    background-color: #f8f8f8;
+}
+</style>

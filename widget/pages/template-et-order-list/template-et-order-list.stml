@@ -1,0 +1,46 @@
+<template>
+    <view class="page">
+        <hoc-header-bar-et title="我的订单" isBack/>
+        <scroll-view style="flex: 1;" scroll-y :show-scrollbar="false">
+            <hoc-order-list-et @itemClick="intoDetail" :orderList="orderList" />
+        </scroll-view>
+    </view>
+</template>
+<script>
+import "../../components/et/hoc-header-bar-et.stml";
+import '../../components/et/hoc-order-list-et.stml';
+export default {
+    name: "template-et-order-list",
+    data() {
+        return {
+            orderList: [{
+                id: "111",
+                status: 2,
+                order_number: 202202021023,
+                amount: 3500,
+                title: "托福提高班"
+            }, {
+                id: "222",
+                status: 1,
+                order_number: 202202021024,
+                amount: 5000,
+                title: "托福提分班"
+            }]
+        };
+    },
+    methods: {
+        intoDetail() {
+            api.openWin({
+                name: 'template-et-order-detail',
+                url: '../template-et-order-detail/template-et-order-detail.stml'
+            });
+        }
+    }
+};
+</script>
+<style>
+.page {
+    height: 100%;
+    background: #F8F8F8;
+}
+</style>

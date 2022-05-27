@@ -1,0 +1,83 @@
+<!--基础组件-->
+<template>
+<safe-area class="page">
+	<avm-nav-bar onBack={this.back}>Image</avm-nav-bar>
+	<scroll-view :show-scrollbar="false" scroll-y>
+		<DemoBlock title='原图'>
+			<image class="originImage" src={src} mode="widthFix"></image>	
+		</DemoBlock>
+        <DemoBlock v-for="(item, index) in list" :title="item.text">
+           <image class="image" src={src} mode={item.mode}></image>
+        </DemoBlock>
+	</scroll-view>
+</safe-area>
+</template>
+<script>
+import '../../components/avm-ui/nav-bar'
+import {DemoBlock} from '../../components/avm-ui/demos'
+export default {
+	name: 'avm-base-image',
+	data() {
+		return {
+			src: 'http://img.mp.itc.cn/q_70,c_zoom,w_640/upload/20170421/06ec60b558ba4c1e81f8aa0f689fa873_th.jpeg',
+            list: [{
+                mode: 'scaleToFill',
+                text: 'scaleToFill：不保持纵横比缩放图片，图片完全拉伸适应'
+            }, {
+                mode: 'aspectFit',
+                text: 'aspectFit：保持纵横比缩放图片，使图片的长边能完全显示出来'
+            }, {
+                mode: 'aspectFill',
+                text: 'aspectFill：保持纵横比缩放图片，只保证图片的短边能完全显示出来'
+            }, {
+                mode: 'top',
+                text: 'top：不缩放图片，只显示图片的顶部区域'
+            }, {
+                mode: 'bottom',
+                text: 'bottom：不缩放图片，只显示图片的底部区域'
+            }, {
+                mode: 'center',
+                text: 'center：不缩放图片，只显示图片的中间区域'
+            }, {
+                mode: 'left',
+                text: 'left：不缩放图片，只显示图片的左边区域'
+            }, {
+                mode: 'right',
+                text: 'right：不缩放图片，只显示图片的右边边区域'
+            }, {
+                mode: 'top left',
+                text: 'top left：不缩放图片，只显示图片的左上边区域'
+            }, {
+                mode: 'top right',
+                text: 'top right：不缩放图片，只显示图片的右上边区域'
+            }, {
+                mode: 'bottom left',
+                text: 'bottom left：不缩放图片，只显示图片的左下边区域'
+            }, {
+                mode: 'bottom right',
+                text: 'bottom right：不缩放图片，只显示图片的右下边区域'
+            }]
+		}
+	},
+	methods: {
+		back() {
+			api.closeWin();
+		}
+	}
+}
+</script>
+<style>
+.page {
+	width: 100%;
+	height: 100%;
+	background: #f2f2f2;
+}
+.originImage {
+    width: 100%;
+}
+.image {
+    width: 150px;
+    height: 150px;
+    background-color: #ddd;
+}
+</style>

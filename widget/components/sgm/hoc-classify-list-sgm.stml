@@ -1,0 +1,133 @@
+<!--分类-详情列表-->
+<template>
+	<scroll-view class="classify-detail-list" :show-scrollbar="false" scroll-y>
+		<view class="classify-detail-list-box">
+			<view class="classify-detail-list-item" v-for="(item,index) in classDetailList" data-id={item.id}
+				data-name={item.name} @click="clickItem(item)">
+				<image class="classify-detail-list-item-img" :src="item.icon"></image>
+				<text class="classify-detail-list-item-text">{{item.name}}</text>
+			</view>
+		</view>
+	</scroll-view>
+</template>
+<script>
+const classifyList = [
+    {
+        "id": "f7cf34d0-d6e8-11ea-8546-397f48399cb9",
+        "name": "特色美食",
+        "icon": "http://a5acb3a72579f0bf5f6c.qiniucdn.apicloud-system.com/apicloud/f431072b8b58f5eb2adae2d6167c4a14.JPG",
+        "addtime": "2020-08-05T06:57:46.653Z",
+        "sta": 1,
+        "orderby": 4,
+        "pid": "1"
+    },
+    {
+        "id": "765fdbc0-dba2-11ea-a68f-873831895ca3",
+        "name": "乡土文创",
+        "icon": "http://a5acb3a72579f0bf5f6c.qiniucdn.apicloud-system.com/apicloud/1825d8792308e9ba9cb9ad9c6e5d1380.JPG",
+        "addtime": "2020-08-11T07:15:40.540Z",
+        "sta": 1,
+        "orderby": 4,
+        "pid": "1"
+    },
+    {
+        "id": "03e206d0-d6e9-11ea-8546-397f48399cb9",
+        "name": "农耕课堂",
+        "icon": "http://a5acb3a72579f0bf5f6c.qiniucdn.apicloud-system.com/apicloud/20af6bccfa9fff071477b1708743f9e1.JPG",
+        "addtime": "2020-08-05T06:58:06.909Z",
+        "sta": 1,
+        "orderby": 3,
+        "pid": "1"
+    },
+    {
+        "id": "210952f0-a3b5-11ec-9291-8d2664d910ab",
+        "name": "农家特色",
+        "icon": "http://a5acb3a72579f0bf5f6c.qiniucdn.apicloud-system.com/apicloud/5b6a61c32d64e918f51422549b0a3900.JPG",
+        "addtime": "2022-03-14T16:38:08.031Z",
+        "sta": 0,
+        "orderby": 3,
+        "pid": "f7cf34d0-d6e8-11ea-8546-397f48399cb9"
+    },
+    {
+        "id": "22737f20-d6e9-11ea-8546-397f48399cb9",
+        "name": "初心笃志",
+        "icon": "http://a5acb3a72579f0bf5f6c.qiniucdn.apicloud-system.com/apicloud/a77b21b571526bfba17131c44b957c55.JPG",
+        "addtime": "2020-08-05T06:58:58.194Z",
+        "sta": 1,
+        "orderby": 2,
+        "pid": "1"
+    },
+    {
+        "id": "0292b5a0-a3b5-11ec-9291-8d2664d910ab",
+        "name": "养生滋味",
+        "icon": "http://a5acb3a72579f0bf5f6c.qiniucdn.apicloud-system.com/apicloud/ac17fbba3b3dd76a142e4e805501d22e.JPG",
+        "addtime": "2022-03-14T16:37:16.922Z",
+        "sta": 0,
+        "orderby": 2,
+        "pid": "f7cf34d0-d6e8-11ea-8546-397f48399cb9"
+    },
+    {
+        "id": "3a80f260-a3b5-11ec-9291-8d2664d910ab",
+        "name": "复古怀旧",
+        "icon": "http://a5acb3a72579f0bf5f6c.qiniucdn.apicloud-system.com/apicloud/77f093776045f6187ccb188cee428985.JPG",
+        "addtime": "2022-03-14T16:38:50.758Z",
+        "sta": 0,
+        "orderby": 2,
+        "pid": "765fdbc0-dba2-11ea-a68f-873831895ca3"
+    }
+]
+export default {
+	name: 'hoc-classify-list-sgm',
+	apiready() {//like created
+
+	},
+	data() {
+		return {
+			classDetailList: this.props.classDetailList || classifyList
+		}
+	},
+	methods: {
+		clickItem(item) {
+			this.fire('classifyItemClick', item)
+		}
+	}
+}
+</script>
+<style>
+.classify-detail-list {
+	flex: 1;
+}
+.classify-detail-list-box {
+    display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	margin: 15px;
+	padding: 15px;
+	background: #fff;
+	border-radius: 8px;
+}
+
+.classify-detail-list-item {
+	width: 100px;
+	height: auto;
+    display: flex;
+    flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.classify-detail-list-item-img {
+	width: 100px;
+	height: 100px;
+	background-color: #f6f6f6;
+}
+
+.classify-detail-list-item-text {
+	height: 40px;
+	line-height: 40px;
+	text-align: center;
+	color: #8f8f8f;
+	font-size: 14px;
+}
+</style>

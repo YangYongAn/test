@@ -1,0 +1,91 @@
+<template>
+	<scroll-view class="scroll_left" scroll-y>
+		<view :class=" 'left_one'+ (index == active ? ' left_one_on' : '') " v-for="(item,index) in list"
+			data-id={item.id} >
+			<view class={index==active ? 'left_line' : '' }></view>
+			<text class="left_zi" style={'color:'+(index==active?'#333;':'#8f8f8f;')}>{item.name}</text>
+		</view>
+	</scroll-view>
+</template>
+<script>
+export default {
+	name: 'hoc-side-bar-od',
+	props: {
+		list: {
+			type: Array,
+			default: function () {
+				return []
+			}
+		},
+		active: {
+			type: Number,
+			default: 1
+		}
+	},
+	apiready() {//like created
+
+	},
+	data() {
+		return {
+			list:this.props.list || [
+					{
+					  "id": "1",
+					  "name": "女装"
+					},
+					{
+					  "id": "2",
+					  "name": "男装"
+					},
+					{
+					  "id": "1ff38f90-caf7-11ea-8523-0da8a6a49497",
+					  "name": "运动装"
+					},
+					{
+					  "id": "418835c0-caf7-11ea-8523-0da8a6a49497",
+					  "name": "婴儿服饰"
+					}
+				  ],
+				  active:this.props.active || 1
+		}
+	},
+	methods: {
+
+	}
+}
+</script>
+<style scoped>
+/* left */
+.scroll_left {
+	width: 80px;
+	height: 100%;
+	background-color: #f8f8f8;
+}
+
+.left_one {
+	flex-direction: row;
+	align-items: center;
+	height: 40px;
+	background-color: #f8f8f8;
+}
+
+.left_one_on {
+	background-color: #ffffff;
+}
+
+.left_line {
+	width: 4px;
+	height: 14px;
+	background-color: #ff7037;
+	visibility: visible;
+}
+
+.hidden {
+	visibility: hidden;
+}
+
+.left_zi {
+	flex: 1;
+	font-weight: 500;
+	text-align: center;
+}
+</style>

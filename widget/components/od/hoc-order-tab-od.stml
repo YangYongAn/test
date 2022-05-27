@@ -1,0 +1,76 @@
+<template>
+	<view class="tabs">
+		<view class="nav_one" v-for="(item,index) in list" data-index={index}>
+			<text class={0==index?'nav_zi nav_zi_on':'nav_zi'}>{item.text}</text>
+		</view>
+	</view>
+</template>
+<script>
+export default {
+	name: 'hoc-order-tab-od',
+	props: {
+		list: {
+			type: Array,
+			default: function () {
+				return []
+			}
+		}
+	},
+	apiready() {//like created
+
+	},
+	data() {
+		return {
+			list:this.props.list || [
+					{
+						"text": "全部",
+						"type": 0
+					},
+					{
+						"text": "待付款",
+						"type": 1
+					},
+					{
+						"text": "待发货",
+						"type": 2
+					},
+					{
+						"text": "待收货",
+						"type": 4
+					},
+					{
+						"text": "已完成",
+						"type": 5
+					}
+				]
+		}
+	},
+	methods: {
+
+	}
+}
+</script>
+<style scoped>
+.tabs {
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-around;
+	height: 44px;
+	background-color: white;
+}
+.nav_one {
+	flex: 1;
+	justify-content: center;
+	align-items: center;
+}
+.nav_zi {
+	padding: 7px 0;
+	font-size: 14px;
+	color: #999999;
+	border-bottom: none;
+}
+.nav_zi_on {
+	color: #ff7037;
+	border-bottom: 2px solid #ff7037;
+}
+</style>

@@ -1,0 +1,53 @@
+<template>
+	<view class="order-detail-statetip">
+		<view class="order-detail-statetip-top">
+			<text class="order-detail-statetip-text">{this.props.statusStr !== undefined ? this.props.statusStr : '待发货'}</text>
+		</view>
+		<text class="order-detail-statetip-tips">{this.props.desc !== undefined ? this.props.desc : '请耐心等待，将尽快为您安排发货'}</text>
+	</view>
+</template>
+<script>
+export default {
+	name: 'hoc-order-detail-status-sgm',
+	apiready() {//like created
+
+	},
+	data() {
+		return {
+
+		}
+	},
+	methods: {
+
+	}
+}
+</script>
+<style>
+.order-detail-statetip {
+	padding: 15px;
+	background-image: linear-gradient(to bottom, #2f9bff, #44a5ff);
+}
+.order-detail-statetip-top {
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+}
+.order-detail-statetip-time {
+	flex-direction: row;
+	align-items: center;
+}
+.order-detail-statetip-time-icon{
+	width: 14px;
+	height: 14px;
+	margin-right: 4px;
+}
+.order-detail-statetip-text {
+	font-size: 17px;
+	color: white;
+}
+.order-detail-statetip-tips {
+	margin-top: 10px;
+	font-size: 14px;
+	color: white;
+}
+</style>

@@ -1,0 +1,66 @@
+<template>
+    <safe-area class="page">
+        <hoc-nav-bar-sgm isShowBack title="订单详情" />
+        <hoc-order-detail-status-sgm statusStr="待发货" desc="请耐心等待，将尽快为您安排发货" />
+        <hoc-order-address-sgm consignee="温泉" phone="1234556789" area="北京" detailAddress="北京市海淀区用友产业园" />
+        <hoc-order-goods-list-sgm :list="hocOrderGoodsListSgmList" />
+        <hoc-form-list-sgm :formList="formList"/>
+    </safe-area>
+</template>
+<script>
+import '../../components/sgm/hoc-nav-bar-sgm.stml';
+import '../../components/sgm/hoc-order-detail-status-sgm.stml';
+import '../../components/sgm/hoc-order-address-sgm.stml';
+import '../../components/sgm/hoc-order-goods-list-sgm.stml';
+import '../../components/sgm/hoc-form-list-sgm.stml'
+export default {
+    name: 'template-sgm-order_detail',
+    apiready() { //like created
+    },
+    data() {
+        return {
+            hocOrderGoodsListSgmList: [{
+                title: "苹果笔记本电脑超薄",
+                image: "http://ae8b3ee28597856d3283.qiniucdn.apicloud-system.com/apicloud/02b297b95bd2ae7aa0021ed8df11bede.png",
+                price: 30.9,
+                delprice: 50,
+                key: "小盒/200g",
+                buynum: 1,
+                act: "tuan"
+            }],
+            formList: [{
+				label: '配送方式',
+				text: '配送',
+				id: '11'
+			}, {
+				label: '订单编号',
+				text: '202203290948386376',
+				id: '22'
+			}, {
+				label: '交易编号',
+				text: '202203290948386376',
+				id: '33'
+			}, {
+				label: '创建时间',
+				text: '2022.05.12 14:21:39',
+				id: '44'
+			}, {
+				label: '运费',
+				text: '￥0',
+				id: '55'
+			}, {
+				label: '备注',
+				text: '请送货上门',
+				id: '66'
+			}]
+        };
+    },
+    methods: {}
+};
+</script>
+<style>
+.page {
+    height: 100%;
+    background-color: #f8f8f8;
+}
+</style>

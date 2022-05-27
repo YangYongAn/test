@@ -1,0 +1,98 @@
+<template>
+	<safe-area class="page">
+		<avm-nav-bar onBack={this.back}>Stepper</avm-nav-bar>
+		<scroll-view>
+			<DemoBlock title='基础用法(非受控)'>
+				<avm-stepper
+					defaultValue={1}
+					handleChange={this.handleChange}
+				/>
+			</DemoBlock>
+			<DemoBlock title='受控组件'>
+				<avm-stepper
+					value={this.data.num}
+					handleChange={this.numChange}
+				/>
+			</DemoBlock>
+			<DemoBlock title='步长设置'>
+				<avm-stepper step={10} defaultValue={10} />
+			</DemoBlock>
+			<DemoBlock title='设置输入范围'>
+				<avm-stepper min={-5} max={5} />
+			</DemoBlock>
+			<DemoBlock title='格式化到整数'>
+				<avm-stepper digits={0} />
+			</DemoBlock>
+			<DemoBlock title='格式化到一位小数'>
+				<avm-stepper digits={1} />
+			</DemoBlock>
+			<DemoBlock title='禁用状态'>
+				<avm-stepper disabled />
+			</DemoBlock>
+			<DemoBlock title='获得/失去焦点'>
+				<avm-stepper
+					inputFocus={this.handleFocus}
+					inputBlur={this.handleBlur}
+				/>
+			</DemoBlock>
+			<DemoBlock title='自定义css变量'>
+				<avm-stepper
+					borderInner="none"
+					btnBgColor="#9AC200"
+					height="30px"
+					inputWidth="60px"
+					activeBorder="1px solid #1677ff"
+					defaultValue={10000}
+					step={10000}
+				/>
+			</DemoBlock>
+		</scroll-view>
+	</safe-area>
+</template>
+<script>
+import '../../components/avm-ui/stepper'
+import '../../components/avm-ui/nav-bar'
+import {DemoBlock} from '../../components/avm-ui/demos'
+export default {
+	name: 'demo-stepper',
+	data() {
+		return{
+			num: 0
+		}
+	},
+	methods: {
+		back() {
+			api.closeWin();
+		},
+		handleChange(val) {
+			api.toast({
+				msg: val
+			})
+		},
+		numChange(val) {
+			this.setNum(val)
+		},
+		setNum(num) {
+			this.data.num = num
+		},
+		handleFocus() {
+			api.toast({
+				msg:'获得焦点'
+			})
+		},
+		handleBlur() {
+			api.toast({
+				msg:'失去焦点'
+			})
+		}
+	}
+}
+</script>
+<style src="../../components/avm-ui/demos/index.css"/>
+<style>
+.page {
+	height: 100%;
+	width: 100%;
+	background: #f2f2f2;
+}
+</style>

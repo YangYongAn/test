@@ -1,0 +1,65 @@
+<!--基础组件-->
+<template>
+<safe-area class="page">
+	<avm-nav-bar onBack={this.back}>Switch</avm-nav-bar>
+	<DemoBlock title='基础用法'>
+		<avm-space>
+			<switch class="switch" checked onchange={this.onchange}/>
+			<switch class="switch" onchange={this.onchange}/>
+			<view class="switch-box">
+				<switch class="switch-scale" checked onchange={this.onchange}/>
+			</view>
+		</avm-space>
+	</DemoBlock>
+	<DemoBlock title='禁用'>
+		<avm-space>
+			<switch class="switch" disabled/>
+		</avm-space>
+	</DemoBlock>
+	<DemoBlock title='自定义颜色'>
+		<avm-space>
+			<switch class="switch" checked color="#9ac200" onchange={this.onchange}/>
+		</avm-space>
+	</DemoBlock>
+</safe-area>
+</template>
+<script>
+import '../../components/avm-ui/nav-bar'
+import '../../components/avm-ui/space'
+import {DemoBlock} from '../../components/avm-ui/demos'
+export default {
+	name: 'avm-base-switch',
+	data(){
+		return {
+			
+		}
+    },
+	methods: {
+		back() {
+			api.closeWin();
+		},
+		onchange(e) {
+			api.toast({
+				msg: e.detail.value?'已开启':'已关闭'
+			});
+		}
+	}
+}
+</script>
+<style>
+.page {
+	width: 100%;
+	height: 100%;
+	background: #f2f2f2;
+	padding: 0 16px;
+}
+.switch-box {
+	justify-content: center;
+	align-items: center;
+	width: 90px;
+	height: 35px;
+}
+.switch-scale {
+	transform: scale(1.5, 1.5);
+}
+</style>

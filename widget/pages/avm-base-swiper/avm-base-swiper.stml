@@ -1,0 +1,103 @@
+<!--基础组件-->
+<template>
+<safe-area class="page">
+	<avm-nav-bar onBack={this.back}>Swiper</avm-nav-bar>
+	<scroll-view :show-scrollbar="false" scroll-y>
+		<DemoBlock title='使用默认设置'>
+			<swiper class="swiper" autoplay circular indicator-dots indicator-color="#ddd" indicator-active-color="#fff">
+				<swiper-item class="swiper-item" v-for="(_item,_index) in dataList">
+					<text class="desc">{_item}</text>
+				</swiper-item>
+			</swiper>
+		</DemoBlock>
+		<DemoBlock title='使用自定义指示器'>
+			<view class="container">
+				<swiper class="swiper" id="customSwiper" autoplay circular onchange={this.onchange}>
+					<swiper-item class="swiper-item" reusable>
+						<text class="desc">{item}</text>
+					</swiper-item>
+				</swiper>
+				<view class="indicator">
+					<view v-for="(item,index) in dataList" class={'indicator-item '+(index==this.data.current?'indicator-item-active':'indicator-item-normal')} ></view>
+				</view>
+			</view>
+		</DemoBlock>
+	</scroll-view>
+</safe-area>
+</template>
+<script>
+import '../../components/avm-ui/nav-bar'
+import {DemoBlock} from '../../components/avm-ui/demos'
+export default {
+	name: 'avm-base-swiper',
+	data(){
+		return {
+			dataList: ['item1', 'item2', 'item3', 'item4'],
+			current: 0
+		}
+    },
+	methods: {
+		back() {
+			api.closeWin();
+		},
+		apiready() {
+			var customSwiper = document.getElementById('customSwiper');
+			customSwiper.load({
+				data: this.data.dataList
+			});
+		},
+		onchange(e){
+			this.data.current = e.detail.current;
+		}
+	}
+}
+</script>
+<style>
+.page {
+	width: 100%;
+	height: 100%;
+	background: #f2f2f2;
+}
+.swiper {
+	width: 100%;
+	height: 200px;
+	background-color: #9ac200;
+}
+.swiper-item {
+	justify-content: center;
+}
+.title {
+	padding: 10px 0;
+	font-size: 20px;
+}
+.desc {
+	width: 100%;
+	text-align: center;
+	color: #fff;
+}
+.container {
+	width: 100%;
+	height: 200px;
+}
+.indicator {
+	flex-direction: row;
+	justify-content: center;
+	position: absolute;
+	width: 100%;
+	height: 20px;
+	bottom: 8px;
+}
+.indicator-item {
+	width: 15px;
+	height: 8px;
+	margin: 3px;
+	border-radius: 4px;
+}
+.indicator-item-normal {
+	background-color: #999;
+}
+.indicator-item-active {
+	background-color: #fff;
+	width: 20px;
+}
+</style>

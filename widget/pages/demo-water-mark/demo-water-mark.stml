@@ -1,0 +1,55 @@
+<template>
+	<safe-area class='water-mark-overlay'>
+		<avm-nav-bar onBack={this.back}>WaterMark</avm-nav-bar>
+		<scroll-view>
+			<DemoBlock title='普通水印' padding='0'>
+				<avm-button onClick={() => this.setProps(textProps)}>普通水印</avm-button>
+			</DemoBlock>
+			<DemoBlock title='图片水印' padding='0'>
+				<avm-button onClick={() => this.setProps(imageProps)}>图片水印</avm-button>
+			</DemoBlock>
+		</scroll-view>
+		<avm-water-mark {...this.data.propsAttr}/>
+	</safe-area>
+</template>
+
+<script>
+import '../../components/avm-ui/water-mark';
+import '../../components/avm-ui/nav-bar';
+import '../../components/avm-ui/button';
+import {DemoBlock} from '../../components/avm-ui/demos';
+
+const textProps = {
+  content: 'Ant Design Mobile',
+}
+
+const imageProps = {
+  image: 'https://gw.alipayobjects.com/zos/bmw-prod/59a18171-ae17-4fc5-93a0-2645f64a3aca.svg',
+  imageWidth: 115,
+  imageHeight: 36,
+  width: 140,
+  height: 80,
+}
+export default {
+	name: 'demo-tree-select',
+	data() {
+		return {
+			propsAttr: textProps
+		}
+	},
+
+	methods: {
+		back() {
+			api.closeWin();
+		},
+		setProps(attr) {
+			this.data.propsAttr = attr;
+		}
+	}
+}
+</script>
+<style>
+.water-mark-overlay {
+  padding: 12px;
+}
+</style>

@@ -1,0 +1,90 @@
+<template>
+	<view class="page">
+		<!-- <safe-area></safe-area> -->
+		<hoc-nav-bar-od msg="分类" isBack={false} />
+		<view class="sort">
+			<hoc-side-bar-od :list="sideList" />
+			<hoc-side-content-od :list="contentList" />
+		</view>
+	</view>
+</template>
+<script>
+import '../../components/od/hoc-nav-bar-od.stml';
+import '../../components/od/hoc-side-bar-od.stml';
+import '../../components/od/hoc-side-content-od.stml';
+export default {
+	name: 'template-od-sort',
+	apiready() { //like created
+	},
+	data() {
+		return {
+			sideList: [
+				{
+					"id": "1",
+					"name": "女装"
+				},
+				{
+					"id": "2",
+					"name": "男装"
+				},
+				{
+					"id": "1ff38f90-caf7-11ea-8523-0da8a6a49497",
+					"name": "运动装"
+				},
+				{
+					"id": "418835c0-caf7-11ea-8523-0da8a6a49497",
+					"name": "婴儿服饰"
+				}
+			],
+			contentList: [
+				{
+					"id": "258389c0-d532-11ea-9b7c-8f1336202828",
+					"name": "连衣裙",
+					"icon": "http://ae8b3ee28597856d3283.qiniucdn.apicloud-system.com/apicloud/51a76d00c46bdc90fa0138601cdb2060.png"
+				},
+				{
+					"id": "11cca860-d2ff-11ea-a0bc-bd616acc739c",
+					"name": "针织裙",
+					"icon": "http://ae8b3ee28597856d3283.qiniucdn.apicloud-system.com/apicloud/bf017f44d8396a43d0c3a5faaba647dd.png"
+				},
+				{
+					"id": "07bbe7f0-d2ff-11ea-a0bc-bd616acc739c",
+					"name": "T连衣裙",
+					"icon": "http://ae8b3ee28597856d3283.qiniucdn.apicloud-system.com/apicloud/c88d14de583f85ef069dd0b1e065bd92.png"
+				},
+				{
+					"id": "f97b6080-d2fe-11ea-a0bc-bd616acc739c",
+					"name": "裤子",
+					"icon": "http://ae8b3ee28597856d3283.qiniucdn.apicloud-system.com/apicloud/19efd0fa529705147316dd696e860ff7.png"
+				},
+				{
+					"id": "42990ef0-ccb7-11ea-8ee1-07d7d7fa197c",
+					"name": "吊带裙",
+					"icon": "http://ae8b3ee28597856d3283.qiniucdn.apicloud-system.com/apicloud/de8a2625b3adafabe55bfe1a7ec2b386.png"
+				},
+				{
+					"id": "42990ef0-ccb7-11ea-8ee1-07d7d7fa197c",
+					"name": "长裙",
+					"icon": "http://ae8b3ee28597856d3283.qiniucdn.apicloud-system.com/apicloud/e240fc0c356abfb2a44d358521881c30.png"
+				},
+				{
+					"id": "42990ef0-ccb7-11ea-8ee1-07d7d7fa197c",
+					"name": "短裙",
+					"icon": "http://ae8b3ee28597856d3283.qiniucdn.apicloud-system.com/apicloud/3ce4698626fce034b2e9aebc33ee0065.png"
+				}
+			]
+		};
+	},
+	methods: {}
+};
+</script>
+<style>
+.page {
+	height: 100%;
+	background-color: #fff;
+}
+.sort {
+	flex: 1;
+	flex-direction: row;
+}
+</style>

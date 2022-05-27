@@ -1,0 +1,38 @@
+<template>
+    <view class="no-data">
+        <image class="no-data-img" :src="this.props.noDataImg || 'http://ae8b3ee28597856d3283.qiniucdn.apicloud-system.com/apicloud/8ef62c4c43c7b693aef8eacb7fb9a84d.png'"></image>
+        <text class="no-data-desc">{this.props.noDataDesc !== undefined ? this.props.noDataDesc : '暂无数据'}</text>
+        <text class="no-data-refresh-btn" v-if={this.props.showRefresh} onclick="onclick">刷新</text>
+    </view>
+</template>
+<script>
+	export default {
+		name: 'hoc-no-data-sgm',
+		methods: {
+            onclick(){
+                this.fire('refreshClick');
+            }
+		}
+	}
+</script>
+<style>
+.no-data{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.no-data-img{
+    width: 135px;
+    height: 135px;
+}
+.no-data-desc{
+    font-size: 12px;
+    color: #798391;
+}
+.no-data-refresh-btn{
+    font-size: 14px;
+    color: #FE5C00;
+    padding-top: 6px;
+}
+</style>

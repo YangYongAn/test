@@ -1,0 +1,118 @@
+<template>
+
+	<safe-area class="page">
+		<avm-nav-bar onBack={this.back}>Collapse</avm-nav-bar>
+		<scroll-view>
+			<DemoBlock title='基础用法' padding='0' border='none'>
+				<avm-collapse defaultActiveKey={['1']}>
+					<avm-collapse-panel key='1' title='第一项' extra="内容1">
+						这里是第一项的内容
+						这里是第一项的内容
+						这里是第一项的内容
+						这里是第一项的内容
+						这里是第一项的内容
+						这里是第一项的内容
+					</avm-collapse-panel>
+					<avm-collapse-panel key='2' title='第二项' extra="内容2">
+						这里是第二项的内容
+					</avm-collapse-panel>
+					<avm-collapse-panel key='3' title='第三项' extra="内容3">
+						这里是第三项的内容
+					</avm-collapse-panel>
+				</avm-collapse>
+			</DemoBlock>
+			<DemoBlock title='手风琴模式' padding='0' border='none'>
+				<avm-collapse accordion>
+					<avm-collapse-panel key='1' title='第一项'>
+						手风琴模式只能同时展开一个
+						手风琴模式只能同时展开一个
+						手风琴模式只能同时展开一个
+						手风琴模式只能同时展开一个
+						手风琴模式只能同时展开一个
+						手风琴模式只能同时展开一个
+					</avm-collapse-panel>
+					<avm-collapse-panel key='2' title='第二项'>
+						手风琴模式只能同时展开一个
+					</avm-collapse-panel>
+					<avm-collapse-panel key='3' title='第三项'>
+						手风琴模式只能同时展开一个
+					</avm-collapse-panel>
+				</avm-collapse>
+			</DemoBlock>
+			<DemoBlock title='禁用' padding='0' border='none'>
+				<avm-collapse>
+					<avm-collapse-panel key='1' title='第一项'>
+						这里是第一项的内容
+					</avm-collapse-panel>
+					<avm-collapse-panel key='2' title='第二项' disabled>
+						这里是第二项的内容
+					</avm-collapse-panel>
+					<avm-collapse-panel key='3' title='第三项' disabled>
+						这里是第三项的内容
+					</avm-collapse-panel>
+				</avm-collapse>
+			</DemoBlock>
+			<DemoBlock title='自定义箭头' padding='0' border='none'>
+				<avm-collapse>
+					<avm-collapse-panel
+						key='1'
+						title='第一项'
+						prefix={<text className="icon-style">icon</text>}
+						content="你可以通过 avm-collapse-panel 的 arrow 属性来自定义单个面板的箭头"
+						arrow={<text className="icon-style">自定义图标</text>}
+					/>
+					<avm-collapse-panel
+						key='2'
+						title='第二项'
+						prefix={<text className="icon-style">icon</text>}
+						content="你可以通过 avm-collapse-panel 的 arrow 属性来自定义单个面板的箭头"
+						arrow={<text className="icon-style">自定义图标</text>}
+					/>
+					<avm-collapse-panel
+						key='3'
+						title='第三项'
+						prefix={<text className="icon-style">icon</text>}
+						content="你可以通过 avm-collapse-panel 的 arrow 属性来自定义单个面板的箭头"
+						arrow={<text className="icon-style">自定义图标</text>}
+					/>
+				</avm-collapse>
+			</DemoBlock>
+			<!-- <DemoBlock title='动态内容' padding='0' border='none'>
+				<avm-collapse accordion>
+					<avm-collapse-panel key='1' title='第一项' onClick={() => api.toast({msg: '点击第一项'})}>
+						<DynamicContent />
+					</avm-collapse-panel>
+					<avm-collapse-panel key='2' title='第二项' onClick={() => api.toast({msg: '点击第二项'})}>
+						<DynamicContent />
+					</avm-collapse-panel>
+				</avm-collapse>
+			</DemoBlock> -->
+		</scroll-view>
+	</safe-area>
+</template>
+
+<script>
+// import {DynamicContent} from './dynamicContent.js'
+import '../../components/avm-ui/collapse'
+import '../../components/avm-ui/nav-bar'
+import {DemoBlock} from '../../components/avm-ui/demos'
+
+export default {
+	name: 'demo-collapse',
+	methods: {
+		back() {
+			api.closeWin();
+		}
+	}
+}
+</script>
+<style src="../../components/avm-ui/demos/index.css"></style>
+<style>
+.page {
+	background: #f2f2f2;
+}
+.icon-style {
+	font-size: 12px;
+	color: #999;
+}
+</style>
